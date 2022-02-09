@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
+import CoinChart from "./CoinChart";
 import PercentChange from "./PercentChange";
 
 const TableLine = ({ coin }) => {
+  const [showChart, setShowChart] = useState(false);
+
   const mktCapFormater = (num) => {
     let newNum = String(num).split("").slice(0, -6);
 
@@ -30,7 +33,13 @@ const TableLine = ({ coin }) => {
       <div className="img">
         <img src={coin.image} height="20" alt="" />
       </div>
-      <h4>
+      <h4
+      // onMouseEnter={() => {
+      //   setShowChart(true);
+      // }}
+      // onMouseLeave={() => setShowChart(false)}
+      >
+        {coin.id === "bitcoin" && <CoinChart coinId={coin.id} />}
         {coin.name} - <span>{coin.symbol.toUpperCase()}</span>
       </h4>
       <p>{priceFormater(coin.current_price).toLocaleString()} $</p>
@@ -39,7 +48,6 @@ const TableLine = ({ coin }) => {
       <PercentChange price={coin.price_change_percentage_1h_in_currency} />
       <PercentChange price={coin.market_cap_change_percentage_24h} />
       <PercentChange price={coin.price_change_percentage_7d_in_currency} />
-      <PercentChange price={coin.price_change_percentage_14d_in_currency} />
       <PercentChange price={coin.price_change_percentage_30d_in_currency} />
       <PercentChange price={coin.price_change_percentage_200d_in_currency} />
       <PercentChange price={coin.price_change_percentage_1y_in_currency} />

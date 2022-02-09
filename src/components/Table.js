@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import TableLine from "./TableLine";
 
-const Table = () => {
-  const [list, setList] = useState([]);
+const Table = ({ data }) => {
   const [orderBy, setOrderBy] = useState("#");
   const tableHeader = [
     "#",
@@ -15,20 +13,11 @@ const Table = () => {
     "1h",
     "1j",
     "1s",
-    "2s",
     "1m",
     "6m",
     "1y",
     "ATH",
   ];
-
-  useEffect(() => {
-    axios
-      .get(
-        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=1h%2C24h%2C7d%2C14d%2C30d%2C200d%2C1y"
-      )
-      .then((res) => setList(res.data));
-  }, []);
 
   return (
     <div className="table-container">
@@ -36,8 +25,16 @@ const Table = () => {
         {tableHeader.map((el) => (
           <li key={el}>
             <input
-              checked={el === orderBy ? true : false}
-              onChange={() => setOrderBy(el)}
+              defaultChecked={
+                el === orderBy || el === orderBy + "reverse" ? true : false
+              }
+              onClick={() => {
+                if (orderBy === el) {
+                  setOrderBy(el + "reverse");
+                } else {
+                  setOrderBy(el);
+                }
+              }}
               type="radio"
               name="header-el"
               id={el}
@@ -46,7 +43,7 @@ const Table = () => {
           </li>
         ))}
       </ul>
-      {list
+      {data
         .sort((a, b) => {
           switch (orderBy) {
             case "#":
@@ -72,11 +69,6 @@ const Table = () => {
                 b.price_change_percentage_7d_in_currency -
                 a.price_change_percentage_7d_in_currency
               );
-            case "2s":
-              return (
-                b.price_change_percentage_14d_in_currency -
-                a.price_change_percentage_14d_in_currency
-              );
             case "1m":
               return (
                 b.price_change_percentage_30d_in_currency -
@@ -94,6 +86,46 @@ const Table = () => {
               );
             case "ATH":
               return b.ath_change_percentage - a.ath_change_percentage;
+            case "#reverse":
+              return a.market_cap - b.market_cap;
+            case "Prixreverse":
+              return a.current_price - b.current_price;
+            case "Volumereverse":
+              return a.total_volume - b.total_volume;
+            case "MarketCapreverse":
+              return a.market_cap - b.market_cap;
+            case "1hreverse":
+              return (
+                a.price_change_percentage_1h_in_currency -
+                b.price_change_percentage_1h_in_currency
+              );
+            case "1jreverse":
+              return (
+                a.market_cap_change_percentage_24h -
+                b.market_cap_change_percentage_24h
+              );
+            case "1sreverse":
+              return (
+                a.price_change_percentage_7d_in_currency -
+                b.price_change_percentage_7d_in_currency
+              );
+            case "1mreverse":
+              return (
+                a.price_change_percentage_30d_in_currency -
+                b.price_change_percentage_30d_in_currency
+              );
+            case "6mreverse":
+              return (
+                a.price_change_percentage_200d_in_currency -
+                b.price_change_percentage_200d_in_currency
+              );
+            case "1yreverse":
+              return (
+                a.price_change_percentage_1y_in_currency -
+                b.price_change_percentage_1y_in_currency
+              );
+            case "ATHreverse":
+              return a.ath_change_percentage - b.ath_change_percentage;
             default:
               null;
           }

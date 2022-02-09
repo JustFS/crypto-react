@@ -7,10 +7,25 @@
 }
 
 body {
-  background: rgb(206, 238, 250);
+  background: rgb(37, 37, 37);
   font-family: "Baloo 2", cursive;
 }
 
 li {
   list-style: none;
+}
+path {
+  font-size: 0.4rem;
+}
+@for $i from 10 through 250 {
+  g:nth-child(#{$i}) {
+    text {
+      font-size: 0.4rem !important;
+      font-weight: 100;
+    }
+  }
+}
+.custom-tooltip {
+  background: rgb(59, 59, 59);
+  padding: 10px;
 }

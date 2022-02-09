@@ -4,7 +4,7 @@
   .table-header,
   .table-line {
     display: grid;
-    grid-template-columns: 32px 32px 220px 100px 120px 100px repeat(8, 1fr);
+    grid-template-columns: 32px 32px 220px 100px 120px 100px repeat(7, 1fr);
   }
   .table-header {
     input[type="radio"] {
@@ -26,6 +26,15 @@
     }
   }
   .table-line {
+    height: 40px;
+    align-items: center;
+    border-top: 1px solid rgb(179, 179, 179);
+    position: relative;
+
+    &:hover {
+      background: grey;
+    }
+
     h4 {
       text-align: left;
     }
