@@ -3,7 +3,7 @@ import { Treemap, Tooltip } from "recharts";
 
 const GlobalChart = ({ data }) => {
   const [dataArray, setDataArray] = useState([]);
-  const [inputValue, setInputValue] = useState(1);
+  const [inputValue, setInputValue] = useState(25);
 
   useEffect(() => {
     let chartData = [];
@@ -40,14 +40,14 @@ const GlobalChart = ({ data }) => {
       <input
         type="range"
         min="10"
-        max="100"
+        max="50"
         defaultValue={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
       />
       <span>{inputValue}</span>
       <Treemap
-        width={1200}
-        height={400}
+        width={800}
+        height={200}
         data={dataArray}
         dataKey="size"
         stroke="rgb(41, 41, 41)"

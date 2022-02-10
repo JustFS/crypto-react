@@ -25,9 +25,10 @@ const CoinChart = ({ coinId }) => {
       .then((res) => {
         for (let i = 0; i < res.data.prices.length; i++) {
           let price = res.data.prices[i][1];
+
           dataArray.push({
             date: new Date(res.data.prices[i][0]).toLocaleDateString(),
-            price: price.toFixed(2),
+            price: price < 1 ? price : price.toFixed(2),
           });
 
           if (price < min) min = price;
@@ -44,7 +45,6 @@ const CoinChart = ({ coinId }) => {
         <button onClick={() => setTime(1)}>1 jour</button>
         <button onClick={() => setTime(3)}>3 jours</button>
         <button onClick={() => setTime(7)}>1 semaine</button>
-        <button onClick={() => setTime(14)}>2 semaines</button>
         <button onClick={() => setTime(30)}>1 mois</button>
         <button onClick={() => setTime(91)}>3 mois</button>
         <button onClick={() => setTime(181)}>6 mois</button>

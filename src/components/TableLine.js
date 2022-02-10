@@ -30,18 +30,30 @@ const TableLine = ({ coin }) => {
   return (
     <div className="table-line">
       <p>{coin.market_cap_rank}</p>
-      <div className="img">
-        <img src={coin.image} height="20" alt="" />
-      </div>
-      <h4
-      // onMouseEnter={() => {
-      //   setShowChart(true);
-      // }}
-      // onMouseLeave={() => setShowChart(false)}
+      <div
+        className="name-pic-container"
+        onMouseEnter={(e) => {
+          setShowChart(true);
+          if (e.clientY > 280) {
+            document.getElementById(coin.id).style.bottom = "32px";
+            document.getElementById(coin.id).style.top = "none";
+          } else {
+            document.getElementById(coin.id).style.bottom = "-290px";
+            document.getElementById(coin.id).style.top = "none";
+          }
+        }}
+        onMouseLeave={() => setShowChart(false)}
       >
-        {coin.id === "bitcoin" && <CoinChart coinId={coin.id} />}
-        {coin.name} - <span>{coin.symbol.toUpperCase()}</span>
-      </h4>
+        <div className="img">
+          <img src={coin.image} height="20" alt="logo" />
+        </div>
+        <h4>
+          {coin.name} - <span>{coin.symbol.toUpperCase()}</span>
+        </h4>
+        <div className="chart-container" id={coin.id}>
+          {showChart && <CoinChart coinId={coin.id} />}
+        </div>
+      </div>
       <p>{priceFormater(coin.current_price).toLocaleString()} $</p>
       <p>{coin.total_volume.toLocaleString()} $</p>
       <p>{mktCapFormater(coin.market_cap)} Md$</p>

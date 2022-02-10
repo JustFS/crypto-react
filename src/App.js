@@ -6,7 +6,7 @@ import axios from "axios";
 
 const App = () => {
   const [data, setData] = useState([]);
-  const [rangeNumber, setRangeNumber] = useState(10);
+  const [rangeNumber, setRangeNumber] = useState(100);
 
   useEffect(() => {
     axios
@@ -18,11 +18,12 @@ const App = () => {
 
   return (
     <div>
+      <h1>Crypto React</h1>
       <GlobalChart data={data} />
       <Header />
       <input
         type="range"
-        min="10"
+        min="50"
         max="250"
         defaultValue={rangeNumber}
         onChange={(e) => setRangeNumber(e.target.value)}

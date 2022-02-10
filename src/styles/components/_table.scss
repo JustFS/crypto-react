@@ -4,7 +4,7 @@
   .table-header,
   .table-line {
     display: grid;
-    grid-template-columns: 32px 32px 220px 100px 120px 100px repeat(7, 1fr);
+    grid-template-columns: 32px 252px 100px 120px 100px repeat(7, 1fr);
   }
   .table-header {
     input[type="radio"] {
@@ -34,13 +34,26 @@
     &:hover {
       background: grey;
     }
-
-    h4 {
-      text-align: left;
-    }
-    .img {
+    .name-pic-container {
       display: flex;
-      align-items: center;
+      height: 100%;
+
+      .img {
+        display: flex;
+        align-items: center;
+
+        img {
+          object-fit: cover;
+        }
+      }
+      h4 {
+        text-align: left;
+        margin-left: 10px;
+        height: 100%;
+        width: 100%;
+        align-items: center;
+        display: flex;
+      }
     }
   }
 }

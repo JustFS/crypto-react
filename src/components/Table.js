@@ -5,7 +5,6 @@ const Table = ({ data }) => {
   const [orderBy, setOrderBy] = useState("#");
   const tableHeader = [
     "#",
-    " ",
     "",
     "Prix",
     "Volume",
