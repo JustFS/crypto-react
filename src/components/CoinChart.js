@@ -12,8 +12,8 @@ import {
 const CoinChart = ({ coinId }) => {
   const [coinData, setCoinData] = useState();
   const [time, setTime] = useState(30);
-  let min = 1000000;
-  let max = 0;
+  const [min, setMin] = useState();
+  const [max, setMax] = useState();
 
   useEffect(() => {
     let dataArray = [];
@@ -30,12 +30,21 @@ const CoinChart = ({ coinId }) => {
             date: new Date(res.data.prices[i][0]).toLocaleDateString(),
             price: price < 1 ? price : price.toFixed(2),
           });
-
-          if (price < min) min = price;
-          if (price > max) max = price;
         }
       })
-      .then(() => setCoinData(dataArray));
+      .then(() => {
+        setCoinData(dataArray);
+        setMin(
+          dataArray.reduce((prev, curr) => {
+            return prev.price < curr.price ? prev.price : curr.price;
+          })
+        );
+        setMax(
+          dataArray.reduce((prev, curr) => {
+            return prev.price > curr.price ? prev.price : curr.price;
+          })
+        );
+      });
   }, [coinId, time]);
 
   return (
@@ -58,8 +67,8 @@ const CoinChart = ({ coinId }) => {
       >
         <defs>
           <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
-            <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
+            <stop offset="5%" stopColor="pink" stopOpacity={0.8} />
+            <stop offset="95%" stopColor="pink" stopOpacity={0} />
           </linearGradient>
         </defs>
         <XAxis dataKey="date" />
@@ -74,7 +83,7 @@ const CoinChart = ({ coinId }) => {
         <Area
           type="monotone"
           dataKey="price"
-          stroke="#8884d8"
+          stroke="pink"
           fillOpacity={1}
           fill="url(#colorUv)"
         />

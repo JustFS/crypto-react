@@ -1,11 +1,29 @@
 .chart-container {
   position: absolute;
-  width: 850px;
+  z-index: 100;
+  width: 760px;
   left: 60px;
+  background: rgba(128, 128, 128, 0.8);
+  backdrop-filter: blur(3px);
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.548);
 
   .coin-chart {
-    background: rgb(235, 235, 235);
+    padding: 20px;
     z-index: 100;
     position: relative;
+
+    p {
+      text-transform: capitalize;
+      font-size: 1.5rem;
+    }
+
+    button {
+      position: relative;
+    }
+
+    text {
+      fill: $color1;
+    }
   }
 }

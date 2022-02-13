@@ -1,28 +1,61 @@
 import React, { useEffect, useState } from "react";
 import { Treemap, Tooltip } from "recharts";
+import colors from "../styles/_settings.scss";
 
 const GlobalChart = ({ data }) => {
   const [dataArray, setDataArray] = useState([]);
-  const [inputValue, setInputValue] = useState(25);
+
+  const colorPicker = (number) => {
+    if (number >= 20) {
+      return colors.color1;
+    } else if (number >= 5) {
+      return colors.green2;
+    } else if (number >= 0) {
+      return colors.green1;
+    } else if (number >= -5) {
+      return colors.red1;
+    } else if (number >= -20) {
+      return colors.red2;
+    } else {
+      return colors.black2;
+    }
+  };
+
+  const excludeCoin = (coin) => {
+    if (
+      coin === "usdt" ||
+      coin === "usdc" ||
+      coin === "busd" ||
+      coin === "dai" ||
+      coin === "ust" ||
+      coin === "mim"
+    ) {
+      return false;
+    } else {
+      return true;
+    }
+  };
 
   useEffect(() => {
     let chartData = [];
 
     if (data.length > 0) {
-      for (let i = 0; i < inputValue; i++) {
-        chartData.push({
-          name:
-            data[i].symbol.toUpperCase() +
-            " " +
-            data[i].price_change_percentage_24h.toFixed(2) +
-            "%",
-          size: data[i].market_cap,
-          fill: data[i].price_change_percentage_24h >= 0 ? "green" : "red",
-        });
+      for (let i = 0; i < 45; i++) {
+        if (excludeCoin(data[i].symbol)) {
+          chartData.push({
+            name:
+              data[i].symbol.toUpperCase() +
+              " " +
+              data[i].market_cap_change_percentage_24h.toFixed(2) +
+              "%",
+            size: data[i].market_cap,
+            fill: colorPicker(data[i].price_change_percentage_24h),
+          });
+        }
       }
     }
     setDataArray(chartData);
-  }, [inputValue, data]);
+  }, [data]);
 
   const TreemapTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
@@ -37,22 +70,14 @@ const GlobalChart = ({ data }) => {
 
   return (
     <div className="global-chart">
-      <input
-        type="range"
-        min="10"
-        max="50"
-        defaultValue={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-      />
-      <span>{inputValue}</span>
       <Treemap
-        width={800}
-        height={200}
+        width={730}
+        height={134}
         data={dataArray}
         dataKey="size"
-        stroke="rgb(41, 41, 41)"
+        stroke="rgb(51, 51, 51)"
         fill="black"
-        aspectRatio="1.5"
+        aspectRatio="1"
       >
         <Tooltip content={<TreemapTooltip />} />
       </Treemap>

@@ -1,0 +1,80 @@
+header {
+  margin: 20px 0 15px 0;
+  display: grid;
+  grid-template-columns: 1fr 230px 730px;
+
+  .title,
+  .infos-mkt {
+    background: rgba(20, 20, 20, 0.85);
+    padding: 10px;
+    border-radius: 14px;
+    margin-right: 10px;
+    box-shadow: $shadow;
+    display: grid;
+    align-items: center;
+    height: 100%;
+    backdrop-filter: blur(3px);
+
+    ul {
+      height: 100%;
+    }
+  }
+  .title {
+    position: relative;
+    overflow: hidden;
+
+    &:before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 52px;
+      background: rgba(0, 0, 0, 0.5);
+      top: 0;
+    }
+    h1 {
+      font-family: $font2;
+      font-size: 1.5rem;
+      color: $color1;
+      z-index: 2;
+      position: relative;
+      text-align: center;
+      transform: translateY(-5px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: -webkit-linear-gradient(360deg, #0debc6, $color1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      height: 36px;
+
+      img {
+        height: 18px;
+        object-fit: cover;
+        margin-right: 3px;
+        transform: translateY(-3px);
+      }
+    }
+  }
+  .global-mkt {
+    display: flex;
+
+    p {
+      margin-left: 5px;
+      font-size: 1.1rem;
+    }
+  }
+  .global-chart {
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: $shadow;
+
+    text {
+      font-size: 1rem !important;
+      letter-spacing: 1px;
+    }
+    .custom-tooltip {
+      background: rgb(59, 59, 59);
+      padding: 10px;
+    }
+  }
+}

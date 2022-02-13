@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import TableLine from "./TableLine";
 
 const Table = ({ data }) => {
-  const [orderBy, setOrderBy] = useState("#");
+  const [orderBy, setOrderBy] = useState("");
+  const [rangeNumber, setRangeNumber] = useState(100);
+
   const tableHeader = [
-    "#",
-    "",
     "Prix",
-    "Volume",
     "MarketCap",
+    "Volume",
     "1h",
     "1j",
     "1s",
@@ -21,6 +21,23 @@ const Table = ({ data }) => {
   return (
     <div className="table-container">
       <ul className="table-header">
+        <div className="range-container">
+          <span>
+            Top{" "}
+            <input
+              type="text"
+              value={rangeNumber}
+              onChange={(e) => setRangeNumber(e.target.value)}
+            />
+          </span>
+          <input
+            type="range"
+            min="1"
+            max="250"
+            value={rangeNumber}
+            onChange={(e) => setRangeNumber(e.target.value)}
+          />
+        </div>
         {tableHeader.map((el) => (
           <li key={el}>
             <input
@@ -43,10 +60,9 @@ const Table = ({ data }) => {
         ))}
       </ul>
       {data
+        .slice(0, rangeNumber)
         .sort((a, b) => {
           switch (orderBy) {
-            case "#":
-              return b.market_cap - a.market_cap;
             case "Prix":
               return b.current_price - a.current_price;
             case "Volume":

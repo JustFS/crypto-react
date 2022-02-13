@@ -1,14 +1,15 @@
 import React from "react";
+import colors from "../styles/_settings.scss";
 
-const PercentChange = ({ price }) => {
+const PercentChange = ({ percent }) => {
   return (
     <p
       className="percent-change-container"
       style={{
-        color: price >= 0 ? "green" : "red",
+        color: percent >= 0 ? colors.green1 : colors.red1,
       }}
     >
-      {price ? price.toFixed(2) + "%" : "-"}
+      {percent ? percent.toFixed(2) + "%" : "-"}
     </p>
   );
 };
