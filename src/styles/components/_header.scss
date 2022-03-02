@@ -1,7 +1,11 @@
 header {
   margin: 20px 0 15px 0;
   display: grid;
-  grid-template-columns: 1fr 230px 730px;
+  grid-template-columns: 1fr 1fr 730px;
+
+  @media screen and (max-width: 1150px) {
+    grid-template-columns: 1fr 1fr;
+  }
 
   .title,
   .infos-mkt {
@@ -14,6 +18,7 @@ header {
     align-items: center;
     height: 100%;
     backdrop-filter: blur(3px);
+    border-bottom: 2px solid $color1;
 
     ul {
       height: 100%;
@@ -30,6 +35,10 @@ header {
       height: 52px;
       background: rgba(0, 0, 0, 0.5);
       top: 0;
+
+      @media screen and (max-width: 1150px) {
+        top: -8px;
+      }
     }
     h1 {
       font-family: $font2;
@@ -38,20 +47,20 @@ header {
       z-index: 2;
       position: relative;
       text-align: center;
-      transform: translateY(-5px);
+      transform: translateY(-2px);
       display: flex;
       align-items: center;
       justify-content: center;
-      background: -webkit-linear-gradient(360deg, #0debc6, $color1);
+      background: -webkit-linear-gradient(360deg, $color1, #0debc6);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       height: 36px;
 
       img {
-        height: 18px;
+        height: 17px;
         object-fit: cover;
         margin-right: 3px;
-        transform: translateY(-3px);
+        transform: translate(3px, -4px);
       }
     }
   }
@@ -63,10 +72,19 @@ header {
       font-size: 1.1rem;
     }
   }
+  .infos-mkt {
+    @media screen and (max-width: 1150px) {
+      margin-right: 0;
+    }
+  }
   .global-chart {
     border-radius: 14px;
     overflow: hidden;
     box-shadow: $shadow;
+
+    @media screen and (max-width: 1150px) {
+      display: none;
+    }
 
     text {
       font-size: 1rem !important;

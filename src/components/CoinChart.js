@@ -8,19 +8,30 @@ import {
   Tooltip,
   Area,
 } from "recharts";
+import colors from "../styles/_settings.scss";
 
-const CoinChart = ({ coinId }) => {
+const CoinChart = ({ coinId, coinName }) => {
   const [coinData, setCoinData] = useState();
-  const [time, setTime] = useState(30);
-  const [min, setMin] = useState();
-  const [max, setMax] = useState();
+  const [duration, setDuration] = useState(30);
+  const radioData = [
+    [1, "1 jour"],
+    [3, "3 jours"],
+    [7, "7 jours"],
+    [30, "1 mois"],
+    [91, "3 mois"],
+    [181, "6 mois"],
+    [365, "1 an"],
+    [3000, "Max"],
+  ];
 
   useEffect(() => {
     let dataArray = [];
-    let interval = time > 32 ? "&interval=daily" : "";
+
     axios
       .get(
-        `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=usd&days=${time}${interval}`
+        `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=usd&days=${duration}${
+          duration > 32 ? "&interval=daily" : ""
+        }`
       )
       .then((res) => {
         for (let i = 0; i < res.data.prices.length; i++) {
@@ -28,62 +39,50 @@ const CoinChart = ({ coinId }) => {
 
           dataArray.push({
             date: new Date(res.data.prices[i][0]).toLocaleDateString(),
-            price: price < 1 ? price : price.toFixed(2),
+            price: price < "50" ? price : parseInt(price),
           });
         }
-      })
-      .then(() => {
         setCoinData(dataArray);
-        setMin(
-          dataArray.reduce((prev, curr) => {
-            return prev.price < curr.price ? prev.price : curr.price;
-          })
-        );
-        setMax(
-          dataArray.reduce((prev, curr) => {
-            return prev.price > curr.price ? prev.price : curr.price;
-          })
-        );
       });
-  }, [coinId, time]);
+  }, [coinId, duration]);
 
   return (
     <div className="coin-chart">
-      <p>{coinId}</p>
+      <p>{coinName}</p>
       <div className="btn-container">
-        <button onClick={() => setTime(1)}>1 jour</button>
-        <button onClick={() => setTime(3)}>3 jours</button>
-        <button onClick={() => setTime(7)}>1 semaine</button>
-        <button onClick={() => setTime(30)}>1 mois</button>
-        <button onClick={() => setTime(91)}>3 mois</button>
-        <button onClick={() => setTime(181)}>6 mois</button>
-        <button onClick={() => setTime(365)}>1 an</button>
+        {radioData.map((radio) => {
+          return (
+            <div
+              htmlFor={"btn" + radio[0]}
+              onClick={() => setDuration(radio[0])}
+              key={radio[0]}
+              className={radio[0] === duration ? "active-btn" : ""}
+            >
+              {radio[1]}
+            </div>
+          );
+        })}
       </div>
       <AreaChart
-        width={730}
+        width={680}
         height={250}
         data={coinData}
         margin={{ top: 10, right: 0, left: 100, bottom: 0 }}
       >
         <defs>
           <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="5%" stopColor="pink" stopOpacity={0.8} />
-            <stop offset="95%" stopColor="pink" stopOpacity={0} />
+            <stop offset="7%" stopColor={colors.color1} stopOpacity={0.8} />
+            <stop offset="93%" stopColor={colors.white1} stopOpacity={0} />
           </linearGradient>
         </defs>
         <XAxis dataKey="date" />
-        <YAxis
-          domain={[
-            (min) => (min * 0.99).toFixed(2),
-            (max) => (max * 1.01).toFixed(2),
-          ]}
-        />
+        <YAxis domain={["auto", "auto"]} />
         <CartesianGrid strokeDasharray="3 3" />
         <Tooltip />
         <Area
           type="monotone"
           dataKey="price"
-          stroke="pink"
+          stroke={colors.color1}
           fillOpacity={1}
           fill="url(#colorUv)"
         />

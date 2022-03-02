@@ -51,16 +51,19 @@ a,
 a:visited {
   text-decoration: none;
 }
+label {
+  user-select: none;
+}
 
-#top {
+.top {
   margin: 10px auto 30px;
   text-align: center;
   animation: animLogo 1.2s infinite linear;
   user-select: none;
 
   img {
-    height: 30px;
-    transition: 0.3s;
+    height: 22px;
+    transition: transform 0.4s;
     cursor: pointer;
 
     &:hover {
@@ -70,7 +73,7 @@ a:visited {
 
   @keyframes animLogo {
     50% {
-      transform: translateY(5px);
+      transform: translateY(3px);
     }
     100% {
       transform: translate(0);

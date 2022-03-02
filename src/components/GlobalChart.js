@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Treemap, Tooltip } from "recharts";
 import colors from "../styles/_settings.scss";
+import { useSelector } from "react-redux";
 
-const GlobalChart = ({ data }) => {
+const GlobalChart = () => {
   const [dataArray, setDataArray] = useState([]);
+  const coinsData = useSelector((state) => state.allCoinsReducer);
 
   const colorPicker = (number) => {
     if (number >= 20) {
@@ -39,23 +41,23 @@ const GlobalChart = ({ data }) => {
   useEffect(() => {
     let chartData = [];
 
-    if (data.length > 0) {
+    if (coinsData.length > 0) {
       for (let i = 0; i < 45; i++) {
-        if (excludeCoin(data[i].symbol)) {
+        if (excludeCoin(coinsData[i].symbol)) {
           chartData.push({
             name:
-              data[i].symbol.toUpperCase() +
+              coinsData[i].symbol.toUpperCase() +
               " " +
-              data[i].market_cap_change_percentage_24h.toFixed(2) +
+              coinsData[i].market_cap_change_percentage_24h.toFixed(1) +
               "%",
-            size: data[i].market_cap,
-            fill: colorPicker(data[i].price_change_percentage_24h),
+            size: coinsData[i].market_cap,
+            fill: colorPicker(coinsData[i].price_change_percentage_24h),
           });
         }
       }
     }
     setDataArray(chartData);
-  }, [data]);
+  }, [coinsData]);
 
   const TreemapTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
