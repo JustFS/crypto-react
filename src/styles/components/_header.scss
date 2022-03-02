@@ -16,7 +16,7 @@ header {
     box-shadow: $shadow;
     display: grid;
     align-items: center;
-    height: 100%;
+    height: 132px;
     backdrop-filter: blur(3px);
     border-bottom: 2px solid $color1;
 
@@ -87,7 +87,7 @@ header {
     }
 
     text {
-      font-size: 1rem !important;
+      font-size: 0.8rem !important;
       letter-spacing: 1px;
     }
     .custom-tooltip {

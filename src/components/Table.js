@@ -2,13 +2,12 @@ import React, { useState } from "react";
 import TableFilters from "./TableFilters";
 import TableLine from "./TableLine";
 import ToTop from "./ToTop";
-import { useSelector } from "react-redux";
 import { isEmpty } from "./Utils";
+import { useSelector } from "react-redux";
 
-const Table = () => {
+const Table = ({ coinsData }) => {
   const [orderBy, setOrderBy] = useState("");
   const [rangeNumber, setRangeNumber] = useState(100);
-  const coinsData = useSelector((state) => state.allCoinsReducer);
   const showStable = useSelector((state) => state.stableReducer);
   const showList = useSelector((state) => state.listReducer);
 
@@ -203,7 +202,9 @@ const Table = () => {
                 null;
             }
           })
-          .map((coin) => <TableLine coin={coin} key={coin.id} />)}
+          .map((coin, index) => (
+            <TableLine coin={coin} key={coin.id} index={index} />
+          ))}
     </div>
   );
 };

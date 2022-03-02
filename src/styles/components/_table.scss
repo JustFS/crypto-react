@@ -1,63 +1,69 @@
 .table-container {
   text-align: center;
   color: $white1 !important;
+  margin-top: -53px;
 
   .table-filters {
-    display: flex;
-    background: $black1;
-    border-radius: 10px;
-    padding: 4px;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: 1fr 740px;
+    margin-bottom: 12px;
 
-    .stable-checkbox-container {
+    .table-filters-container {
       display: flex;
-      align-items: center;
-
-      #stableCoin {
-        display: none;
-
-        &:checked {
-          ~ label {
-            background: $black2;
-            border-bottom: 1px solid $color1;
-          }
-        }
-        ~ label {
-          transition: 0.15s;
-          padding: 2px 10px;
-          border-radius: 10px;
-          cursor: pointer;
-
-          &:hover {
-            filter: brightness(130%);
-          }
-        }
-      }
-    }
-
-    .no-list-btn,
-    .fav-list {
-      transition: 0.15s;
+      background: $black1;
       border-radius: 10px;
-      padding: 2px 10px;
-      cursor: pointer;
-      &:hover {
-        filter: brightness(130%);
+      padding: 4px;
+      justify-content: space-between;
+      border-bottom: 1px solid $color1;
+
+      .stable-checkbox-container {
+        display: flex;
+        align-items: center;
+
+        #stableCoin {
+          display: none;
+
+          &:checked {
+            ~ label {
+              background: $black2;
+            }
+          }
+          ~ label {
+            transition: 0.15s;
+            padding: 2px 10px;
+            border-radius: 10px;
+            cursor: pointer;
+
+            &:hover {
+              filter: brightness(130%);
+            }
+          }
+        }
       }
 
-      &.active {
-        background: $black2;
-        border-bottom: 1px solid $color1;
+      .no-list-btn,
+      .fav-list {
+        transition: 0.15s;
+        border-radius: 10px;
+        padding: 2px 10px;
+        cursor: pointer;
+        &:hover {
+          filter: brightness(130%);
+        }
+
+        &.active {
+          background: $black2;
+        }
       }
-    }
 
-    .fav-list {
-      display: flex;
-      align-items: center;
+      .fav-list {
+        display: flex;
+        align-items: center;
 
-      img {
-        height: 14px;
-        margin-left: 5px;
+        img {
+          height: 14px;
+          margin-left: 5px;
+        }
       }
     }
   }

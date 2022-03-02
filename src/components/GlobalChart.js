@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Treemap, Tooltip } from "recharts";
 import colors from "../styles/_settings.scss";
-import { useSelector } from "react-redux";
 
-const GlobalChart = () => {
+const GlobalChart = ({ coinsData }) => {
   const [dataArray, setDataArray] = useState([]);
-  const coinsData = useSelector((state) => state.allCoinsReducer);
 
   const colorPicker = (number) => {
     if (number >= 20) {
@@ -74,7 +72,7 @@ const GlobalChart = () => {
     <div className="global-chart">
       <Treemap
         width={730}
-        height={134}
+        height={179}
         data={dataArray}
         dataKey="size"
         stroke="rgb(51, 51, 51)"

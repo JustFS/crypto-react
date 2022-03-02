@@ -3,7 +3,7 @@ import CoinChart from "./CoinChart";
 import PercentChange from "./PercentChange";
 import StarIcon from "./StarIcon";
 
-const TableLine = ({ coin }) => {
+const TableLine = ({ coin, index }) => {
   const [showChart, setShowChart] = useState(false);
 
   const mktCapFormater = (num) => {
@@ -54,7 +54,7 @@ const TableLine = ({ coin }) => {
     <div className="table-line">
       <div className="infos-container">
         <StarIcon coinId={coin.id} />
-        <p>{coin.market_cap_rank}</p>
+        <p>{index + 1}</p>
         <div className="img">
           <img src={coin.image} height="20" alt="logo" />
         </div>
