@@ -1,20 +1,17 @@
 import React, { useState } from "react";
 import CoinChart from "./CoinChart";
+import DeleteIcon from "./DeleteIcon";
 import PercentChange from "./PercentChange";
+import Signal from "./Signal";
 import StarIcon from "./StarIcon";
 
-const TableLine = ({ coin, index }) => {
+const TableLine = ({ coin }) => {
   const [showChart, setShowChart] = useState(false);
 
   const mktCapFormater = (num) => {
     let newNum = String(num).split("").slice(0, -6);
 
-    if (newNum.length > 3) {
-      newNum[newNum.length - 4] += " ";
-      return newNum.join("");
-    } else {
-      return "0," + newNum.join("");
-    }
+    return Number(newNum.join(""));
   };
 
   const volFormater = (num) => {
@@ -54,7 +51,7 @@ const TableLine = ({ coin, index }) => {
     <div className="table-line">
       <div className="infos-container">
         <StarIcon coinId={coin.id} />
-        <p>{index + 1}</p>
+        <p>{coin.market_cap_rank}</p>
         <div className="img">
           <img src={coin.image} height="20" alt="logo" />
         </div>
@@ -84,9 +81,15 @@ const TableLine = ({ coin, index }) => {
           </a>
         </div>
       </div>
+      <Signal coin={coin} />
       <p>{priceFormater(coin.current_price).toLocaleString()} $</p>
-      <p className="mktcap">{mktCapFormater(coin.market_cap)} Md$</p>
+      <p className="mktcap">
+        {mktCapFormater(coin.market_cap).toLocaleString()} M$
+      </p>
       <p className="volume">{volFormater(coin.total_volume)} M$</p>
+      <p className="volumeMktcap">
+        {((coin.total_volume / coin.market_cap) * 100).toFixed(2)}
+      </p>
       <PercentChange percent={coin.price_change_percentage_1h_in_currency} />
       <PercentChange percent={coin.market_cap_change_percentage_24h} />
       <PercentChange percent={coin.price_change_percentage_7d_in_currency} />
@@ -94,10 +97,11 @@ const TableLine = ({ coin, index }) => {
       <PercentChange percent={coin.price_change_percentage_200d_in_currency} />
       <PercentChange percent={coin.price_change_percentage_1y_in_currency} />
       {coin.ath_change_percentage > -3 ? (
-        "ATH !"
+        "ATH"
       ) : (
         <PercentChange percent={coin.ath_change_percentage} />
       )}
+      <DeleteIcon coinId={coin.id} />
     </div>
   );
 };

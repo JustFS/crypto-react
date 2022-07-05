@@ -1,11 +1,10 @@
-import { SET_STABLE_STATE } from "../actions/stable.action";
+import { SET_BANLIST_DISPLAY } from "../actions/banList.action";
 
 const initialState = {};
 
 export default function filterReducer(state = initialState, action) {
   switch (action.type) {
-    case SET_STABLE_STATE:
-      window.localStorage.stableChoice = action.payload;
+    case SET_BANLIST_DISPLAY:
       return action.payload;
     default:
       return state;

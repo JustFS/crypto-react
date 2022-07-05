@@ -28,6 +28,7 @@ $shadow: 0 5px 15px rgba(0, 0, 0, 0.322);
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: $font1;
 }
 
 html {
@@ -37,9 +38,8 @@ html {
 body {
   background: url(../assets/wave.svg) center/cover;
   background-size: 2000%;
-  font-family: $font1;
   color: $white1;
-  max-width: 1200px;
+  max-width: 1300px;
   margin: 0 auto;
   min-height: 100vh;
 }
@@ -53,6 +53,11 @@ a:visited {
 }
 label {
   user-select: none;
+}
+input {
+  &::selection {
+    background: $color1;
+  }
 }
 
 .top {

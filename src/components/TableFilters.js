@@ -4,14 +4,19 @@ import { setListDisplay } from "../actions/list.action";
 import { setStableState } from "../actions/stable.action";
 
 const TableFilters = () => {
-  const [showStable, setShowStable] = useState(true);
-  const [showFavList, setFavList] = useState(false);
+  let stableStart = window.localStorage.stableChoice
+    ? window.localStorage.stableChoice
+    : true;
+  const [showStable, setShowStable] = useState(
+    stableStart === "true" ? true : false
+  );
+  const [showList, setList] = useState("none");
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(setStableState(showStable));
-    dispatch(setListDisplay(showFavList));
-  }, [showStable, showFavList]);
+    dispatch(setListDisplay(showList));
+  }, [showStable, showList]);
 
   return (
     <div className="table-filters">
@@ -21,24 +26,43 @@ const TableFilters = () => {
             onChange={() => setShowStable(!showStable)}
             type="checkbox"
             id="stableCoin"
-            defaultChecked={true}
+            defaultChecked={showStable}
           />
           <label htmlFor="stableCoin">
-            {showStable ? "Avec stable coin" : "Sans stable coin"}
+            {showStable ? "Avec stable" : "Sans stable"}
           </label>
         </div>
-        <div
-          className={showFavList ? "no-list-btn" : "no-list-btn active"}
-          onClick={() => setFavList(false)}
-        >
-          <p>Aucune liste</p>
+        <div className="stable-checkbox-container">
+          <input
+            onChange={() => {
+              document
+                .querySelector(".table-container")
+                .classList.toggle("mktvol");
+            }}
+            type="checkbox"
+            id="volmkt"
+            defaultChecked={false}
+          />
+          <label htmlFor="volmkt">vol/mkt</label>
         </div>
         <div
-          className={showFavList ? "fav-list active" : "fav-list"}
-          onClick={() => setFavList(true)}
+          className={showList === "none" ? "no-list-btn active" : "no-list-btn"}
+          onClick={() => setList("none")}
         >
-          <p>Liste des favoris</p>
+          <p>Liste</p>
+        </div>
+        <div
+          className={showList === "fav" ? "fav-list active" : "fav-list"}
+          onClick={() => setList("fav")}
+        >
+          <p>Fav</p>
           <img src="./assets/star-full.svg" alt="icon-star" />
+        </div>
+        <div
+          className={showList === "shit" ? "shit-list active" : "shit-list"}
+          onClick={() => setList("shit")}
+        >
+          <p>Shitcoins</p>
         </div>
       </div>
     </div>

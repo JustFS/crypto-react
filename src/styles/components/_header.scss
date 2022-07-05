@@ -7,6 +7,10 @@ header {
     grid-template-columns: 1fr 1fr;
   }
 
+  @media screen and (max-width: 450px) {
+    display: none;
+  }
+
   .title,
   .infos-mkt {
     background: rgba(20, 20, 20, 0.85);
@@ -55,6 +59,10 @@ header {
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       height: 36px;
+
+      @media screen and (max-width: 450px) {
+        font-size: 1.2rem;
+      }
 
       img {
         height: 17px;

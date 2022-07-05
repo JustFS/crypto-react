@@ -4,23 +4,30 @@ import TableLine from "./TableLine";
 import ToTop from "./ToTop";
 import { isEmpty } from "./Utils";
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 const Table = ({ coinsData }) => {
   const [orderBy, setOrderBy] = useState("");
-  const [rangeNumber, setRangeNumber] = useState(100);
+  const [rangeNumber, setRangeNumber] = useState(250);
+  const [startNumber, setStartNumber] = useState(0);
+  const [inputSearch, setInputSearch] = useState("");
   const showStable = useSelector((state) => state.stableReducer);
   const showList = useSelector((state) => state.listReducer);
+  const banList = useSelector((state) => state.banListReducer);
+  const signalList = useSelector((state) => state.signalListReducer);
 
   const tableHeader = [
+    "AT",
     "Prix",
     "MarketCap",
     "Volume",
+    "Vol-Mkt",
     "1h",
     "1j",
     "1s",
     "1m",
     "6m",
-    "1y",
+    "1a",
     "ATH",
   ];
 
@@ -44,7 +51,15 @@ const Table = ({ coinsData }) => {
       coin === "ousd" ||
       coin === "xsgd" ||
       coin === "usdx" ||
-      coin === "eurs"
+      coin === "eurs" ||
+      coin === "cusdc" ||
+      coin === "cdai" ||
+      coin === "usdd" ||
+      coin === "ibeur" ||
+      coin === "eurt" ||
+      coin === "flexusd" ||
+      coin === "alusd" ||
+      coin === "susd"
     ) {
       return false;
     } else {
@@ -52,25 +67,65 @@ const Table = ({ coinsData }) => {
     }
   };
 
+  useEffect(() => {
+    if (signalList) {
+      coinsData.forEach((coins) => {
+        for (let i = 0; i < signalList.length; i++) {
+          if (signalList[i][0] === coins.id) {
+            coins.signal = (coins.current_price / signalList[i][2]) * 100;
+          }
+        }
+      });
+    }
+  }, [signalList, coinsData]);
+
   return (
     <div className="table-container">
       <TableFilters />
       <ul className="table-header">
         <div className="range-container">
           <span>
-            Top{" "}
+            <span>Top </span>
             <input
               type="text"
               value={rangeNumber}
               onChange={(e) => setRangeNumber(e.target.value)}
             />
           </span>
+          <div className="inputs-container">
+            <input
+              type="range"
+              min="0"
+              max="250"
+              value={startNumber}
+              onChange={(e) => {
+                if (startNumber > rangeNumber) {
+                  setStartNumber(e.target.value).then(() =>
+                    setRangeNumber(() => Number(startNumber) + 1)
+                  );
+                }
+                setStartNumber(e.target.value);
+              }}
+            />
+            <input
+              type="range"
+              min="1"
+              max="250"
+              value={rangeNumber}
+              onChange={(e) => {
+                if (rangeNumber < startNumber) {
+                  setRangeNumber(e.target.value);
+                  setStartNumber(rangeNumber - 1);
+                }
+                setRangeNumber(e.target.value);
+              }}
+            />
+          </div>
           <input
-            type="range"
-            min="1"
-            max="250"
-            value={rangeNumber}
-            onChange={(e) => setRangeNumber(e.target.value)}
+            type="text"
+            placeholder="Rechercher..."
+            spellCheck={false}
+            onChange={(e) => setInputSearch(e.target.value)}
           />
           <ToTop />
         </div>
@@ -97,16 +152,39 @@ const Table = ({ coinsData }) => {
       </ul>
       {!isEmpty(coinsData) &&
         coinsData
-          .slice(0, rangeNumber)
+          .slice(startNumber, rangeNumber)
           .filter((coin) => {
-            if (showList) {
-              let list = window.localStorage.coinList.split(",");
-              console.log(list);
-              if (list.includes(coin.id)) {
+            return (
+              coin.name.toLowerCase().includes(inputSearch.toLowerCase()) ||
+              coin.symbol.toLowerCase().includes(inputSearch.toLowerCase())
+            );
+          })
+          .filter((coin) => {
+            if (showList === "fav") {
+              if (window.localStorage.coinList) {
+                let list = window.localStorage.coinList.split(",");
+                if (list.includes(coin.id)) {
+                  return coin;
+                }
+              }
+            } else if (showList === "none") {
+              if (window.localStorage.banList) {
+                let list = banList.split(",");
+                if (!list.includes(coin.id)) {
+                  return coin;
+                }
+              } else {
                 return coin;
               }
-            } else {
-              return coin;
+            } else if (showList === "shit") {
+              if (window.localStorage.banList) {
+                let list = banList.split(",");
+                if (list.includes(coin.id)) {
+                  return coin;
+                }
+              } else {
+                return null;
+              }
             }
           })
           .filter((coin) => {
@@ -120,6 +198,8 @@ const Table = ({ coinsData }) => {
           })
           .sort((a, b) => {
             switch (orderBy) {
+              case "AT":
+                return a.signal - b.signal;
               case "Prix":
                 return b.current_price - a.current_price;
               case "Volume":
@@ -151,7 +231,7 @@ const Table = ({ coinsData }) => {
                   b.price_change_percentage_200d_in_currency -
                   a.price_change_percentage_200d_in_currency
                 );
-              case "1y":
+              case "1a":
                 return (
                   b.price_change_percentage_1y_in_currency -
                   a.price_change_percentage_1y_in_currency
@@ -160,6 +240,9 @@ const Table = ({ coinsData }) => {
                 return b.ath_change_percentage - a.ath_change_percentage;
               case "#reverse":
                 return a.market_cap - b.market_cap;
+              case "ATreverse":
+                return b.signal - a.signal;
+                return;
               case "Prixreverse":
                 return a.current_price - b.current_price;
               case "Volumereverse":
@@ -191,20 +274,26 @@ const Table = ({ coinsData }) => {
                   a.price_change_percentage_200d_in_currency -
                   b.price_change_percentage_200d_in_currency
                 );
-              case "1yreverse":
+              case "1areverse":
                 return (
                   a.price_change_percentage_1y_in_currency -
                   b.price_change_percentage_1y_in_currency
                 );
               case "ATHreverse":
                 return a.ath_change_percentage - b.ath_change_percentage;
+              case "Vol-Mkt":
+                return (
+                  a.total_volume / a.market_cap - b.total_volume / b.market_cap
+                );
+              case "Vol-Mktreverse":
+                return (
+                  b.total_volume / b.market_cap - a.total_volume / a.market_cap
+                );
               default:
                 null;
             }
           })
-          .map((coin, index) => (
-            <TableLine coin={coin} key={coin.id} index={index} />
-          ))}
+          .map((coin, index) => <TableLine coin={coin} key={coin.id} />)}
     </div>
   );
 };

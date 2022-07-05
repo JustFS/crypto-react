@@ -4,9 +4,13 @@ import Table from "./components/Table";
 import GlobalChart from "./components/GlobalChart";
 import ToTop from "./components/ToTop";
 import axios from "axios";
+import { setBanListDisplay } from "./actions/banList.action";
+import { useDispatch } from "react-redux";
+import { setSignalList } from "./actions/signalList.action";
 
 const App = () => {
   const [coinsData, setCoinsData] = useState([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     axios
@@ -22,6 +26,13 @@ const App = () => {
         document.querySelector(".table-header").classList.remove("active");
       }
     });
+
+    if (window.localStorage.banList) {
+      dispatch(setBanListDisplay(window.localStorage.banList));
+    }
+    if (window.localStorage.signalData) {
+      dispatch(setSignalList(JSON.parse(window.localStorage.signalData)));
+    }
   }, []);
 
   return (
