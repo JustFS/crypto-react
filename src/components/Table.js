@@ -4,9 +4,8 @@ import TableLine from "./TableLine";
 import ToTop from "./ToTop";
 import { isEmpty } from "./Utils";
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
 
-const Table = ({ coinsData }) => {
+const Table = () => {
   const [orderBy, setOrderBy] = useState("");
   const [rangeNumber, setRangeNumber] = useState(250);
   const [startNumber, setStartNumber] = useState(0);
@@ -14,7 +13,7 @@ const Table = ({ coinsData }) => {
   const showStable = useSelector((state) => state.stableReducer);
   const showList = useSelector((state) => state.listReducer);
   const banList = useSelector((state) => state.banListReducer);
-  const signalList = useSelector((state) => state.signalListReducer);
+  const coinsData = useSelector((state) => state.coinsDataReducer);
 
   const tableHeader = [
     "AT",
@@ -66,18 +65,6 @@ const Table = ({ coinsData }) => {
       return true;
     }
   };
-
-  useEffect(() => {
-    if (signalList) {
-      coinsData.forEach((coins) => {
-        for (let i = 0; i < signalList.length; i++) {
-          if (signalList[i][0] === coins.id) {
-            coins.signal = (coins.current_price / signalList[i][2]) * 100;
-          }
-        }
-      });
-    }
-  }, [signalList, coinsData]);
 
   return (
     <div className="table-container">
@@ -199,7 +186,7 @@ const Table = ({ coinsData }) => {
           .sort((a, b) => {
             switch (orderBy) {
               case "AT":
-                return a.signal - b.signal;
+                return b.signal[1] - a.signal[1];
               case "Prix":
                 return b.current_price - a.current_price;
               case "Volume":
@@ -241,7 +228,7 @@ const Table = ({ coinsData }) => {
               case "#reverse":
                 return a.market_cap - b.market_cap;
               case "ATreverse":
-                return b.signal - a.signal;
+                return b.signal[0] - a.signal[0];
                 return;
               case "Prixreverse":
                 return a.current_price - b.current_price;

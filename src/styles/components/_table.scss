@@ -9,12 +9,12 @@
       grid-template-columns: 308px 20px 100px 82px 82px 60px repeat(7, 1fr) 20px;
     }
     .table-header {
-      li:nth-child(5) {
+      li:nth-child(6) {
         display: block;
       }
     }
     .table-line {
-      p:nth-child(5) {
+      p:nth-child(6) {
         display: block;
       }
     }
@@ -153,23 +153,28 @@
         visibility: visible !important;
       }
     }
+    @media screen and (max-width: 1020px) {
+      li:nth-child(2) {
+        display: none;
+      }
+    }
 
     @media screen and (max-width: 850px) {
-      li:nth-child(8),
       li:nth-child(9),
-      li:nth-child(10) {
+      li:nth-child(10),
+      li:nth-child(11) {
         display: none;
       }
     }
     @media screen and (max-width: 715px) {
-      li:nth-child(3),
-      li:nth-child(4) {
+      li:nth-child(4),
+      li:nth-child(5) {
         display: none;
       }
     }
     @media screen and (max-width: 450px) {
-      li:nth-child(11),
-      li:nth-child(12) {
+      li:nth-child(12),
+      li:nth-child(13) {
         display: none;
       }
     }
@@ -297,8 +302,9 @@
         color: $color1;
       }
     }
-    li:nth-child(5) {
+    li:nth-child(6) {
       display: none;
+
       @media screen and (max-width: 1020px) {
         display: none;
       }
@@ -313,13 +319,13 @@
     color: $white1;
     transition: 0.15s;
 
-    p:nth-child(5) {
+    p:nth-child(6) {
       display: none;
     }
 
     @media screen and (max-width: 1020px) {
       font-size: 0.8rem;
-      p:nth-child(5) {
+      p:nth-child(6) {
         display: none;
       }
     }
@@ -333,7 +339,7 @@
     }
     @media screen and (max-width: 715px) {
       p:nth-child(4),
-      p:nth-child(3) {
+      p:nth-child(5) {
         display: none;
       }
     }
@@ -439,6 +445,10 @@
     .signal-container {
       position: relative;
 
+      @media screen and (max-width: 1020px) {
+        display: none;
+      }
+
       .sign-color {
         height: 12px;
         width: 12px;
@@ -531,6 +541,10 @@
   }
   .delete-container {
     cursor: pointer;
+
+    @media screen and (max-width: 1020px) {
+      display: none;
+    }
 
     img {
       height: 15px;

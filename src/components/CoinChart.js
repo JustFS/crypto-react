@@ -12,7 +12,7 @@ import colors from "../styles/_settings.scss";
 
 const CoinChart = ({ coinId, coinName }) => {
   const [coinData, setCoinData] = useState();
-  const [duration, setDuration] = useState(30);
+  const [duration, setDuration] = useState(365);
   const radioData = [
     [1, "1 jour"],
     [3, "3 jours"],
