@@ -1,0 +1,206 @@
+.help-container {
+  max-width: 1200px;
+  margin: 12px auto 50px;
+  padding: 10px;
+
+  h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    letter-spacing: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      margin-left: 15px;
+    }
+  }
+  .link {
+    display: block;
+    text-align: center;
+    background: $black2;
+    width: 120px;
+    margin: 15px auto;
+    font-size: 1.4rem;
+    height: 40px;
+    align-items: center;
+    display: grid;
+    border-radius: 12px;
+    transition: 0.15s;
+
+    &:hover {
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.547);
+    }
+  }
+  #sec {
+    width: 200px;
+  }
+  .features {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-areas:
+      "intro intro mkt mkt"
+      "filt filt filt filt"
+      "other ta ta ta";
+    margin-top: 24px;
+    gap: 8px;
+
+    @media screen and (max-width: 890px) {
+      display: block;
+
+      > div {
+        margin: 6px 0;
+      }
+    }
+
+    > div {
+      background: $black1;
+      border-radius: 10px;
+      padding: 8px 14px 14px 14px;
+      box-shadow: 0 2px 10px rgba(255, 255, 255, 0.055);
+
+      h3 {
+        background: -webkit-linear-gradient(45deg, $color1, #73f5e0);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 10px;
+        letter-spacing: 1px;
+      }
+      p,
+      li {
+        line-height: 30px;
+      }
+    }
+    .intro {
+      grid-area: intro;
+
+      span {
+        color: $color1;
+      }
+    }
+    .mkt-atl {
+      grid-area: mkt;
+    }
+    .other {
+      img {
+        height: 17px;
+        transform: translateY(2px);
+      }
+      ul {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        height: 85%;
+        li {
+          margin-left: 20px;
+          list-style-type: disc;
+        }
+      }
+    }
+    .ta {
+      grid-area: ta;
+
+      .subtitle {
+        color: $white2;
+        margin-top: 12px;
+      }
+      .explain {
+        display: grid;
+        grid-template-columns: 50% 50%;
+
+        @media screen and (max-width: 600px) {
+          display: block;
+          margin-top: 20px;
+        }
+
+        .form-part {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          img {
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
+          }
+        }
+      }
+      li {
+        margin-left: 26px;
+        position: relative;
+        span {
+          height: 14px;
+          width: 14px;
+          display: block;
+          position: absolute;
+          left: -24px;
+          top: 8px;
+          border-radius: 150px;
+          box-shadow: 0 0px 4px rgba(255, 255, 255, 0.306);
+        }
+      }
+      li:nth-child(1) {
+        span {
+          background: #2a2a2a;
+        }
+      }
+      li:nth-child(2) {
+        span {
+          background: $green2;
+        }
+      }
+      li:nth-child(3) {
+        span {
+          background: $green;
+        }
+      }
+      li:nth-child(4) {
+        span {
+          background: $green1;
+        }
+      }
+      li:nth-child(5) {
+        span {
+          background: black;
+        }
+      }
+      li:nth-child(6) {
+        span {
+          background: rgb(251, 185, 174);
+        }
+      }
+      li:nth-child(7) {
+        span {
+          background: $red1;
+        }
+      }
+      li:nth-child(8) {
+        span {
+          background: $red2;
+        }
+      }
+    }
+    .filter-bar {
+      grid-area: filt;
+      width: 100%;
+      padding-bottom: 22px;
+
+      @media screen and (max-width: 700px) {
+        display: none;
+      }
+
+      img {
+        object-fit: cover;
+        width: 100%;
+        max-width: 1023px;
+        border-radius: 12px;
+        margin: 0 auto;
+        display: block;
+      }
+    }
+  }
+  .ama {
+    text-align: center;
+    display: block;
+    margin: 30px 0 30px;
+  }
+}

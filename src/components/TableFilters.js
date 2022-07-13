@@ -29,27 +29,20 @@ const TableFilters = () => {
             defaultChecked={showStable}
           />
           <label htmlFor="stableCoin">
-            {showStable ? "Avec stable" : "Sans stable"}
+            {showStable ? "With stable" : "Without stable"}
           </label>
         </div>
-        <div className="stable-checkbox-container">
-          <input
-            onChange={() => {
-              document
-                .querySelector(".table-container")
-                .classList.toggle("mktvol");
-            }}
-            type="checkbox"
-            id="volmkt"
-            defaultChecked={false}
-          />
-          <label htmlFor="volmkt">vol/mkt</label>
+        <div
+          className={showList === "all" ? "all active" : "all"}
+          onClick={() => setList("all")}
+        >
+          <p>All</p>
         </div>
         <div
-          className={showList === "none" ? "no-list-btn active" : "no-list-btn"}
+          className={showList === "none" ? "none active" : "none"}
           onClick={() => setList("none")}
         >
-          <p>Liste</p>
+          <p>List</p>
         </div>
         <div
           className={showList === "fav" ? "fav-list active" : "fav-list"}
@@ -62,7 +55,21 @@ const TableFilters = () => {
           className={showList === "shit" ? "shit-list active" : "shit-list"}
           onClick={() => setList("shit")}
         >
-          <p>Shitcoins</p>
+          <p>Trash</p>
+          <img src="./assets/delete-icon.svg" alt="delete icon" />
+        </div>
+        <div className="stable-checkbox-container">
+          <input
+            onChange={() => {
+              document
+                .querySelector(".table-container")
+                .classList.toggle("mktvol");
+            }}
+            type="checkbox"
+            id="volmkt"
+            defaultChecked={false}
+          />
+          <label htmlFor="volmkt">mv/ath/atl</label>
         </div>
       </div>
     </div>

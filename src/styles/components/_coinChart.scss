@@ -2,13 +2,14 @@
   position: absolute;
   z-index: 1000;
   width: 660px;
-  top: 17px;
-  left: 8px;
+  top: 13px;
+  left: 12px;
   background: rgba(82, 82, 82, 0.8);
   backdrop-filter: blur(3px);
   border-radius: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.548);
   overflow: hidden;
+  z-index: 1000;
 
   .coin-chart {
     padding: 20px;

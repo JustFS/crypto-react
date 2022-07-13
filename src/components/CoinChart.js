@@ -12,15 +12,15 @@ import colors from "../styles/_settings.scss";
 
 const CoinChart = ({ coinId, coinName }) => {
   const [coinData, setCoinData] = useState();
-  const [duration, setDuration] = useState(365);
+  const [duration, setDuration] = useState(3000);
   const radioData = [
-    [1, "1 jour"],
-    [3, "3 jours"],
-    [7, "7 jours"],
-    [30, "1 mois"],
-    [91, "3 mois"],
-    [181, "6 mois"],
-    [365, "1 an"],
+    [1, "1 day"],
+    [3, "3 days"],
+    [7, "7 days"],
+    [30, "1 mo"],
+    [91, "3 mo"],
+    [181, "6 mo"],
+    [365, "1 year"],
     [3000, "Max"],
   ];
 
@@ -48,7 +48,7 @@ const CoinChart = ({ coinId, coinName }) => {
 
   return (
     <div className="coin-chart">
-      <p>{coinName}</p>
+      <p>{coinName} chart</p>
       <div className="btn-container">
         {radioData.map((radio) => {
           return (

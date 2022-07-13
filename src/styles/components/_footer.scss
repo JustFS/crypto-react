@@ -1,0 +1,35 @@
+footer {
+  text-align: center;
+  padding-bottom: 30px;
+  position: relative;
+
+  p {
+    line-height: 40px;
+  }
+
+  a {
+    color: $color1;
+    transition: 0.2s;
+
+    &:hover {
+      filter: brightness(200%);
+      transform: translate(1px);
+    }
+  }
+  .ee {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    height: 70px;
+    width: 70px;
+    opacity: 0;
+    background: url(../../assets/pepe.png) center/cover;
+    transition: 0.4s linear;
+    cursor: none;
+    filter: drop-shadow(0 2px 10px rgba(255, 255, 255, 0.246));
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}

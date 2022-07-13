@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Treemap, Tooltip } from "recharts";
 import colors from "../styles/_settings.scss";
+import Notes from "./Notes";
 
 const GlobalChart = ({ coinsData }) => {
   const [dataArray, setDataArray] = useState([]);
+  const [showNotes, setShowNotes] = useState(false);
 
   const colorPicker = (number) => {
     if (number >= 20) {
       return colors.color1;
     } else if (number >= 5) {
       return colors.green2;
-    } else if (number >= 0) {
+    } else if (number > -0.99) {
       return colors.green1;
     } else if (number >= -5) {
       return colors.red1;
@@ -69,18 +71,22 @@ const GlobalChart = ({ coinsData }) => {
   };
 
   return (
-    <div className="global-chart">
-      <Treemap
-        width={730}
-        height={179}
-        data={dataArray}
-        dataKey="size"
-        stroke="rgb(51, 51, 51)"
-        fill="black"
-        aspectRatio="1"
-      >
-        <Tooltip content={<TreemapTooltip />} />
-      </Treemap>
+    <div className="global-chart" onClick={() => setShowNotes(true)}>
+      {showNotes ? (
+        <Notes setShowNotes={setShowNotes} />
+      ) : (
+        <Treemap
+          width={730}
+          height={179}
+          data={dataArray}
+          dataKey="size"
+          stroke="rgb(51, 51, 51)"
+          fill="black"
+          aspectRatio="1"
+        >
+          <Tooltip content={<TreemapTooltip />} />
+        </Treemap>
+      )}
     </div>
   );
 };

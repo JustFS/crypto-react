@@ -31,6 +31,11 @@ $shadow: 0 5px 15px rgba(0, 0, 0, 0.322);
   padding: 0;
   box-sizing: border-box;
   font-family: $font1;
+
+  &::selection {
+    background: $color1;
+    color: $black1;
+  }
 }
 
 html {
@@ -44,6 +49,20 @@ body {
   max-width: 1300px;
   margin: 0 auto;
   min-height: 100vh;
+
+  &::-webkit-scrollbar {
+    background: #333;
+    width: 8px;
+  }
+  &::-webkit-scrollbar-track {
+    border-radius: 50px;
+    background: $black1;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #00b7b3, #0debc6);
+    border-radius: 50px;
+    height: 30px;
+  }
 }
 li {
   list-style: none;
@@ -52,14 +71,26 @@ li {
 a,
 a:visited {
   text-decoration: none;
+  color: $color1;
+
+  &:hover {
+    filter: brightness(150%);
+  }
 }
 label {
   user-select: none;
 }
 input {
   &::selection {
-    background: $color1;
+    background: linear-gradient(90deg, $color1, #0debc6);
   }
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+img {
+  user-select: none;
 }
 
 .top {

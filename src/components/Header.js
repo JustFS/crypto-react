@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import PercentChange from "./PercentChange";
 import colors from "../styles/_settings.scss";
+import { NavLink } from "react-router-dom";
 
 const Header = () => {
   const [headerData, setHeaderData] = useState([]);
@@ -18,19 +19,26 @@ const Header = () => {
 
   return (
     <>
-      <ul className="title">
-        <li>
+      <div className="title">
+        <div>
           <h1>
             <img src="./assets/logo.png" alt="" /> Watch Tower
           </h1>
-        </li>
-        <li>
-          Crypto-monnaies :{" "}
-          {headerData.active_cryptocurrencies &&
-            headerData.active_cryptocurrencies.toLocaleString()}
-        </li>
-        <li>Marchés : {headerData.markets}</li>
-      </ul>
+        </div>
+        <div className="infos">
+          <ul>
+            <li>
+              Coins :{" "}
+              {headerData.active_cryptocurrencies &&
+                headerData.active_cryptocurrencies.toLocaleString()}
+            </li>
+            <li>Markets : {headerData.markets}</li>
+          </ul>
+          <NavLink to="/help" className="img-help">
+            <img src="./assets/question.svg" alt="question icon" />
+          </NavLink>
+        </div>
+      </div>
       <ul className="infos-mkt">
         <li className="global-mkt">
           Global Market Cap :{" "}

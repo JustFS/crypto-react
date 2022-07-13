@@ -44,9 +44,7 @@ const DeleteIcon = ({ coinId }) => {
           onClick={() => {
             if (
               window.confirm(
-                "Voulez-vous supprimer " +
-                  coinId.toUpperCase() +
-                  " de la liste ?"
+                "Delete " + coinId.toUpperCase() + " from the list ?"
               )
             ) {
               idChecker();
@@ -61,9 +59,7 @@ const DeleteIcon = ({ coinId }) => {
           onClick={() => {
             if (
               window.confirm(
-                "Voulez-vous restaurer " +
-                  coinId.toUpperCase() +
-                  " dans la liste ?"
+                "Restore " + coinId.toUpperCase() + " into the list ?"
               )
             ) {
               idChecker();

@@ -4,6 +4,8 @@ import TableLine from "./TableLine";
 import ToTop from "./ToTop";
 import { isEmpty } from "./Utils";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { setTopThousand } from "../actions/tops.action";
 
 const Table = () => {
   const [orderBy, setOrderBy] = useState("");
@@ -14,52 +16,71 @@ const Table = () => {
   const showList = useSelector((state) => state.listReducer);
   const banList = useSelector((state) => state.banListReducer);
   const coinsData = useSelector((state) => state.coinsDataReducer);
+  const topThousand = useSelector((state) => state.topThousandReducer);
+  const dispatch = useDispatch();
 
   const tableHeader = [
-    "AT",
-    "Prix",
+    "TA",
+    "Price",
     "MarketCap",
     "Volume",
-    "Vol-Mkt",
+    "Mkt-Vol",
     "1h",
-    "1j",
-    "1s",
+    "1d",
+    "1w",
     "1m",
     "6m",
-    "1a",
+    "1y",
     "ATH",
+    "ATHd",
+    "ATLd",
   ];
 
   const excludeCoin = (coin) => {
-    if (
-      coin === "usdt" ||
-      coin === "usdc" ||
-      coin === "busd" ||
-      coin === "dai" ||
-      coin === "ust" ||
-      coin === "mim" ||
-      coin === "tusd" ||
-      coin === "usdp" ||
-      coin === "usdn" ||
-      coin === "fei" ||
-      coin === "tribe" ||
-      coin === "gusd" ||
-      coin === "frax" ||
-      coin === "lusd" ||
-      coin === "husd" ||
-      coin === "ousd" ||
-      coin === "xsgd" ||
-      coin === "usdx" ||
-      coin === "eurs" ||
-      coin === "cusdc" ||
-      coin === "cdai" ||
-      coin === "usdd" ||
-      coin === "ibeur" ||
-      coin === "eurt" ||
-      coin === "flexusd" ||
-      coin === "alusd" ||
-      coin === "susd"
-    ) {
+    let stables = [
+      "usdt",
+      "usdc",
+      "busd",
+      "dai",
+      "ust",
+      "mim",
+      "tusd",
+      "usdp",
+      "usdn",
+      "fei",
+      "tribe",
+      "gusd",
+      "frax",
+      "lusd",
+      "husd",
+      "ousd",
+      "xsgd",
+      "usdx",
+      "eurs",
+      "cusdc",
+      "cdai",
+      "usdd",
+      "ibeur",
+      "eurt",
+      "flexusd",
+      "alusd",
+      "susd",
+      "usdk",
+      "cusd",
+      "ageur",
+      "musd",
+      "yusd",
+      "uxd",
+      "usds",
+      "rsv",
+      "eeur",
+      "ceur",
+      "ustc",
+      "gyen",
+      "mimatic",
+      "tor",
+    ];
+    if (stables.includes(coin)) {
       return false;
     } else {
       return true;
@@ -72,18 +93,47 @@ const Table = () => {
       <ul className="table-header">
         <div className="range-container">
           <span>
-            <span>Top </span>
-            <input
-              type="text"
-              value={rangeNumber}
-              onChange={(e) => setRangeNumber(e.target.value)}
-            />
+            <span
+              onClick={() => {
+                if (topThousand === false) {
+                  setRangeNumber(1000);
+                  setStartNumber(0);
+                } else {
+                  setRangeNumber(500);
+                  setStartNumber(0);
+                }
+                dispatch(setTopThousand(!topThousand));
+              }}
+            >
+              Top
+            </span>{" "}
+            {topThousand ? (
+              <input
+                type="number"
+                value={rangeNumber}
+                onChange={(e) => setRangeNumber(e.target.value)}
+                max="1000"
+                maxLength={4}
+              />
+            ) : (
+              <input
+                type="number"
+                value={rangeNumber}
+                onChange={(e) => setRangeNumber(e.target.value)}
+                max="500"
+                maxLength={3}
+              />
+            )}
           </span>
           <div className="inputs-container">
+            <div className="number-indic">
+              <p className="start">{startNumber}</p>
+              <p className="end">{rangeNumber}</p>
+            </div>
             <input
               type="range"
               min="0"
-              max="250"
+              max={topThousand ? 1000 : 500}
               value={startNumber}
               onChange={(e) => {
                 if (startNumber > rangeNumber) {
@@ -97,7 +147,7 @@ const Table = () => {
             <input
               type="range"
               min="1"
-              max="250"
+              max={topThousand ? 1000 : 500}
               value={rangeNumber}
               onChange={(e) => {
                 if (rangeNumber < startNumber) {
@@ -108,12 +158,22 @@ const Table = () => {
               }}
             />
           </div>
-          <input
-            type="text"
-            placeholder="Rechercher..."
-            spellCheck={false}
-            onChange={(e) => setInputSearch(e.target.value)}
-          />
+          <div className="input-search">
+            <input
+              type="text"
+              placeholder="Search..."
+              spellCheck={false}
+              onChange={(e) => setInputSearch(e.target.value)}
+              value={inputSearch}
+            />
+            {inputSearch && (
+              <img
+                src="./assets/delete-search.svg"
+                alt="delete search"
+                onClick={() => setInputSearch("")}
+              />
+            )}
+          </div>
           <ToTop />
         </div>
         {tableHeader.map((el) => (
@@ -147,6 +207,9 @@ const Table = () => {
             );
           })
           .filter((coin) => {
+            if (showList === "all") {
+              return coin;
+            }
             if (showList === "fav") {
               if (window.localStorage.coinList) {
                 let list = window.localStorage.coinList.split(",");
@@ -185,9 +248,9 @@ const Table = () => {
           })
           .sort((a, b) => {
             switch (orderBy) {
-              case "AT":
+              case "TA":
                 return b.signal[1] - a.signal[1];
-              case "Prix":
+              case "Price":
                 return b.current_price - a.current_price;
               case "Volume":
                 return b.total_volume - a.total_volume;
@@ -195,15 +258,15 @@ const Table = () => {
                 return b.market_cap - a.market_cap;
               case "1h":
                 return (
-                  b.price_change_percentage_1h_in_currency -
+                  b.price_change_percentage_h_in_currency -
                   a.price_change_percentage_1h_in_currency
                 );
-              case "1j":
+              case "1d":
                 return (
                   b.market_cap_change_percentage_24h -
                   a.market_cap_change_percentage_24h
                 );
-              case "1s":
+              case "1w":
                 return (
                   b.price_change_percentage_7d_in_currency -
                   a.price_change_percentage_7d_in_currency
@@ -218,19 +281,30 @@ const Table = () => {
                   b.price_change_percentage_200d_in_currency -
                   a.price_change_percentage_200d_in_currency
                 );
-              case "1a":
+              case "1y":
                 return (
                   b.price_change_percentage_1y_in_currency -
                   a.price_change_percentage_1y_in_currency
                 );
               case "ATH":
                 return b.ath_change_percentage - a.ath_change_percentage;
+              case "ATHd":
+                return (
+                  new Date() -
+                  new Date(b.ath_date) -
+                  (new Date() - new Date(a.ath_date))
+                );
+              case "ATLd":
+                return (
+                  new Date() -
+                  new Date(b.atl_date) -
+                  (new Date() - new Date(a.atl_date))
+                );
               case "#reverse":
                 return a.market_cap - b.market_cap;
               case "ATreverse":
                 return b.signal[0] - a.signal[0];
-                return;
-              case "Prixreverse":
+              case "Pricereverse":
                 return a.current_price - b.current_price;
               case "Volumereverse":
                 return a.total_volume - b.total_volume;
@@ -241,12 +315,12 @@ const Table = () => {
                   a.price_change_percentage_1h_in_currency -
                   b.price_change_percentage_1h_in_currency
                 );
-              case "1jreverse":
+              case "1dreverse":
                 return (
                   a.market_cap_change_percentage_24h -
                   b.market_cap_change_percentage_24h
                 );
-              case "1sreverse":
+              case "1wreverse":
                 return (
                   a.price_change_percentage_7d_in_currency -
                   b.price_change_percentage_7d_in_currency
@@ -261,26 +335,48 @@ const Table = () => {
                   a.price_change_percentage_200d_in_currency -
                   b.price_change_percentage_200d_in_currency
                 );
-              case "1areverse":
+              case "1yreverse":
                 return (
                   a.price_change_percentage_1y_in_currency -
                   b.price_change_percentage_1y_in_currency
                 );
               case "ATHreverse":
                 return a.ath_change_percentage - b.ath_change_percentage;
-              case "Vol-Mkt":
+              case "ATHdreverse":
+                return (
+                  new Date() -
+                  new Date(a.ath_date) -
+                  (new Date() - new Date(b.ath_date))
+                );
+              case "ATLdreverse":
+                return (
+                  new Date() -
+                  new Date(a.atl_date) -
+                  (new Date() - new Date(b.atl_date))
+                );
+              case "Mkt-Vol":
                 return (
                   a.total_volume / a.market_cap - b.total_volume / b.market_cap
                 );
-              case "Vol-Mktreverse":
+              case "Mkt-Volreverse":
                 return (
                   b.total_volume / b.market_cap - a.total_volume / a.market_cap
                 );
+
               default:
                 null;
             }
           })
-          .map((coin, index) => <TableLine coin={coin} key={coin.id} />)}
+          .map((coin, index, row) => {
+            return (
+              <TableLine
+                coin={coin}
+                key={coin.id}
+                index={index}
+                sumNumber={row.length}
+              />
+            );
+          })}
     </div>
   );
 };

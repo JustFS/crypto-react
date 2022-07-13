@@ -26,9 +26,9 @@ const Signal = ({ coin }) => {
           setMini(Number(signalList[i][1]));
           setMaxi(Number(signalList[i][2]));
 
-          console.log(coin.id, coin.signal);
-
-          if (coin.signal[1] > 1) {
+          if (coin.signal[0] < 0) {
+            setColor("skyblue");
+          } else if (coin.signal[1] > 1) {
             setColor(colors.green2);
           } else if (coin.signal[1] < 1 && coin.signal[1] > 0.95) {
             setColor(colors.green);
@@ -50,7 +50,6 @@ const Signal = ({ coin }) => {
 
   const setSignal = () => {
     let data = [coin.id, mini, maxi];
-    console.log(data);
 
     if (window.localStorage.signalData) {
       for (let i = 0; i < signalList.length; i++) {
@@ -62,7 +61,7 @@ const Signal = ({ coin }) => {
       dispatch(setSignalList([...signalList, data]));
       dispatch(updateCoinsData(data));
     } else {
-      dispatch(setSignalList(data));
+      dispatch(setSignalList([data]));
       dispatch(updateCoinsData(data));
     }
   };
@@ -74,7 +73,6 @@ const Signal = ({ coin }) => {
           signalList.splice(i, 1);
           dispatch(setSignalList(signalList));
           dispatch(updateCoinsData([coin.id, 0, 0]));
-          setParam(false);
           setMini(0);
           setMaxi(0);
           setColor("rgb(42, 42, 42)");
@@ -104,7 +102,7 @@ const Signal = ({ coin }) => {
         >
           <input
             type="text"
-            placeholder="mini"
+            placeholder="support"
             onChange={(e) => {
               setMini(e.target.value);
             }}
@@ -112,15 +110,20 @@ const Signal = ({ coin }) => {
           />
           <input
             type="text"
-            placeholder="maxi"
+            placeholder="resistance"
             onChange={(e) => setMaxi(e.target.value)}
             defaultValue={maxi !== 0 ? maxi : null}
           />
           <div className="btn-container">
-            <div onClick={() => deleteSignal()}>
+            <div
+              onClick={() => {
+                deleteSignal();
+                setParam(false);
+              }}
+            >
               <img src="./assets/delete-icon-bis.svg" alt="delete" />
             </div>
-            <input type="submit" value="Confirmer" />
+            <input type="submit" value="Confirm" />
           </div>
         </form>
       )}

@@ -1,73 +1,17 @@
-import React, { useEffect, useState } from "react";
-import Header from "./components/Header";
-import Table from "./components/Table";
-import GlobalChart from "./components/GlobalChart";
-import ToTop from "./components/ToTop";
-import axios from "axios";
-import { setBanListDisplay } from "./actions/banList.action";
-import { useDispatch } from "react-redux";
-import { setSignalList } from "./actions/signalList.action";
-import { setCoinsData } from "./actions/coinsData.action";
-import { useSelector } from "react-redux";
+import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Help from "./pages/Help";
+import Home from "./pages/Home";
 
 const App = () => {
-  const dispatch = useDispatch();
-  const coinsData = useSelector((state) => state.coinsDataReducer);
-
-  useEffect(() => {
-    if (window.localStorage.banList) {
-      dispatch(setBanListDisplay(window.localStorage.banList));
-    }
-    if (window.localStorage.signalData) {
-      dispatch(setSignalList(JSON.parse(window.localStorage.signalData)));
-    }
-
-    axios
-      .get(
-        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=false&price_change_percentage=1h%2C24h%2C7d%2C14d%2C30d%2C200d%2C1y`
-      )
-      .then((res) => {
-        if (window.localStorage.signalData) {
-          let signalList = JSON.parse(window.localStorage.signalData);
-
-          res.data.forEach((coin) => {
-            coin.signal = [0, 0];
-            for (let i = 0; i < signalList.length; i++) {
-              if (signalList[i][0] === coin.id) {
-                coin.signal[0] = coin.current_price / signalList[i][1];
-                coin.signal[1] = coin.current_price / signalList[i][2];
-              }
-            }
-            dispatch(setCoinsData(res.data));
-          });
-        } else {
-          dispatch(setCoinsData(res.data));
-        }
-      })
-      .then(() => {
-        window.addEventListener("scroll", () => {
-          if (window.scrollY > 145) {
-            document.querySelector(".table-header").classList.add("active");
-          } else {
-            document.querySelector(".table-header").classList.remove("active");
-          }
-        });
-      });
-  }, []);
-
   return (
-    <div className="app-container">
-      {coinsData && (
-        <>
-          <header>
-            <Header />
-            <GlobalChart coinsData={coinsData} />
-          </header>
-          <Table />
-          <ToTop />
-        </>
-      )}
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/help" element={<Help />} />
+        <Route path="*" element={<Home />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 

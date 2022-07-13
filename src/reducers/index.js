@@ -4,6 +4,7 @@ import listReducer from "./list.reducer";
 import banListReducer from "./banList.reducer";
 import signalListReducer from "./signalList.reducer";
 import coinsDataReducer from "./coinsData.reducer";
+import topThousandReducer from "./tops.reducer";
 
 export default combineReducers({
   stableReducer,
@@ -11,4 +12,5 @@ export default combineReducers({
   banListReducer,
   signalListReducer,
   coinsDataReducer,
+  topThousandReducer,
 });

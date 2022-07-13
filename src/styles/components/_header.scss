@@ -51,7 +51,7 @@ header {
       z-index: 2;
       position: relative;
       text-align: center;
-      transform: translateY(-2px);
+      transform: translateY(-4px);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -59,6 +59,10 @@ header {
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       height: 36px;
+
+      @media screen and (max-width: 1150px) {
+        transform: translateY(-8px);
+      }
 
       @media screen and (max-width: 450px) {
         font-size: 1.2rem;
@@ -68,7 +72,35 @@ header {
         height: 17px;
         object-fit: cover;
         margin-right: 3px;
-        transform: translate(3px, -4px);
+        transform: translate(2px, -4px);
+      }
+    }
+    .infos {
+      display: grid;
+      grid-template-columns: 50% 50%;
+      height: 100%;
+
+      ul {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+      }
+      .img-help {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin-right: 10px;
+
+        img {
+          height: 30px;
+          cursor: pointer;
+          transition: 0.2s;
+
+          &:hover {
+            transform: translateX(1px);
+            filter: brightness(150%);
+          }
+        }
       }
     }
   }
@@ -89,6 +121,85 @@ header {
     border-radius: 14px;
     overflow: hidden;
     box-shadow: $shadow;
+    overflow: hidden;
+
+    .notes-container {
+      height: 179px;
+      width: 730px;
+      background: $black1;
+      border-bottom: 1px solid $color1;
+      border-radius: 0 0 13px 13px;
+
+      h4 {
+        text-align: center;
+        background: $black2;
+        height: 25px;
+        letter-spacing: 1px;
+      }
+
+      form {
+        height: 154px;
+        position: relative;
+
+        textarea {
+          background: transparent;
+          border: none;
+          padding: 5px;
+          overflow-y: scroll;
+          resize: none;
+          color: $white1;
+          font-size: 1.1rem;
+          width: 100% !important;
+          height: 100%;
+
+          &::selection {
+            background: $color1;
+            color: $black1;
+          }
+
+          &::-webkit-scrollbar {
+            // background: $white1;
+            border-radius: 50px;
+            width: 1px;
+          }
+          &::-webkit-scrollbar-track {
+            border-radius: 50px;
+          }
+          &::-webkit-scrollbar-thumb {
+            background: $color1;
+            border-radius: 50px;
+            height: 10px;
+          }
+
+          &:focus {
+            outline: none;
+          }
+        }
+        input[type="submit"] {
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          width: 100px;
+          height: 30px;
+          background: $color1;
+          border: none;
+          cursor: pointer;
+          color: $black2;
+          font-size: 1.01rem;
+          border-radius: 4px 0 0 0;
+          transition: 0.2s;
+
+          &:focus {
+            outline: 1px solid #0debc6;
+          }
+
+          &:hover {
+            filter: brightness(130%);
+            transform: translateX(1px);
+          }
+        }
+      }
+    }
 
     @media screen and (max-width: 1150px) {
       display: none;
