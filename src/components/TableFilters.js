@@ -58,7 +58,7 @@ const TableFilters = () => {
           <p>Trash</p>
           <img src="./assets/delete-icon.svg" alt="delete icon" />
         </div>
-        <div className="stable-checkbox-container">
+        <div className="stable-checkbox-container" id="mktv-btn">
           <input
             onChange={() => {
               document

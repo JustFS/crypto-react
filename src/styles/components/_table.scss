@@ -77,6 +77,12 @@
         font-size: 0.7rem;
       }
 
+      #mktv-btn {
+        @media screen and (max-width: 1200px) {
+          display: none;
+        }
+      }
+
       .stable-checkbox-container {
         display: flex;
         align-items: center;

@@ -208,7 +208,7 @@ const Table = () => {
                 return b.market_cap - a.market_cap;
               case "1h":
                 return (
-                  b.price_change_percentage_h_in_currency -
+                  b.price_change_percentage_1h_in_currency -
                   a.price_change_percentage_1h_in_currency
                 );
               case "1d":
