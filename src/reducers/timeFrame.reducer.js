@@ -1,10 +1,10 @@
-import { SET_STABLE_STATE } from "../actions/stable.action";
+import { SET_TIME_FRAME } from "../actions/timeFrame.action";
 
 const initialState = {};
 
 export default function filterReducer(state = initialState, action) {
   switch (action.type) {
-    case SET_STABLE_STATE:
+    case SET_TIME_FRAME:
       return action.payload;
     default:
       return state;

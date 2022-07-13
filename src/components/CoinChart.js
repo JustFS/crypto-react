@@ -9,10 +9,14 @@ import {
   Area,
 } from "recharts";
 import colors from "../styles/_settings.scss";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { setTimeFrame } from "../actions/timeFrame.action";
 
 const CoinChart = ({ coinId, coinName }) => {
   const [coinData, setCoinData] = useState();
-  const [duration, setDuration] = useState(91);
+  const timeFrame = useSelector((state) => state.timeFrameReducer);
+  const dispatch = useDispatch();
   const radioData = [
     [1, "1 day"],
     [3, "3 days"],
@@ -21,7 +25,7 @@ const CoinChart = ({ coinId, coinName }) => {
     [91, "3 mo"],
     [181, "6 mo"],
     [365, "1 year"],
-    [3000, "Max"],
+    [3200, "Max"],
   ];
 
   useEffect(() => {
@@ -29,8 +33,8 @@ const CoinChart = ({ coinId, coinName }) => {
 
     axios
       .get(
-        `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=usd&days=${duration}${
-          duration > 32 ? "&interval=daily" : ""
+        `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=usd&days=${timeFrame}${
+          timeFrame > 32 ? "&interval=daily" : ""
         }`
       )
       .then((res) => {
@@ -44,7 +48,7 @@ const CoinChart = ({ coinId, coinName }) => {
         }
         setCoinData(dataArray);
       });
-  }, [coinId, duration]);
+  }, [coinId, timeFrame]);
 
   return (
     <div className="coin-chart">
@@ -54,9 +58,9 @@ const CoinChart = ({ coinId, coinName }) => {
           return (
             <div
               htmlFor={"btn" + radio[0]}
-              onClick={() => setDuration(radio[0])}
+              onClick={() => dispatch(setTimeFrame(radio[0]))}
               key={radio[0]}
-              className={radio[0] === duration ? "active-btn" : ""}
+              className={radio[0] === timeFrame ? "active-btn" : ""}
             >
               {radio[1]}
             </div>

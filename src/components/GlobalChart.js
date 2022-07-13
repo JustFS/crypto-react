@@ -32,7 +32,6 @@ const GlobalChart = ({ coinsData }) => {
     if (coinsData.length > 0) {
       for (let i = 0; i < 45; i++) {
         if (isStableCoin(coinsData[i].symbol)) {
-          console.log(coinsData[i].price_change_percentage_24h);
           chartData.push({
             name:
               coinsData[i].symbol.toUpperCase() +
@@ -42,7 +41,6 @@ const GlobalChart = ({ coinsData }) => {
             size: coinsData[i].market_cap,
             fill: colorPicker(coinsData[i].market_cap_change_percentage_24h),
           });
-          console.log(chartData);
         }
       }
     }

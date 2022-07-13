@@ -11,6 +11,7 @@ import { setCoinsData } from "../actions/coinsData.action";
 import { useSelector } from "react-redux";
 import Footer from "../components/Footer";
 import { setTopThousand } from "../actions/tops.action";
+import { setTimeFrame } from "../actions/timeFrame.action";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -25,16 +26,6 @@ const Home = () => {
   };
 
   useEffect(() => {
-    if (window.localStorage.banList) {
-      dispatch(setBanListDisplay(window.localStorage.banList));
-    }
-    if (window.localStorage.signalData) {
-      dispatch(setSignalList(JSON.parse(window.localStorage.signalData)));
-    }
-    if (window.localStorage.topThousand) {
-      dispatch(setTopThousand(JSON.parse(window.localStorage.topThousand)));
-    }
-
     let data = [];
 
     axios
@@ -109,6 +100,21 @@ const Home = () => {
             window.addEventListener("scroll", scrollFunction);
           });
       });
+
+    if (window.localStorage.banList) {
+      dispatch(setBanListDisplay(window.localStorage.banList));
+    }
+    if (window.localStorage.signalData) {
+      dispatch(setSignalList(JSON.parse(window.localStorage.signalData)));
+    }
+    if (window.localStorage.topThousand) {
+      dispatch(setTopThousand(JSON.parse(window.localStorage.topThousand)));
+    }
+    if (window.localStorage.timeFrame) {
+      dispatch(setTimeFrame(JSON.parse(window.localStorage.timeFrame)));
+    } else {
+      dispatch(setTimeFrame(91));
+    }
     return () => {
       window.removeEventListener("scroll", scrollFunction);
     };
