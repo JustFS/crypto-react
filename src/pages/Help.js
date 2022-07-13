@@ -27,8 +27,8 @@ const Help = () => {
           <p>
             The Mktv shows how many days you need to trade as much value as the
             marketcap, this indicator shows that a coin may have a big volume
-            compare to its Marketcap. The ATL & ATH column display how many days
-            have passed since the last ATL/ATH.
+            compare to its Marketcap. The ATL & ATH columns display how many
+            days have passed since the last ATL/ATH.
           </p>
         </div>
         <div className="filter-bar">
@@ -63,7 +63,7 @@ const Help = () => {
             inputs asking you for a support and a resistance. By entering thoses
             levels the circle's color will change and adjusting if you are
             either close to the support or resistance. This is an indicator to
-            start follow closely a token price action.
+            start to follow closely a token price action.
           </p>
           <div className="explain">
             <div className="form-part">
@@ -104,7 +104,7 @@ const Help = () => {
       </div>
 
       <p className="ama">
-        <span>AMA : </span> feel free to ask me what you what on Twitter :
+        <span>AMA : </span> feel free to ask me what you want on Twitter :
         <a href="https://twitter.com/zaneiluj" target="_blank">
           {" "}
           zaneiluj
