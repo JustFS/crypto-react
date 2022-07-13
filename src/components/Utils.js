@@ -6,3 +6,54 @@ export const isEmpty = (value) => {
     (typeof value === "string" && value.trim().length === 0)
   );
 };
+
+export const isStableCoin = (coin) => {
+  let stables = [
+    "usdt",
+    "usdc",
+    "busd",
+    "dai",
+    "ust",
+    "mim",
+    "tusd",
+    "usdp",
+    "usdn",
+    "fei",
+    "tribe",
+    "gusd",
+    "frax",
+    "lusd",
+    "husd",
+    "ousd",
+    "xsgd",
+    "usdx",
+    "eurs",
+    "cusdc",
+    "cdai",
+    "usdd",
+    "ibeur",
+    "eurt",
+    "flexusd",
+    "alusd",
+    "susd",
+    "usdk",
+    "cusd",
+    "ageur",
+    "musd",
+    "yusd",
+    "uxd",
+    "usds",
+    "rsv",
+    "eeur",
+    "ceur",
+    "ustc",
+    "gyen",
+    "mimatic",
+    "tor",
+  ];
+  if (stables.includes(coin)) {
+    return false;
+  } else {
+    return true;
+  }
+};

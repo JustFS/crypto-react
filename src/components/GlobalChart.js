@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Treemap, Tooltip } from "recharts";
 import colors from "../styles/_settings.scss";
 import Notes from "./Notes";
+import { isStableCoin } from "./Utils";
 
 const GlobalChart = ({ coinsData }) => {
   const [dataArray, setDataArray] = useState([]);
@@ -12,7 +13,9 @@ const GlobalChart = ({ coinsData }) => {
       return colors.color1;
     } else if (number >= 5) {
       return colors.green2;
-    } else if (number > -0.99) {
+    } else if (number < 0) {
+      return colors.red1;
+    } else if (number > 0) {
       return colors.green1;
     } else if (number >= -5) {
       return colors.red1;
@@ -23,27 +26,13 @@ const GlobalChart = ({ coinsData }) => {
     }
   };
 
-  const excludeCoin = (coin) => {
-    if (
-      coin === "usdt" ||
-      coin === "usdc" ||
-      coin === "busd" ||
-      coin === "dai" ||
-      coin === "ust" ||
-      coin === "mim"
-    ) {
-      return false;
-    } else {
-      return true;
-    }
-  };
-
   useEffect(() => {
     let chartData = [];
 
     if (coinsData.length > 0) {
       for (let i = 0; i < 45; i++) {
-        if (excludeCoin(coinsData[i].symbol)) {
+        if (isStableCoin(coinsData[i].symbol)) {
+          console.log(coinsData[i].price_change_percentage_24h);
           chartData.push({
             name:
               coinsData[i].symbol.toUpperCase() +
@@ -51,8 +40,9 @@ const GlobalChart = ({ coinsData }) => {
               coinsData[i].market_cap_change_percentage_24h.toFixed(1) +
               "%",
             size: coinsData[i].market_cap,
-            fill: colorPicker(coinsData[i].price_change_percentage_24h),
+            fill: colorPicker(coinsData[i].market_cap_change_percentage_24h),
           });
+          console.log(chartData);
         }
       }
     }

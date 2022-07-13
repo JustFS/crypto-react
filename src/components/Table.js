@@ -6,6 +6,7 @@ import { isEmpty } from "./Utils";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { setTopThousand } from "../actions/tops.action";
+import { isStableCoin } from "./Utils";
 
 const Table = () => {
   const [orderBy, setOrderBy] = useState("");
@@ -35,57 +36,6 @@ const Table = () => {
     "ATHd",
     "ATLd",
   ];
-
-  const excludeCoin = (coin) => {
-    let stables = [
-      "usdt",
-      "usdc",
-      "busd",
-      "dai",
-      "ust",
-      "mim",
-      "tusd",
-      "usdp",
-      "usdn",
-      "fei",
-      "tribe",
-      "gusd",
-      "frax",
-      "lusd",
-      "husd",
-      "ousd",
-      "xsgd",
-      "usdx",
-      "eurs",
-      "cusdc",
-      "cdai",
-      "usdd",
-      "ibeur",
-      "eurt",
-      "flexusd",
-      "alusd",
-      "susd",
-      "usdk",
-      "cusd",
-      "ageur",
-      "musd",
-      "yusd",
-      "uxd",
-      "usds",
-      "rsv",
-      "eeur",
-      "ceur",
-      "ustc",
-      "gyen",
-      "mimatic",
-      "tor",
-    ];
-    if (stables.includes(coin)) {
-      return false;
-    } else {
-      return true;
-    }
-  };
 
   return (
     <div className="table-container">
@@ -241,7 +191,7 @@ const Table = () => {
             if (showStable) {
               return coin;
             } else {
-              if (excludeCoin(coin.symbol)) {
+              if (isStableCoin(coin.symbol)) {
                 return coin;
               }
             }
