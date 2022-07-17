@@ -29,12 +29,12 @@ const Signal = ({ coin }) => {
           if (coin.signal[0] < 0) {
             setColor("skyblue");
           } else if (coin.signal[1] > 1) {
-            setColor(colors.green2);
+            setColor(colors.color1);
           } else if (coin.signal[1] < 1 && coin.signal[1] > 0.95) {
-            setColor(colors.green);
-          } else if (coin.signal[1] < 0.95 && coin.signal[1] > 0.8) {
+            setColor(colors.green2);
+          } else if (coin.signal[1] < 0.95 && coin.signal[1] > 0.85) {
             setColor(colors.green1);
-          } else if (coin.signal[0] < 1.2 && coin.signal[0] > 1.05) {
+          } else if (coin.signal[0] < 1.15 && coin.signal[0] > 1.05) {
             setColor("rgb(251, 185, 174)");
           } else if (coin.signal[0] < 1.05 && coin.signal[0] > 1) {
             setColor(colors.red1);

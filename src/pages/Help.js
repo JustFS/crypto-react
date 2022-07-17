@@ -83,13 +83,13 @@ const Help = () => {
                   <span></span>coin is at 5% to break resistance
                 </li>
                 <li>
-                  <span></span>coin is at 20% to break resistance
+                  <span></span>coin is at 15% to break resistance
                 </li>
                 <li>
                   <span></span>coin is neutral
                 </li>
                 <li>
-                  <span></span>coin is at 20% to break support
+                  <span></span>coin is at 15% to break support
                 </li>
                 <li>
                   <span></span>coin is at 5% to break support
