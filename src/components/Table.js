@@ -199,7 +199,7 @@ const Table = () => {
           .sort((a, b) => {
             switch (orderBy) {
               case "TA":
-                return a.signal[1] - b.signal[1];
+                return b.signal[1] - a.signal[1];
               case "Price":
                 return b.current_price - a.current_price;
               case "Volume":
