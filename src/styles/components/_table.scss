@@ -493,7 +493,7 @@
     }
     .infos-container {
       display: grid;
-      grid-template-columns: 25px 22px 32px 1fr;
+      grid-template-columns: 25px 22px 40px 1fr;
       height: 100%;
       align-items: center;
 
@@ -524,7 +524,8 @@
 
         img {
           object-fit: cover;
-          height: 15px;
+          height: 20px;
+          border-radius: 4px;
         }
       }
       .infos {
@@ -559,6 +560,7 @@
         h4 {
           margin-left: 6px;
           letter-spacing: 1px;
+          font-size: 1.05rem;
         }
         span {
           color: $white2;

@@ -50,7 +50,8 @@ export const isStableCoin = (coin) => {
     "gyen",
     "mimatic",
     "tor",
-    "euroc"
+    "euroc",
+    "cusdt"
   ];
   if (stables.includes(coin)) {
     return false;
