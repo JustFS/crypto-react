@@ -9,8 +9,8 @@ const Footer = () => {
       </p>
       <p>
         Made by{" "}
-        <a href="https://twitter.com/zaneiluj" target="_blank">
-          zaneiluj
+        <a href="https://twitter.com/kobebxmaster" target="_blank">
+          kobebxmaster
         </a>{" "}
         🚀
       </p>
