@@ -105,9 +105,9 @@ const Help = () => {
 
       <p className="ama">
         <span>AMA : </span> feel free to ask me what you want on Twitter :
-        <a href="https://twitter.com/zaneiluj" target="_blank">
+        <a href="https://twitter.com/kobebxmaster" target="_blank">
           {" "}
-          zaneiluj
+          kobebxmaster
         </a>
       </p>
       <NavLink to="/" className="link" id="sec">
