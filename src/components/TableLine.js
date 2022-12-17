@@ -114,6 +114,13 @@ const TableLine = ({ coin, sumNumber, index }) => {
       <p className="volumeMktcap">
         {mktvolCalc(coin.market_cap, coin.total_volume)}
       </p>
+      <p className="diluted">
+        {coin.market_cap / coin.fully_diluted_valuation === Infinity
+          ? "Inf"
+          : ((coin.market_cap / coin.fully_diluted_valuation) * 100).toFixed(
+              0
+            ) + "%"}
+      </p>
       <PercentChange percent={coin.price_change_percentage_1h_in_currency} />
       <PercentChange percent={coin.market_cap_change_percentage_24h} />
       <PercentChange percent={coin.price_change_percentage_7d_in_currency} />

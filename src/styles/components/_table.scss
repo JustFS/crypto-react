@@ -6,10 +6,13 @@
   &.mktvol {
     .table-header,
     .table-line {
-      grid-template-columns: 308px 20px 100px 82px 82px 60px repeat(7, 1fr) 50px 50px 20px;
+      grid-template-columns: 308px 20px 100px 82px 82px 60px repeat(8, 1fr) 50px 50px 20px;
 
       @media screen and (max-width: 1150px) {
-        grid-template-columns: 308px 20px 100px 82px 82px repeat(7, 1fr);
+        grid-template-columns: 308px 20px 100px 82px 82px repeat(7, 1fr) 20px;
+      }
+      @media screen and (max-width: 1020px) {
+        grid-template-columns: 276px 80px 80px 100px repeat(7, 1fr);
       }
       @media screen and (max-width: 850px) {
         grid-template-columns: 276px 80px 80px 100px repeat(4, 1fr);
@@ -26,8 +29,9 @@
     }
     .table-header {
       li:nth-child(6),
-      li:nth-child(14),
-      li:nth-child(15) {
+      li:nth-child(7),
+      li:nth-child(15),
+      li:nth-child(16) {
         display: block;
 
         @media screen and (max-width: 1150px) {
@@ -37,8 +41,9 @@
     }
     .table-line {
       p:nth-child(6),
-      p:nth-child(14),
-      p:nth-child(15) {
+      p:nth-child(7),
+      p:nth-child(15),
+      p:nth-child(16) {
         display: block;
 
         @media screen and (max-width: 1150px) {
@@ -69,9 +74,30 @@
       display: flex;
       background: $black1;
       border-radius: 10px;
-      padding: 4px;
+      padding: 2px 6px;
       justify-content: space-between;
-      border-bottom: 1px solid $color1;
+      align-items: center;
+      height: 38px;
+      border-bottom: 2px solid $color1;
+
+      img {
+        color: $color1;
+        height: 22px;
+        padding: 1px;
+      }
+
+      div,
+      label {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 29px;
+        width: 50px;
+
+        &:hover {
+          transform: scale(1.05) translateX(1px);
+        }
+      }
 
       @media screen and (max-width: 450px) {
         font-size: 0.7rem;
@@ -116,6 +142,12 @@
         }
       }
 
+      .fav-list {
+        img {
+          height: 20px;
+        }
+      }
+
       .no-list-btn,
       .fav-list,
       .shit-list,
@@ -131,23 +163,6 @@
 
         &.active {
           background: $black2;
-        }
-      }
-
-      .fav-list,
-      .shit-list {
-        display: flex;
-        align-items: center;
-
-        img {
-          height: 14px;
-          margin-left: 5px;
-        }
-      }
-      .shit-list {
-        img {
-          height: 15px;
-          // transform: translateY(1px);
         }
       }
     }
@@ -425,8 +440,9 @@
       }
     }
     li:nth-child(6),
-    li:nth-child(14),
-    li:nth-child(15) {
+    li:nth-child(7),
+    li:nth-child(15),
+    li:nth-child(16) {
       display: none;
     }
   }
@@ -451,8 +467,9 @@
     }
 
     p:nth-child(6),
-    p:nth-child(14),
-    p:nth-child(15) {
+    p:nth-child(7),
+    p:nth-child(15),
+    p:nth-child(16) {
       display: none;
     }
 
@@ -460,8 +477,9 @@
       font-size: 0.8rem;
 
       p:nth-child(6),
-      p:nth-child(14),
-      p:nth-child(15) {
+      p:nth-child(7),
+      p:nth-child(15),
+      p:nth-child(16) {
         display: none;
       }
     }

@@ -26,6 +26,7 @@ const Table = () => {
     "MarketCap",
     "Volume",
     "Mkt-Vol",
+    "Diluted",
     "1h",
     "1d",
     "1w",

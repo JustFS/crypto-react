@@ -42,14 +42,8 @@ const DeleteIcon = ({ coinId }) => {
           src="./assets/delete-icon.svg"
           alt="delete"
           onClick={() => {
-            if (
-              window.confirm(
-                "Delete " + coinId.toUpperCase() + " from the list ?"
-              )
-            ) {
-              idChecker();
-              dispatch(setBanListDisplay(window.localStorage.banList));
-            }
+            idChecker();
+            dispatch(setBanListDisplay(window.localStorage.banList));
           }}
         />
       ) : (
@@ -57,14 +51,8 @@ const DeleteIcon = ({ coinId }) => {
           src="./assets/add-icon.svg"
           alt="add"
           onClick={() => {
-            if (
-              window.confirm(
-                "Restore " + coinId.toUpperCase() + " into the list ?"
-              )
-            ) {
-              idChecker();
-              dispatch(setBanListDisplay(window.localStorage.banList));
-            }
+            idChecker();
+            dispatch(setBanListDisplay(window.localStorage.banList));
           }}
         />
       )}

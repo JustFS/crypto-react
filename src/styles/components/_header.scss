@@ -20,7 +20,7 @@ header {
     box-shadow: $shadow;
     display: grid;
     align-items: center;
-    height: 132px;
+    height: 116px;
     backdrop-filter: blur(3px);
     border-bottom: 2px solid $color1;
 
@@ -36,7 +36,7 @@ header {
       content: "";
       position: absolute;
       width: 100%;
-      height: 52px;
+      height: 42px;
       background: rgba(0, 0, 0, 0.5);
       top: 0;
 
@@ -58,7 +58,7 @@ header {
       background: -webkit-linear-gradient(360deg, $color1, #0debc6);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      height: 36px;
+      height: 30px;
 
       @media screen and (max-width: 1150px) {
         transform: translateY(-8px);
@@ -83,7 +83,7 @@ header {
       ul {
         display: flex;
         flex-direction: column;
-        justify-content: space-around;
+        justify-content: space-between;
       }
       .img-help {
         display: flex;

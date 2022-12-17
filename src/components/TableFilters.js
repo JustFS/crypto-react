@@ -29,34 +29,32 @@ const TableFilters = () => {
             defaultChecked={showStable}
           />
           <label htmlFor="stableCoin">
-            {showStable ? "With stable" : "Without stable"}
+            <img src="./assets/stable.svg" alt="stable coin" />
           </label>
-        </div>
-        <div
-          className={showList === "all" ? "all active" : "all"}
-          onClick={() => setList("all")}
-        >
-          <p>All</p>
         </div>
         <div
           className={showList === "none" ? "none active" : "none"}
           onClick={() => setList("none")}
         >
-          <p>List</p>
+          <img src="./assets/checkup-list.svg" alt="list fav" />
+        </div>
+        <div
+          className={showList === "all" ? "all active" : "all"}
+          onClick={() => setList("all")}
+        >
+          <img src="./assets/all-list.svg" alt="all list" />
         </div>
         <div
           className={showList === "fav" ? "fav-list active" : "fav-list"}
           onClick={() => setList("fav")}
         >
-          <p>Fav</p>
           <img src="./assets/star-full.svg" alt="icon-star" />
         </div>
         <div
           className={showList === "shit" ? "shit-list active" : "shit-list"}
           onClick={() => setList("shit")}
         >
-          <p>Trash</p>
-          <img src="./assets/delete-icon.svg" alt="delete icon" />
+          <img src="./assets/trash.svg" alt="delete icon" />
         </div>
         <div className="stable-checkbox-container" id="mktv-btn">
           <input
@@ -69,7 +67,9 @@ const TableFilters = () => {
             id="volmkt"
             defaultChecked={false}
           />
-          <label htmlFor="volmkt">mv/ath/atl</label>
+          <label htmlFor="volmkt">
+            <img src="./assets/magic.svg" alt="magic icon" />
+          </label>
         </div>
       </div>
     </div>
