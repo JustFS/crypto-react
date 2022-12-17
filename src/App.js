@@ -4,7 +4,6 @@ import Help from "./pages/Help";
 import Home from "./pages/Home";
 
 const App = () => {
-  console.log(window.localStorage);
   return (
     <BrowserRouter>
       <Routes>

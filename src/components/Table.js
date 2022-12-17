@@ -207,6 +207,11 @@ const Table = () => {
                 return b.total_volume - a.total_volume;
               case "MarketCap":
                 return b.market_cap - a.market_cap;
+              case "Diluted":
+                return (
+                  b.market_cap / b.fully_diluted_valuation -
+                  a.market_cap / a.fully_diluted_valuation
+                );
               case "1h":
                 return (
                   b.price_change_percentage_1h_in_currency -
@@ -313,7 +318,11 @@ const Table = () => {
                 return (
                   b.total_volume / b.market_cap - a.total_volume / a.market_cap
                 );
-
+              case "Dilutedreverse":
+                return (
+                  a.market_cap / a.fully_diluted_valuation -
+                  b.market_cap / b.fully_diluted_valuation
+                );
               default:
                 null;
             }
