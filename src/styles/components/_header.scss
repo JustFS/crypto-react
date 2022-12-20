@@ -124,10 +124,10 @@ header {
     overflow: hidden;
 
     .notes-container {
-      height: 179px;
+      height: 159px;
       width: 730px;
       background: $black1;
-      border-bottom: 1px solid $color1;
+      border-bottom: 2px solid $color1;
       border-radius: 0 0 13px 13px;
 
       h4 {
@@ -138,7 +138,7 @@ header {
       }
 
       form {
-        height: 154px;
+        height: 134px;
         position: relative;
 
         textarea {
