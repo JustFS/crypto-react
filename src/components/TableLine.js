@@ -121,12 +121,30 @@ const TableLine = ({ coin, sumNumber, index }) => {
               0
             ) + "%"}
       </p>
-      <PercentChange percent={coin.price_change_percentage_1h_in_currency} />
-      <PercentChange percent={coin.market_cap_change_percentage_24h} />
-      <PercentChange percent={coin.price_change_percentage_7d_in_currency} />
-      <PercentChange percent={coin.price_change_percentage_30d_in_currency} />
-      <PercentChange percent={coin.price_change_percentage_200d_in_currency} />
-      <PercentChange percent={coin.price_change_percentage_1y_in_currency} />
+      <PercentChange
+        percent={coin.price_change_percentage_1h_in_currency}
+        time="1h"
+      />
+      <PercentChange
+        percent={coin.market_cap_change_percentage_24h}
+        time="1d"
+      />
+      <PercentChange
+        percent={coin.price_change_percentage_7d_in_currency}
+        time="1w"
+      />
+      <PercentChange
+        percent={coin.price_change_percentage_30d_in_currency}
+        time="1m"
+      />
+      <PercentChange
+        percent={coin.price_change_percentage_200d_in_currency}
+        time="6m"
+      />
+      <PercentChange
+        percent={coin.price_change_percentage_1y_in_currency}
+        time="1y"
+      />
       {coin.ath_change_percentage > -3 ? (
         <p>ATH</p>
       ) : (

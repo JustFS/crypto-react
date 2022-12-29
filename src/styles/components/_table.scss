@@ -6,7 +6,7 @@
   &.mktvol {
     .table-header,
     .table-line {
-      grid-template-columns: 308px 20px 100px 82px 82px 60px repeat(8, 1fr) 50px 50px 20px;
+      grid-template-columns: 314px 20px 100px 82px 82px 60px repeat(8, 1fr) 50px 50px 20px;
 
       @media screen and (max-width: 1150px) {
         grid-template-columns: 308px 20px 100px 82px 82px repeat(7, 1fr) 20px;
@@ -197,9 +197,9 @@
     transition: 0;
 
     li {
-      transition: 0.3s;
+      transition: 0.25s;
       &:active {
-        transform: scale(1.05);
+        transform: scale(1.03);
       }
     }
 
@@ -445,12 +445,68 @@
     li:nth-child(16) {
       display: none;
     }
+    .box-filter {
+      position: relative;
+
+      &:hover {
+        .volume-filter {
+          visibility: visible;
+          opacity: 1;
+        }
+      }
+
+      .volume-filter {
+        visibility: hidden;
+        opacity: 0;
+        transition: 0.15s;
+        position: absolute;
+        left: 80%;
+        bottom: -15px;
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(2px);
+        border-radius: 4px;
+        padding: 1px 4px;
+        width: 80px;
+        z-index: 1000;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
+
+        .bottom-part {
+          display: grid;
+          grid-template-columns: 1fr 20px 20px;
+          align-items: center;
+
+          input {
+            width: 35px;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: $color1;
+            font-size: 1.05rem;
+            text-align: right;
+          }
+          span {
+            margin-left: 2px;
+            transform: translateY(1px);
+            text-align-last: left;
+          }
+          img {
+            height: 20px;
+            cursor: pointer;
+            transition: 0.2s;
+
+            &:hover {
+              transform: scale(1.1);
+            }
+          }
+        }
+      }
+    }
   }
 
   .table-line {
     min-height: 50px;
     align-items: center;
-    border-top: 1px solid rgb(73, 73, 73);
+    border-top: 1px solid rgb(65, 65, 65);
     position: relative;
     color: $white1;
     transition: 0.15s;
@@ -715,6 +771,19 @@
       &:hover {
         transform: scale(1.4);
       }
+    }
+  }
+  .percent-change-container {
+    position: relative;
+    div {
+      height: 5px;
+      position: absolute;
+      bottom: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 14px;
+      opacity: 0.3;
+      // mix-blend-mode: difference;
     }
   }
 }

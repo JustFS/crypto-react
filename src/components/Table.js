@@ -9,34 +9,19 @@ import { setTopThousand } from "../actions/tops.action";
 import { isStableCoin } from "./Utils";
 
 const Table = () => {
-  const [orderBy, setOrderBy] = useState("");
+  const [orderBy, setOrderBy] = useState("MarketCap");
   const [rangeNumber, setRangeNumber] = useState(250);
   const [startNumber, setStartNumber] = useState(0);
   const [inputSearch, setInputSearch] = useState("");
+  const [miniVol, setMiniVol] = useState(0);
+  const [mktVol, setMktVol] = useState(0);
+  const [maxATHd, setMaxATHd] = useState(0);
   const showStable = useSelector((state) => state.stableReducer);
   const showList = useSelector((state) => state.listReducer);
   const banList = useSelector((state) => state.banListReducer);
   const coinsData = useSelector((state) => state.coinsDataReducer);
   const topThousand = useSelector((state) => state.topThousandReducer);
   const dispatch = useDispatch();
-
-  const tableHeader = [
-    "TA",
-    "Price",
-    "MarketCap",
-    "Volume",
-    "Mkt-Vol",
-    "Diluted",
-    "1h",
-    "1d",
-    "1w",
-    "1m",
-    "6m",
-    "1y",
-    "ATH",
-    "ATHd",
-    "ATLd",
-  ];
 
   return (
     <div className="table-container">
@@ -127,26 +112,308 @@ const Table = () => {
           </div>
           <ToTop />
         </div>
-        {tableHeader.map((el) => (
-          <li key={el}>
-            <input
-              defaultChecked={
-                el === orderBy || el === orderBy + "reverse" ? true : false
+        <li>
+          <input
+            defaultChecked={"TA" === orderBy || "TA" === orderBy + "reverse"}
+            onClick={() => {
+              if (orderBy === "TA") {
+                setOrderBy("TA" + "reverse");
+              } else {
+                setOrderBy("TA");
               }
-              onClick={() => {
-                if (orderBy === el) {
-                  setOrderBy(el + "reverse");
-                } else {
-                  setOrderBy(el);
-                }
-              }}
-              type="radio"
-              name="header-el"
-              id={el}
-            />
-            <label htmlFor={el}>{el}</label>
-          </li>
-        ))}
+            }}
+            type="radio"
+            name="header-el"
+            id="TA"
+          />
+          <label htmlFor="TA">TA</label>
+        </li>
+        <li>
+          <input
+            defaultChecked={
+              "Price" === orderBy || "Price" === orderBy + "reverse"
+            }
+            onClick={() => {
+              if (orderBy === "Price") {
+                setOrderBy("Price" + "reverse");
+              } else {
+                setOrderBy("Price");
+              }
+            }}
+            type="radio"
+            name="header-el"
+            id="Price"
+          />
+          <label htmlFor="Price">Price</label>
+        </li>
+        <li>
+          <input
+            defaultChecked={
+              "MarketCap" === orderBy || "MarketCap" === orderBy + "reverse"
+            }
+            onClick={() => {
+              if (orderBy === "MarketCap") {
+                setOrderBy("MarketCap" + "reverse");
+              } else {
+                setOrderBy("MarketCap");
+              }
+            }}
+            type="radio"
+            name="header-el"
+            id="MarketCap"
+          />
+          <label htmlFor="MarketCap">MarketCap</label>
+        </li>
+        <li className="box-filter">
+          <input
+            defaultChecked={
+              "Volume" === orderBy || "Volume" === orderBy + "reverse"
+            }
+            onClick={() => {
+              if (orderBy === "Volume") {
+                setOrderBy("Volume" + "reverse");
+              } else {
+                setOrderBy("Volume");
+              }
+            }}
+            type="radio"
+            name="header-el"
+            id="Volume"
+          />
+          <label htmlFor="Volume">Volume {miniVol > 0 ? "*" : ""}</label>
+          <div className="volume-filter">
+            <h5>Vol mini</h5>
+            <div className="bottom-part">
+              <input
+                type="number"
+                onChange={(e) => setMiniVol(e.target.value)}
+                value={miniVol}
+              />
+              <span>M</span>
+              <img
+                src="./assets/delete-icon-bis.svg"
+                alt="delete"
+                onClick={() => setMiniVol(0)}
+              />
+            </div>
+          </div>
+        </li>
+        <li className="box-filter">
+          <input
+            defaultChecked={
+              "Mkt-Vol" === orderBy || "Mkt-Vol" === orderBy + "reverse"
+            }
+            onClick={() => {
+              if (orderBy === "Mkt-Vol") {
+                setOrderBy("Mkt-Vol" + "reverse");
+              } else {
+                setOrderBy("Mkt-Vol");
+              }
+            }}
+            type="radio"
+            name="header-el"
+            id="Mkt-Vol"
+          />
+          <label htmlFor="Mkt-Vol">Mkt/Vol {mktVol > 0 ? "*" : ""}</label>
+          <div className="volume-filter">
+            <h5>Mkt / Vol max</h5>
+            <div className="bottom-part">
+              <input
+                type="number"
+                onChange={(e) => setMktVol(e.target.value)}
+                value={mktVol}
+              />
+              <span>D</span>
+              <img
+                src="./assets/delete-icon-bis.svg"
+                alt="delete"
+                onClick={() => setMktVol(0)}
+              />
+            </div>
+          </div>
+        </li>
+        <li>
+          <input
+            defaultChecked={
+              "Diluted" === orderBy || "Diluted" === orderBy + "reverse"
+            }
+            onClick={() => {
+              if (orderBy === "Diluted") {
+                setOrderBy("Diluted" + "reverse");
+              } else {
+                setOrderBy("Diluted");
+              }
+            }}
+            type="radio"
+            name="header-el"
+            id="Diluted"
+          />
+          <label htmlFor="Diluted">Diluted</label>
+        </li>
+        <li>
+          <input
+            defaultChecked={"1h" === orderBy || "1h" === orderBy + "reverse"}
+            onClick={() => {
+              if (orderBy === "1h") {
+                setOrderBy("1h" + "reverse");
+              } else {
+                setOrderBy("1h");
+              }
+            }}
+            type="radio"
+            name="header-el"
+            id="1h"
+          />
+          <label htmlFor="1h">1h</label>
+        </li>
+        <li>
+          <input
+            defaultChecked={"1d" === orderBy || "1d" === orderBy + "reverse"}
+            onClick={() => {
+              if (orderBy === "1d") {
+                setOrderBy("1d" + "reverse");
+              } else {
+                setOrderBy("1d");
+              }
+            }}
+            type="radio"
+            name="header-el"
+            id="1d"
+          />
+          <label htmlFor="1d">1d</label>
+        </li>
+        <li>
+          <input
+            defaultChecked={"1w" === orderBy || "1w" === orderBy + "reverse"}
+            onClick={() => {
+              if (orderBy === "1w") {
+                setOrderBy("1w" + "reverse");
+              } else {
+                setOrderBy("1w");
+              }
+            }}
+            type="radio"
+            name="header-el"
+            id="1w"
+          />
+          <label htmlFor="1w">1w</label>
+        </li>
+        <li>
+          <input
+            defaultChecked={"1m" === orderBy || "1m" === orderBy + "reverse"}
+            onClick={() => {
+              if (orderBy === "1m") {
+                setOrderBy("1m" + "reverse");
+              } else {
+                setOrderBy("1m");
+              }
+            }}
+            type="radio"
+            name="header-el"
+            id="1m"
+          />
+          <label htmlFor="1m">1m</label>
+        </li>
+        <li>
+          <input
+            defaultChecked={"6m" === orderBy || "6m" === orderBy + "reverse"}
+            onClick={() => {
+              if (orderBy === "6m") {
+                setOrderBy("6m" + "reverse");
+              } else {
+                setOrderBy("6m");
+              }
+            }}
+            type="radio"
+            name="header-el"
+            id="6m"
+          />
+          <label htmlFor="6m">6m</label>
+        </li>
+        <li>
+          <input
+            defaultChecked={"1y" === orderBy || "1y" === orderBy + "reverse"}
+            onClick={() => {
+              if (orderBy === "1y") {
+                setOrderBy("1y" + "reverse");
+              } else {
+                setOrderBy("1y");
+              }
+            }}
+            type="radio"
+            name="header-el"
+            id="1y"
+          />
+          <label htmlFor="1y">1y</label>
+        </li>
+        <li>
+          <input
+            defaultChecked={"ATH" === orderBy || "ATH" === orderBy + "reverse"}
+            onClick={() => {
+              if (orderBy === "ATH") {
+                setOrderBy("ATH" + "reverse");
+              } else {
+                setOrderBy("ATH");
+              }
+            }}
+            type="radio"
+            name="header-el"
+            id="ATH"
+          />
+          <label htmlFor="ATH">ATH</label>
+        </li>
+        <li className="box-filter">
+          <input
+            defaultChecked={
+              "ATHd" === orderBy || "ATHd" === orderBy + "reverse"
+            }
+            onClick={() => {
+              if (orderBy === "ATHd") {
+                setOrderBy("ATHd" + "reverse");
+              } else {
+                setOrderBy("ATHd");
+              }
+            }}
+            type="radio"
+            name="header-el"
+            id="ATHd"
+          />
+          <label htmlFor="ATHd">ATHd {maxATHd > 0 ? "*" : ""}</label>
+          <div className="volume-filter">
+            <h5>Max ATH date</h5>
+            <div className="bottom-part">
+              <input
+                type="number"
+                onChange={(e) => setMaxATHd(e.target.value)}
+                value={maxATHd}
+              />
+              <span>D</span>
+              <img
+                src="./assets/delete-icon-bis.svg"
+                alt="delete"
+                onClick={() => setMaxATHd(0)}
+              />
+            </div>
+          </div>
+        </li>
+        <li>
+          <input
+            defaultChecked={
+              "ATLd" === orderBy || "ATLd" === orderBy + "reverse"
+            }
+            onClick={() => {
+              if (orderBy === "ATLd") {
+                setOrderBy("ATLd" + "reverse");
+              } else {
+                setOrderBy("ATLd");
+              }
+            }}
+            type="radio"
+            name="header-el"
+            id="ATLd"
+          />
+          <label htmlFor="ATLd">ATLd</label>
+        </li>
       </ul>
       {!isEmpty(coinsData) &&
         coinsData
@@ -195,6 +462,31 @@ const Table = () => {
               if (isStableCoin(coin.symbol)) {
                 return coin;
               }
+            }
+          })
+          .filter((coin) => {
+            if (miniVol > 0) {
+              return coin.total_volume > Number(miniVol + "000000");
+            } else {
+              return coin;
+            }
+          })
+          .filter((coin) => {
+            if (mktVol > 0) {
+              return coin.market_cap / coin.total_volume < mktVol;
+            } else {
+              return coin;
+            }
+          })
+          .filter((coin) => {
+            if (maxATHd > 0) {
+              let days = Math.round(
+                (new Date() - new Date(coin.ath_date)) / (1000 * 3600 * 24)
+              );
+              console.log(days);
+              return days < maxATHd;
+            } else {
+              return coin;
             }
           })
           .sort((a, b) => {
