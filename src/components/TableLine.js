@@ -4,6 +4,7 @@ import DeleteIcon from "./DeleteIcon";
 import PercentChange from "./PercentChange";
 import Signal from "./Signal";
 import StarIcon from "./StarIcon";
+import colors from "../styles/_settings.scss";
 
 const TableLine = ({ coin, sumNumber, index }) => {
   const [showChart, setShowChart] = useState(false);
@@ -146,7 +147,7 @@ const TableLine = ({ coin, sumNumber, index }) => {
         time="1y"
       />
       {coin.ath_change_percentage > -3 ? (
-        <p>ATH</p>
+        <p style={{ color: colors.green1 }}>ATH</p>
       ) : (
         <PercentChange percent={coin.ath_change_percentage} />
       )}
