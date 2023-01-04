@@ -17,12 +17,12 @@ const PercentChange = ({ percent, time }) => {
   }, []);
 
   const barAggregator = (multi) => {
-    if (percent * multi > 95 || percent * multi < -95) {
-      return 95 + "%";
+    if (percent * multi > 100 || percent * multi < -100) {
+      return 62 + "%";
     } else if (percent >= 0) {
-      return percent * multi + "%";
+      return percent * multi * 0.62 + "%";
     } else if (percent <= 0) {
-      return percent * -multi + "%";
+      return percent * -multi * 0.62 + "%";
     }
   };
 
