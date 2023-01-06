@@ -1,0 +1,139 @@
+.coin-infos {
+  position: absolute;
+  width: 600px;
+  left: 12px;
+  background: rgba(82, 82, 82, 0.8);
+  -webkit-backdrop-filter: blur(1px);
+  backdrop-filter: blur(3px);
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgb(0 0 0 / 40%);
+  overflow: hidden;
+  z-index: 1000000000;
+  padding: 6px 20px 12px;
+
+  .coin-infos-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      cursor: default !important;
+      height: 28px !important;
+      transform: none !important;
+
+      &:hover {
+        transform: none !important;
+      }
+    }
+    h2 {
+      font-size: 1.6rem;
+      margin-left: 8px;
+    }
+  }
+  .content-infos {
+    p {
+      text-align: center;
+      font-size: 1.05rem;
+      margin: 0;
+      text-align: center;
+    }
+    p:nth-child(2) {
+      margin-top: -7px;
+    }
+  }
+  h5 {
+    text-align: center;
+    font-size: 1rem;
+    margin: 8px 0 4px;
+    letter-spacing: 1px;
+  }
+  .coin-infos-content {
+    display: grid;
+    grid-template-columns: 50% 50%;
+
+    .community {
+      ul {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        height: 87%;
+
+        li {
+          display: grid;
+          grid-template-columns: 10% 1fr;
+
+          .icon {
+            height: 22px;
+            display: grid;
+            align-items: center;
+            margin-top: 2px;
+          }
+
+          .right-part {
+            display: grid;
+            grid-template-rows: 20px 10px;
+            padding-right: 60px;
+
+            > span {
+              display: flex;
+              align-items: center;
+
+              p {
+                margin-left: 3px;
+                color: $white1;
+                letter-spacing: 1px;
+                font-size: 0.87rem;
+              }
+            }
+            .barMaker {
+              height: 5px;
+              width: 0;
+              background: linear-gradient(90deg, $color1, #0debc6);
+              border-radius: 10px;
+            }
+          }
+        }
+      }
+    }
+    .exchange-list {
+      padding-left: 20px;
+
+      ul {
+        li {
+          display: flex;
+          align-items: center;
+          height: 24px;
+          position: relative;
+
+          > p {
+            margin-right: 3px;
+          }
+          p {
+            z-index: 3;
+            letter-spacing: 1px;
+          }
+
+          .target {
+            background: rgba(0, 0, 0, 0.307);
+            border-radius: 5px;
+            padding: 0 4px;
+            font-size: 0.65rem !important;
+            letter-spacing: 1px;
+            transform: translateY(-4px);
+          }
+
+          .exch-bar {
+            position: absolute;
+            transition: 0.6s ease-out;
+            height: 4px;
+            // width: 0;
+            background: linear-gradient(90deg, #00b7b427, #0debc67a);
+            border-radius: 15px;
+            bottom: 4px;
+            left: -6px;
+          }
+        }
+      }
+    }
+  }
+}

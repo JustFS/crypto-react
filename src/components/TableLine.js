@@ -5,9 +5,12 @@ import PercentChange from "./PercentChange";
 import Signal from "./Signal";
 import StarIcon from "./StarIcon";
 import colors from "../styles/_settings.scss";
+import CoinInfos from "./CoinInfos";
 
 const TableLine = ({ coin, sumNumber, index }) => {
   const [showChart, setShowChart] = useState(false);
+  const [showInfos, setShowInfos] = useState(false);
+  const [top, setTop] = useState("8px");
 
   const mktCapFormater = (num) => {
     let newNum = String(num).split("").slice(0, -6);
@@ -85,25 +88,59 @@ const TableLine = ({ coin, sumNumber, index }) => {
             className="chart-img"
             onMouseEnter={(e) => {
               setShowChart(true);
+              if (e.screenY < 435) {
+                setTop("16px");
+              } else {
+                setTop("-340px");
+              }
             }}
             onMouseLeave={() => setShowChart(false)}
           >
             <img src="./assets/chart-icon.svg" alt="chart-icon" />
-            <div className="chart-container" id={coin.name}>
-              {showChart && <CoinChart coinId={coin.id} coinName={coin.name} />}
+            <div className="chart-container" style={{ top }} id={coin.name}>
+              {showChart && (
+                <CoinChart
+                  coinId={coin.id}
+                  coinName={coin.name}
+                  coinImg={coin.image}
+                />
+              )}
             </div>
           </div>
           <h4>{coin.name}</h4>
           <span>- {coin.symbol.toUpperCase()}</span>
-          <a
-            target="_blank"
-            href={
-              "https://www.coingecko.com/en/coins/" +
-              coin.name.toLowerCase().replace(" ", "-").replace(" ", "-")
-            }
+          <div
+            className="infos-popup"
+            onMouseEnter={(e) => {
+              setShowInfos(true);
+              if (e.screenY < 435) {
+                setTop("6px");
+                console.log(e);
+              } else {
+                setTop("-340px");
+                console.log(e);
+              }
+            }}
+            onMouseLeave={() => setShowInfos(false)}
           >
-            <img src="./assets/info-icon.svg" alt="info-icon" />
-          </a>
+            <a
+              target="_blank"
+              href={
+                "https://www.coingecko.com/en/coins/" + coin.id.toLowerCase()
+              }
+            >
+              <img src="./assets/info-icon.svg" alt="info-icon" />
+            </a>
+            {showInfos && (
+              <CoinInfos
+                coinId={coin.id}
+                coinImage={coin.image}
+                coinName={coin.name}
+                volume={coin.total_volume}
+                top={top}
+              />
+            )}
+          </div>
         </div>
       </div>
       <Signal coin={coin} />

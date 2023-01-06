@@ -13,7 +13,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { setTimeFrame } from "../actions/timeFrame.action";
 
-const CoinChart = ({ coinId, coinName }) => {
+const CoinChart = ({ coinId, coinName, coinImg }) => {
   const [coinData, setCoinData] = useState();
   const timeFrame = useSelector((state) => state.timeFrameReducer);
   const dispatch = useDispatch();
@@ -52,7 +52,10 @@ const CoinChart = ({ coinId, coinName }) => {
 
   return (
     <div className="coin-chart">
-      <p>{coinName} chart</p>
+      <div className="chart-header">
+        <img src={coinImg} alt="" />
+        <p>{coinName} chart</p>
+      </div>
       <div className="btn-container">
         {radioData.map((radio) => {
           return (

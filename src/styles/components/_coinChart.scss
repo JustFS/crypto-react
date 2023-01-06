@@ -2,24 +2,39 @@
   position: absolute;
   z-index: 1000;
   width: 660px;
-  top: 13px;
-  left: 12px;
+  left: 15px;
   background: rgba(82, 82, 82, 0.8);
   backdrop-filter: blur(3px);
   border-radius: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.548);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
   overflow: hidden;
-  z-index: 1000;
+  z-index: 1000000000;
 
   .coin-chart {
     padding: 20px;
     z-index: 100;
     position: relative;
 
-    p {
-      text-transform: capitalize;
-      font-size: 1.5rem;
-      text-align: center;
+    .chart-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      img {
+        height: 30px !important;
+        margin-right: 8px;
+        cursor: default !important;
+
+        &:hover {
+          transform: none !important;
+        }
+      }
+
+      p {
+        text-transform: capitalize;
+        font-size: 1.5rem;
+        text-align: center;
+      }
     }
 
     .btn-container {

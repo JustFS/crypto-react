@@ -48,13 +48,13 @@ const PercentChange = ({ percent, time }) => {
   return (
     <p className="percent-change-container" style={{ color }}>
       {percent ? percent.toFixed(1) + "%" : "-"}
-      <div
+      <span
         className="bar"
         style={{
           width: backgroundMaker(),
           background: percent >= 0 ? colors.green1 : colors.red1,
         }}
-      ></div>
+      ></span>
     </p>
   );
 };
