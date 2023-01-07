@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 import Footer from "../components/Footer";
 import { setTopThousand } from "../actions/tops.action";
 import { setTimeFrame } from "../actions/timeFrame.action";
+import Trending from "../components/Trending";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -126,6 +127,7 @@ const Home = () => {
         <>
           <header>
             <Header />
+            <Trending />
             <GlobalChart coinsData={coinsData} />
           </header>
           <Table />

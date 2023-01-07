@@ -1,8 +1,11 @@
 header {
   margin: 20px 0 15px 0;
   display: grid;
-  grid-template-columns: 1fr 1fr 730px;
+  grid-template-columns: 1fr 1fr 330px 500px;
 
+  @media screen and (max-width: 1250px) {
+    grid-template-columns: 1fr 1fr 550px;
+  }
   @media screen and (max-width: 1150px) {
     grid-template-columns: 1fr 1fr;
   }
@@ -12,7 +15,8 @@ header {
   }
 
   .title,
-  .infos-mkt {
+  .infos-mkt,
+  .trending-container {
     background: rgba(20, 20, 20, 0.85);
     padding: 10px;
     border-radius: 14px;
@@ -212,6 +216,68 @@ header {
     .custom-tooltip {
       background: rgb(59, 59, 59);
       padding: 10px;
+    }
+  }
+  .trending-container {
+    height: 162px;
+    display: block;
+    overflow: hidden;
+
+    @media screen and (max-width: 1250px) {
+      display: none;
+    }
+
+    h3 {
+      text-align: center;
+      letter-spacing: 1px;
+      margin-top: -7px;
+      color: $color1;
+
+      &::after {
+        content: "";
+        position: absolute;
+        height: 35px;
+        width: 100%;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0, 0, 0, 0.5);
+        z-index: -1;
+      }
+    }
+
+    .trend-list {
+      display: grid;
+      grid-template-columns: 50% 50%;
+      margin-top: 6px;
+
+      ul {
+        display: grid;
+        height: 115px;
+        li {
+          display: flex;
+          align-items: center;
+
+          .rank {
+            width: 10px;
+            font-size: 0.97rem;
+          }
+
+          img {
+            border-radius: 4px;
+            height: 16px;
+            margin: 0 6px;
+          }
+          p {
+            font-size: 1.05rem;
+          }
+          span {
+            font-size: 0.86rem;
+            color: $white2;
+            margin-left: 5px;
+          }
+        }
+      }
     }
   }
 }

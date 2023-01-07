@@ -111,6 +111,7 @@
           p {
             z-index: 3;
             letter-spacing: 1px;
+            font-size: 1.05rem;
           }
 
           .target {
@@ -125,7 +126,7 @@
           .exch-bar {
             position: absolute;
             transition: 0.6s ease-out;
-            height: 4px;
+            height: 6px;
             // width: 0;
             background: linear-gradient(90deg, #00b7b427, #0debc67a);
             border-radius: 15px;

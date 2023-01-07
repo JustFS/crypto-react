@@ -115,10 +115,8 @@ const TableLine = ({ coin, sumNumber, index }) => {
               setShowInfos(true);
               if (e.screenY < 435) {
                 setTop("6px");
-                console.log(e);
               } else {
                 setTop("-340px");
-                console.log(e);
               }
             }}
             onMouseLeave={() => setShowInfos(false)}
