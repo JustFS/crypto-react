@@ -3,10 +3,11 @@ header {
   display: grid;
   grid-template-columns: 1fr 1fr 330px 500px;
 
-  @media screen and (max-width: 1250px) {
-    grid-template-columns: 1fr 1fr 550px;
+  @media screen and (max-width: 1220px) {
+    grid-template-columns: 1fr 1fr 330px;
   }
-  @media screen and (max-width: 1150px) {
+
+  @media screen and (max-width: 770px) {
     grid-template-columns: 1fr 1fr;
   }
 
@@ -116,16 +117,15 @@ header {
       font-size: 1.1rem;
     }
   }
-  .infos-mkt {
-    @media screen and (max-width: 1150px) {
-      margin-right: 0;
-    }
-  }
   .global-chart {
     border-radius: 14px;
     overflow: hidden;
     box-shadow: $shadow;
     overflow: hidden;
+
+    @media screen and (max-width: 1220px) {
+      display: none;
+    }
 
     .notes-container {
       height: 159px;
@@ -205,10 +205,6 @@ header {
       }
     }
 
-    @media screen and (max-width: 1150px) {
-      display: none;
-    }
-
     text {
       font-size: 0.8rem !important;
       letter-spacing: 1px;
@@ -223,7 +219,7 @@ header {
     display: block;
     overflow: hidden;
 
-    @media screen and (max-width: 1250px) {
+    @media screen and (max-width: 770px) {
       display: none;
     }
 
@@ -267,6 +263,7 @@ header {
             border-radius: 4px;
             height: 16px;
             margin: 0 6px;
+            filter: drop-shadow(0 0 4px rgba(250, 250, 250, 0.25));
           }
           p {
             font-size: 1.05rem;
