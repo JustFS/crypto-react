@@ -293,7 +293,7 @@
         border: none;
         outline: none;
         color: white;
-        font-size: 1.05rem;
+        font-size: 0.95rem;
         color: $white1;
       }
     }
@@ -318,6 +318,7 @@
         transition: 0.1s;
         user-select: none;
         position: relative;
+        font-size: 0.9rem;
 
         &:hover {
           span {
