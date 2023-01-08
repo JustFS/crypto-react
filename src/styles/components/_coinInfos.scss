@@ -1,7 +1,7 @@
 .coin-infos {
   position: absolute;
   width: 600px;
-  left: 12px;
+  left: 10px;
   background: rgba(82, 82, 82, 0.8);
   -webkit-backdrop-filter: blur(1px);
   backdrop-filter: blur(3px);
@@ -31,6 +31,7 @@
     }
   }
   .content-infos {
+    height: 46px;
     p {
       text-align: center;
       font-size: 1.05rem;

@@ -25,7 +25,7 @@ header {
     box-shadow: $shadow;
     display: grid;
     align-items: center;
-    height: 116px;
+    height: 112px;
     backdrop-filter: blur(3px);
     border-bottom: 2px solid $color1;
 
@@ -74,9 +74,9 @@ header {
       }
 
       img {
-        height: 17px;
+        height: 18px;
         object-fit: cover;
-        margin-right: 3px;
+        margin-right: 5px;
         transform: translate(2px, -4px);
       }
     }
@@ -84,11 +84,12 @@ header {
       display: grid;
       grid-template-columns: 50% 50%;
       height: 100%;
+      font-size: 0.9rem;
 
       ul {
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        justify-content: space-around;
       }
       .img-help {
         display: flex;
@@ -109,12 +110,16 @@ header {
       }
     }
   }
-  .global-mkt {
-    display: flex;
+  .infos-mkt {
+    font-size: 0.95rem;
 
-    p {
-      margin-left: 5px;
-      font-size: 1.1rem;
+    .global-mkt {
+      display: flex;
+
+      p {
+        margin-left: 5px;
+        font-size: 1rem;
+      }
     }
   }
   .global-chart {
@@ -206,7 +211,7 @@ header {
     }
 
     text {
-      font-size: 0.8rem !important;
+      font-size: 0.7rem !important;
       letter-spacing: 1px;
     }
     .custom-tooltip {
@@ -256,22 +261,22 @@ header {
 
           .rank {
             width: 10px;
-            font-size: 0.97rem;
+            font-size: 0.9rem;
           }
 
           img {
             border-radius: 4px;
             height: 16px;
-            margin: 0 6px;
+            margin: 0 8px 0 6px;
             filter: drop-shadow(0 0 4px rgba(250, 250, 250, 0.25));
           }
           p {
-            font-size: 1.05rem;
+            font-size: 0.95rem;
           }
           span {
-            font-size: 0.86rem;
+            font-size: 0.7rem;
             color: $white2;
-            margin-left: 5px;
+            margin-left: 3px;
           }
         }
       }

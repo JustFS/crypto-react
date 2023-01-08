@@ -27,7 +27,9 @@ const Trending = () => {
                 <p className="name">
                   {coin.item.name.replaceAll(" ", "-").length < 11
                     ? coin.item.name
-                    : coin.item.name.split(" ")[0]}
+                    : coin.item.name.split(" ")[0].length < 12
+                    ? coin.item.name.split(" ")[0]
+                    : coin.item.name.split("").slice(0, 12)}
                 </p>
                 <span>({coin.item.symbol})</span>
               </li>
@@ -42,7 +44,9 @@ const Trending = () => {
                 <p className="name">
                   {coin.item.name.replaceAll(" ", "-").length < 11
                     ? coin.item.name
-                    : coin.item.name.split(" ")[0]}
+                    : coin.item.name.split(" ")[0].length < 12
+                    ? coin.item.name.split(" ")[0]
+                    : coin.item.name.split("").slice(0, 12)}
                 </p>
                 <span>({coin.item.symbol})</span>
               </li>

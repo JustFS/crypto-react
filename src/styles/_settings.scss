@@ -40,13 +40,14 @@ $shadow: 0 5px 15px rgba(0, 0, 0, 0.322);
 
 html {
   scroll-behavior: smooth;
+  font-size: 110%;
 }
 
 body {
   background: url(../assets/wave.svg) center/cover;
   background-size: 2000%;
   color: $white1;
-  max-width: 1300px;
+  max-width: 1360px;
   margin: 0 auto;
   min-height: 100vh;
   font-size: 1.01rem;

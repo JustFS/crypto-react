@@ -92,6 +92,27 @@
       align-items: center;
       height: 38px;
       border-bottom: 2px solid $color1;
+      position: relative;
+
+      .list-type {
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, -15px);
+        color: $white2;
+        font-size: 0.8rem;
+
+        &::after {
+          content: "";
+          position: absolute;
+          width: 136%;
+          height: 12px;
+          background: $black1;
+          left: 50%;
+          border-radius: 300px;
+          transform: translate(-50%, 1px);
+          z-index: -1;
+        }
+      }
 
       img {
         color: $color1;
@@ -526,9 +547,13 @@
 
     .sum-number {
       position: absolute;
-      right: 0px;
-      top: -35px;
+      right: 2px;
+      top: -37px;
       color: grey;
+
+      @media screen and (max-width: 1140px) {
+        transform: translate(-3px, 3px);
+      }
 
       @media screen and (max-width: 1050px) {
         display: none;
@@ -585,7 +610,7 @@
       align-items: center;
 
       > img {
-        height: 12px;
+        height: 14px;
         display: block;
         margin-left: auto;
         cursor: pointer;
@@ -623,12 +648,16 @@
         text-align: left;
 
         .chart-img {
-          transform: translateY(2px);
+          transform: translateY(0px);
           z-index: 10000000;
           position: relative;
 
           @media screen and (max-width: 770px) {
             display: none;
+          }
+
+          img {
+            height: 17px;
           }
         }
         img {
@@ -669,7 +698,7 @@
           a {
             img {
               transform: translateY(4px);
-              height: 15px;
+              height: 17px;
 
               @media screen and (max-width: 715px) {
                 transform: translate(3px, 1px);

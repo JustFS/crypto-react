@@ -18,9 +18,25 @@ const TableFilters = () => {
     dispatch(setListDisplay(showList));
   }, [showStable, showList]);
 
+  const setListName = (list) => {
+    switch (list) {
+      case "none":
+        return "Filtered List";
+      case "all":
+        return "All market";
+      case "fav":
+        return "Fav List";
+      case "shit":
+        return "Trash";
+      default:
+        return "Filtered List";
+    }
+  };
+
   return (
     <div className="table-filters">
       <div className="table-filters-container">
+        <span className="list-type">{setListName(showList)}</span>
         <div className="stable-checkbox-container">
           <input
             onChange={() => setShowStable(!showStable)}

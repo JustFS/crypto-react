@@ -89,9 +89,9 @@ const TableLine = ({ coin, sumNumber, index }) => {
             onMouseEnter={(e) => {
               setShowChart(true);
               if (e.screenY < 435) {
-                setTop("16px");
+                setTop("10px");
               } else {
-                setTop("-340px");
+                setTop("-366px");
               }
             }}
             onMouseLeave={() => setShowChart(false)}
@@ -114,9 +114,9 @@ const TableLine = ({ coin, sumNumber, index }) => {
             onMouseEnter={(e) => {
               setShowInfos(true);
               if (e.screenY < 435) {
-                setTop("6px");
+                setTop("10px");
               } else {
-                setTop("-340px");
+                setTop("-372px");
               }
             }}
             onMouseLeave={() => setShowInfos(false)}
