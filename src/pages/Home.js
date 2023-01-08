@@ -116,6 +116,7 @@ const Home = () => {
     } else {
       dispatch(setTimeFrame(91));
     }
+
     return () => {
       window.removeEventListener("scroll", scrollFunction);
     };

@@ -231,7 +231,7 @@ header {
     h3 {
       text-align: center;
       letter-spacing: 1px;
-      margin-top: -7px;
+      margin-top: -10px;
       color: $color1;
 
       &::after {
@@ -250,7 +250,7 @@ header {
     .trend-list {
       display: grid;
       grid-template-columns: 50% 50%;
-      margin-top: 6px;
+      margin-top: 7px;
 
       ul {
         display: grid;
