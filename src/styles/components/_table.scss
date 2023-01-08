@@ -239,7 +239,7 @@
 
     &.active {
       position: fixed;
-      max-width: 1300px;
+      max-width: 1360px;
       top: 0;
       background: rgba(52, 52, 52, 0.8);
       backdrop-filter: blur(2px);
@@ -649,7 +649,7 @@
 
         .chart-img {
           transform: translateY(0px);
-          z-index: 10000000;
+          z-index: 10;
           position: relative;
 
           @media screen and (max-width: 770px) {
