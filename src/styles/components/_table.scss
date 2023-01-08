@@ -6,10 +6,10 @@
   &.mktvol {
     .table-header,
     .table-line {
-      grid-template-columns: 314px 20px 100px 82px 82px 60px repeat(8, 1fr) 50px 50px 20px;
+      grid-template-columns: 314px 20px 106px 82px 82px 60px repeat(8, 1fr) 50px 50px 20px;
 
       @media screen and (max-width: 1150px) {
-        grid-template-columns: 308px 20px 100px 82px 82px repeat(7, 1fr) 20px;
+        grid-template-columns: 312px 20px 100px 82px 82px repeat(7, 1fr) 20px;
       }
       @media screen and (max-width: 1020px) {
         grid-template-columns: 276px 80px 80px 100px repeat(7, 1fr);
@@ -74,14 +74,6 @@
       grid-template-columns: 1fr;
       margin-right: 10px;
     }
-
-    // @media screen and (max-width: 1150px) {
-    //   margin-bottom: 6px;
-    //   grid-template-columns: 1fr;
-    //   width: 100%;
-    //   max-width: 550px;
-    //   margin: 0 auto;
-    // }
 
     .table-filters-container {
       display: flex;
@@ -205,7 +197,7 @@
   .table-header,
   .table-line {
     display: grid;
-    grid-template-columns: 308px 20px 100px 82px 82px repeat(7, 1fr) 20px;
+    grid-template-columns: 314px 20px 106px 82px 82px repeat(7, 1fr) 20px;
 
     @media screen and (max-width: 1020px) {
       grid-template-columns: 276px 80px 80px 100px repeat(7, 1fr);
@@ -606,19 +598,19 @@
     }
     .infos-container {
       display: grid;
-      grid-template-columns: 25px 22px 40px 1fr;
+      grid-template-columns: 19px 28px 28px 1fr;
       height: 100%;
       align-items: center;
 
       > img {
         height: 14px;
         display: block;
-        margin-left: auto;
         cursor: pointer;
         transition: 0.2s;
+        transform: translateX(3px);
 
         &:hover {
-          transform: scale(1.4);
+          transform: scale(1.25) translateX(3px);
         }
         @media screen and (max-width: 450px) {
           display: none;
@@ -627,7 +619,6 @@
 
       > p {
         text-align: center;
-        margin-left: 4px;
       }
 
       .img {
@@ -647,6 +638,7 @@
         align-items: center;
         display: flex;
         text-align: left;
+        margin-left: 3px;
 
         .chart-img {
           transform: translateY(0px);
