@@ -3,7 +3,7 @@ header {
   display: grid;
   grid-template-columns: 1fr 1fr 330px 500px;
 
-  @media screen and (max-width: 1220px) {
+  @media screen and (max-width: 1235px) {
     grid-template-columns: 1fr 1fr 330px;
   }
 
@@ -128,7 +128,7 @@ header {
     box-shadow: $shadow;
     overflow: hidden;
 
-    @media screen and (max-width: 1220px) {
+    @media screen and (max-width: 1235px) {
       display: none;
     }
 
@@ -258,6 +258,7 @@ header {
         li {
           display: flex;
           align-items: center;
+          height: 22px;
 
           .rank {
             width: 10px;

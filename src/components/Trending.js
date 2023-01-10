@@ -36,8 +36,9 @@ const Trending = () => {
             ))}
         </ul>
         <ul>
+          <li></li>
           {trendData &&
-            trendData.slice(4, 8).map((coin) => (
+            trendData.slice(4, 7).map((coin) => (
               <li key={coin.item.id}>
                 <p className="rank">{coin.item.score + 1 + "."}</p>
                 <img src={coin.item.thumb} alt={coin.item.name + " logo"} />
