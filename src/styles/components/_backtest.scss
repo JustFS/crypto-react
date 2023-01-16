@@ -10,9 +10,20 @@
     align-items: center;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 50px;
 
-    h2 {
-      font-size: 1.8rem;
-      letter-spacing: 2px;
+    .start {
+      display: flex;
+      align-items: center;
+      justify-content: start;
+
+      h2 {
+        font-size: 1.8rem;
+        letter-spacing: 2px;
+      }
+      input {
+        font-size: 0.7rem;
+        color: grey;
+        width: 50px;
+      }
     }
 
     p {

@@ -113,8 +113,6 @@ const BackTest = () => {
 
         setAvailableTotal(availableTotal - amountInvested);
         setCoinsData(() => [...coinsData, data]);
-
-        console.log(data);
         setAmountInvested("");
         setCoinSearch("");
         setCoinChoice("");
@@ -167,7 +165,14 @@ const BackTest = () => {
   return (
     <div className="backtest-container">
       <div className="header">
-        <h2>Backtest</h2>
+        <div className="start">
+          <h2>Backtest</h2>
+          <input
+            onChange={(e) => setAvailableTotal(Number(e.target.value))}
+            type="text"
+            placeholder="start"
+          />
+        </div>
         <div>
           Date
           <input
@@ -176,7 +181,10 @@ const BackTest = () => {
             value={todayDate}
           />
         </div>
-        <p>Avail. {thousandSeparator(availableTotal.toFixed(0))} $</p>
+        <p>
+          Avail.{" "}
+          {availableTotal && thousandSeparator(availableTotal.toFixed(0))} $
+        </p>
         {btcEq && <p>{btcEq.toFixed(1)} BTC</p>}
         <p>
           PNL <span>{thousandSeparator(pnl.toFixed(0))} $</span>
