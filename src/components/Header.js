@@ -22,7 +22,8 @@ const Header = () => {
       <div className="title">
         <div>
           <h1>
-            <img src="./assets/logo.png" alt="" /> Watch Tower
+            <img src="./assets/logo.png" alt="" />
+            <NavLink to="/"> Watch Tower</NavLink>
           </h1>
         </div>
         <div className="infos">
