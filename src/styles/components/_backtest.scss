@@ -1,0 +1,167 @@
+.backtest-container {
+  background: $black1;
+  border-radius: 14px;
+  padding: 10px 15px;
+  min-height: 400px;
+  border-bottom: 2px solid $color1;
+
+  .header {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 50px;
+
+    h2 {
+      font-size: 1.8rem;
+      letter-spacing: 2px;
+    }
+
+    p {
+      font-size: 2rem;
+      color: grey;
+    }
+    span {
+      color: $white1;
+    }
+    input {
+      background: none;
+      border: none;
+      text-align: center;
+      color: white;
+      font-size: 1.4rem;
+    }
+  }
+  .form {
+    margin: 10px 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 36px;
+
+    ul {
+      position: absolute;
+      top: 32px;
+      left: -2px;
+      z-index: 10000;
+
+      li {
+        background: $black2;
+        padding: 4px 10px;
+        cursor: pointer;
+        border-radius: 10px;
+        margin-top: 1px;
+        box-shadow: 0 0 10px rgba(93, 93, 93, 0.383);
+
+        &:hover {
+          background: rgb(59, 59, 59);
+        }
+
+        span {
+          color: grey;
+          margin-left: 2px;
+        }
+      }
+    }
+    > p {
+      text-transform: capitalize;
+      font-size: 1.4rem;
+      margin-right: 6px;
+      background: white;
+      color: $black1;
+      padding: 0 10px;
+      border-radius: 4px;
+      min-width: 130px;
+    }
+    input {
+      height: 100%;
+      margin-right: 6px;
+      width: 130px;
+      font-size: 0.8rem;
+      text-align: center;
+      border-radius: 4px;
+      border: none;
+    }
+    button {
+      height: 100%;
+      width: 60px;
+      font-size: 0.95rem;
+      background: $color1;
+      border: none;
+      border-radius: 4px;
+
+      &:hover {
+        background: white;
+        cursor: pointer;
+      }
+    }
+  }
+  .coin-list {
+    padding-top: 8px;
+
+    .card {
+      padding: 8px;
+      background: $black2;
+      box-shadow: 0 0 4px rgba(0, 0, 0, 0.422);
+      border-radius: 8px;
+      align-items: center;
+      margin: 8px 0;
+      display: grid;
+      grid-template-columns: 46px 1fr 130px repeat(5, 110px) 35px 110px 66px 20px;
+      width: 100%;
+
+      h3 {
+        letter-spacing: 1px;
+      }
+
+      img {
+        height: 30px;
+        display: block;
+        margin-right: auto;
+        margin-left: 4px;
+        filter: drop-shadow(0 0 4px rgba(214, 214, 214, 0.4));
+      }
+      span {
+        display: block;
+        color: $white2;
+      }
+      p {
+        color: grey;
+      }
+      input,
+      button {
+        height: 100%;
+        text-align: center;
+        margin-left: 5px;
+        border-radius: 5px;
+        border: none;
+        font-size: 0.95rem;
+      }
+      button {
+        background: $color1;
+        cursor: pointer;
+
+        &:hover {
+          background: grey;
+        }
+      }
+      .pos-value {
+        div {
+          display: flex;
+          align-items: center;
+
+          span {
+            margin-right: 10px;
+          }
+        }
+      }
+      .pos-value,
+      .pnl {
+        span {
+          font-size: 1.3rem;
+        }
+      }
+      .delete {
+        background: rgb(250, 43, 43);
+      }
+    }
+  }
+}

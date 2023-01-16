@@ -34,9 +34,14 @@ const Header = () => {
             </li>
             <li>Markets : {headerData.markets}</li>
           </ul>
-          <NavLink to="/help" className="img-help">
-            <img src="./assets/question.svg" alt="question icon" />
-          </NavLink>
+          <div className="img-help">
+            <NavLink to="/backtest">
+              <img src="./assets/backtest.svg" alt="question icon" />
+            </NavLink>
+            <NavLink to="/help">
+              <img src="./assets/question.svg" alt="question icon" />
+            </NavLink>
+          </div>
         </div>
       </div>
       <ul className="infos-mkt">

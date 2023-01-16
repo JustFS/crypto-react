@@ -95,7 +95,6 @@ header {
         display: flex;
         justify-content: flex-end;
         align-items: center;
-        margin-right: 10px;
 
         img {
           height: 30px;
@@ -106,6 +105,9 @@ header {
             transform: translateX(1px);
             filter: brightness(150%);
           }
+        }
+        a {
+          margin-right: 10px !important;
         }
       }
     }

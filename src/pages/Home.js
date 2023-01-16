@@ -19,7 +19,7 @@ const Home = () => {
   const coinsData = useSelector((state) => state.coinsDataReducer);
 
   const scrollFunction = () => {
-    if (window.scrollY > 145) {
+    if (window.scrollY > 145 && document.querySelector(".table-header")) {
       document.querySelector(".table-header").classList.add("active");
     } else {
       document.querySelector(".table-header").classList.remove("active");

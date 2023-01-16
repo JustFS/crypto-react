@@ -483,7 +483,6 @@ const Table = () => {
               let days = Math.round(
                 (new Date() - new Date(coin.ath_date)) / (1000 * 3600 * 24)
               );
-              console.log(days);
               return days < maxATHd;
             } else {
               return coin;
