@@ -51,7 +51,8 @@ export const isStableCoin = (coin) => {
     "mimatic",
     "tor",
     "euroc",
-    "cusdt"
+    "cusdt",
+    "edgt",
   ];
   if (stables.includes(coin)) {
     return false;
