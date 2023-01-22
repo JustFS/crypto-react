@@ -145,10 +145,11 @@ header {
 
     .notes-container {
       height: 159px;
-      width: 730px;
+      width: 500px;
       background: $black1;
       border-bottom: 2px solid $color1;
       border-radius: 0 0 13px 13px;
+      overflow: hidden;
 
       h4 {
         text-align: center;
