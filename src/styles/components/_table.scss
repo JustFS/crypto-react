@@ -224,8 +224,32 @@
 
     li {
       transition: 0.25s;
+      position: relative;
+
       &:active {
         transform: scale(1.03);
+      }
+    }
+
+    .timeframe {
+      &:nth-child(8),
+      &:nth-child(9),
+      &:nth-child(10),
+      &:nth-child(11),
+      &:nth-child(12),
+      &:nth-child(13) {
+        transform: translateY(-8px);
+        font-size: 1.03rem;
+      }
+
+      span {
+        position: absolute;
+        bottom: -14px;
+        font-size: 0.74rem;
+        left: 50%;
+        transform: translateX(-50%);
+        color: rgb(161, 161, 161);
+        letter-spacing: 0.05rem;
       }
     }
 
@@ -513,7 +537,7 @@
           }
           span {
             margin-left: 2px;
-            transform: translateY(1px);
+            transform: translateY(0px);
             text-align-last: left;
           }
           img {

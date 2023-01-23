@@ -7,6 +7,8 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { setTopThousand } from "../actions/tops.action";
 import { isStableCoin } from "./Utils";
+import { useEffect } from "react";
+import colors from "../styles/_settings.scss";
 
 const Table = () => {
   const [orderBy, setOrderBy] = useState("MarketCap");
@@ -22,6 +24,146 @@ const Table = () => {
   const coinsData = useSelector((state) => state.coinsDataReducer);
   const topThousand = useSelector((state) => state.topThousandReducer);
   const dispatch = useDispatch();
+  const [oneYear, setOneYear] = useState();
+  const [sixMonths, setSixMonths] = useState();
+  const [oneMonth, setOneMonth] = useState();
+  const [oneWeek, setOneWeek] = useState();
+  const [oneDay, setOneDay] = useState();
+  const [oneHour, setOneHour] = useState();
+
+  useEffect(() => {
+    if (coinsData.length > 0) {
+      let filtData = coinsData
+        .slice(startNumber, rangeNumber)
+        .filter((coin) => {
+          if (showList === "all") {
+            return coin;
+          }
+          if (showList === "fav") {
+            if (window.localStorage.coinList) {
+              let list = window.localStorage.coinList.split(",");
+              if (list.includes(coin.id)) {
+                return coin;
+              }
+            }
+          } else if (showList === "none") {
+            if (window.localStorage.banList) {
+              let list = banList.split(",");
+              if (!list.includes(coin.id)) {
+                return coin;
+              }
+            } else {
+              return coin;
+            }
+          } else if (showList === "shit") {
+            if (window.localStorage.banList) {
+              let list = banList.split(",");
+              if (list.includes(coin.id)) {
+                return coin;
+              }
+            } else {
+              return null;
+            }
+          }
+        })
+        .filter((coin) => {
+          if (showStable) {
+            return coin;
+          } else {
+            if (isStableCoin(coin.symbol)) {
+              return coin;
+            }
+          }
+        })
+        .filter((coin) => {
+          if (miniVol > 0) {
+            return coin.total_volume > Number(miniVol + "000000");
+          } else {
+            return coin;
+          }
+        })
+        .filter((coin) => {
+          if (mktVol > 0) {
+            return coin.market_cap / coin.total_volume < mktVol;
+          } else {
+            return coin;
+          }
+        })
+        .filter((coin) => {
+          if (maxATHd > 0) {
+            let days = Math.round(
+              (new Date() - new Date(coin.ath_date)) / (1000 * 3600 * 24)
+            );
+            return days < maxATHd;
+          } else {
+            return coin;
+          }
+        });
+      if (filtData.length > 0) {
+        calcGlobalPerf(filtData);
+      }
+    }
+  }, [
+    rangeNumber,
+    startNumber,
+    miniVol,
+    mktVol,
+    maxATHd,
+    showStable,
+    showList,
+    banList,
+    coinsData,
+    topThousand,
+  ]);
+
+  const calcGlobalPerf = (filData) => {
+    let oneYearVar = 0;
+    let sixMonthsVar = 0;
+    let oneMonthVar = 0;
+    let oneWeekVar = 0;
+    let oneDayVar = 0;
+    let oneHourVar = 0;
+    let eleminate = 0;
+
+    for (let i = 0; i < filData.length; i++) {
+      if (filData[i].price_change_percentage_1y_in_currency !== null) {
+        oneYearVar += filData[i].price_change_percentage_1y_in_currency;
+      } else {
+        eleminate++;
+      }
+      if (filData[i].price_change_percentage_200d_in_currency !== null) {
+        sixMonthsVar += filData[i].price_change_percentage_200d_in_currency;
+      } else {
+        eleminate++;
+      }
+      if (filData[i].price_change_percentage_30d_in_currency !== null) {
+        oneMonthVar += filData[i].price_change_percentage_30d_in_currency;
+      } else {
+        eleminate++;
+      }
+      if (filData[i].price_change_percentage_7d_in_currency !== null) {
+        oneWeekVar += filData[i].price_change_percentage_7d_in_currency;
+      } else {
+        eleminate++;
+      }
+      if (filData[i].price_change_percentage_24h_in_currency !== null) {
+        oneDayVar += filData[i].price_change_percentage_24h_in_currency;
+      } else {
+        eleminate++;
+      }
+      if (filData[i].price_change_percentage_1h_in_currency !== null) {
+        oneHourVar += filData[i].price_change_percentage_1h_in_currency;
+      } else {
+        eleminate++;
+      }
+    }
+    setOneYear(oneYearVar / (filData.length - eleminate));
+    setSixMonths(sixMonthsVar / (filData.length - eleminate));
+    setOneMonth(oneMonthVar / (filData.length - eleminate));
+    setOneWeek(oneWeekVar / (filData.length - eleminate));
+    setOneDay(oneDayVar / (filData.length - eleminate));
+    setOneHour(oneHourVar / (filData.length - eleminate));
+  };
 
   return (
     <div className="table-container">
@@ -250,7 +392,7 @@ const Table = () => {
           />
           <label htmlFor="Diluted">Diluted</label>
         </li>
-        <li>
+        <li className="timeframe">
           <input
             defaultChecked={"1h" === orderBy || "1h" === orderBy + "reverse"}
             onClick={() => {
@@ -265,8 +407,11 @@ const Table = () => {
             id="1h"
           />
           <label htmlFor="1h">1h</label>
+          <span style={{ color: oneHour >= 0 ? colors.green1 : colors.red1 }}>
+            {oneHour && oneHour.toFixed(1)}%
+          </span>
         </li>
-        <li>
+        <li className="timeframe">
           <input
             defaultChecked={"1d" === orderBy || "1d" === orderBy + "reverse"}
             onClick={() => {
@@ -281,8 +426,11 @@ const Table = () => {
             id="1d"
           />
           <label htmlFor="1d">1d</label>
+          <span style={{ color: oneDay >= 0 ? colors.green1 : colors.red1 }}>
+            {oneDay && oneDay.toFixed(1)}%
+          </span>
         </li>
-        <li>
+        <li className="timeframe">
           <input
             defaultChecked={"1w" === orderBy || "1w" === orderBy + "reverse"}
             onClick={() => {
@@ -297,8 +445,11 @@ const Table = () => {
             id="1w"
           />
           <label htmlFor="1w">1w</label>
+          <span style={{ color: oneWeek >= 0 ? colors.green1 : colors.red1 }}>
+            {oneWeek && oneWeek.toFixed(0)}%
+          </span>
         </li>
-        <li>
+        <li className="timeframe">
           <input
             defaultChecked={"1m" === orderBy || "1m" === orderBy + "reverse"}
             onClick={() => {
@@ -313,8 +464,11 @@ const Table = () => {
             id="1m"
           />
           <label htmlFor="1m">1m</label>
+          <span style={{ color: oneMonth >= 0 ? colors.green1 : colors.red1 }}>
+            {oneMonth && oneMonth.toFixed(0)}%
+          </span>
         </li>
-        <li>
+        <li className="timeframe">
           <input
             defaultChecked={"6m" === orderBy || "6m" === orderBy + "reverse"}
             onClick={() => {
@@ -329,8 +483,11 @@ const Table = () => {
             id="6m"
           />
           <label htmlFor="6m">6m</label>
+          <span style={{ color: sixMonths >= 0 ? colors.green1 : colors.red1 }}>
+            {sixMonths && sixMonths.toFixed(0)}%
+          </span>
         </li>
-        <li>
+        <li className="timeframe">
           <input
             defaultChecked={"1y" === orderBy || "1y" === orderBy + "reverse"}
             onClick={() => {
@@ -345,6 +502,9 @@ const Table = () => {
             id="1y"
           />
           <label htmlFor="1y">1y</label>
+          <span style={{ color: oneYear >= 0 ? colors.green1 : colors.red1 }}>
+            {oneYear && oneYear.toFixed(0)}%
+          </span>
         </li>
         <li>
           <input
