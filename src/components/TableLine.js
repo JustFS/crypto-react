@@ -7,7 +7,7 @@ import StarIcon from "./StarIcon";
 import colors from "../styles/_settings.scss";
 import CoinInfos from "./CoinInfos";
 
-const TableLine = ({ coin, sumNumber, index }) => {
+const TableLine = ({ coin, index }) => {
   const [showChart, setShowChart] = useState(false);
   const [showInfos, setShowInfos] = useState(false);
   const [top, setTop] = useState("8px");
@@ -197,7 +197,6 @@ const TableLine = ({ coin, sumNumber, index }) => {
         )}
       </p>
       <DeleteIcon coinId={coin.id} />
-      {index === 0 && <p className="sum-number">{sumNumber}</p>}
     </div>
   );
 };

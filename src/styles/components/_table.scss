@@ -552,6 +552,14 @@
         }
       }
     }
+    .sum-number {
+      color: grey;
+      transform: translateX(-3px);
+
+      @media screen and (max-width: 1050px) {
+        display: none;
+      }
+    }
   }
 
   .table-line {
@@ -561,21 +569,6 @@
     position: relative;
     color: $white1;
     transition: 0.15s;
-
-    .sum-number {
-      position: absolute;
-      right: 2px;
-      top: -37px;
-      color: grey;
-
-      @media screen and (max-width: 1140px) {
-        transform: translate(-3px, 3px);
-      }
-
-      @media screen and (max-width: 1050px) {
-        display: none;
-      }
-    }
 
     p:nth-child(6),
     p:nth-child(7),

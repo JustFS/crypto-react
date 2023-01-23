@@ -30,6 +30,7 @@ const Table = () => {
   const [oneWeek, setOneWeek] = useState();
   const [oneDay, setOneDay] = useState();
   const [oneHour, setOneHour] = useState();
+  const [sumCoin, setSumCoin] = useState();
 
   useEffect(() => {
     if (coinsData.length > 0) {
@@ -163,6 +164,7 @@ const Table = () => {
     setOneWeek(oneWeekVar / (filData.length - eleminate));
     setOneDay(oneDayVar / (filData.length - eleminate));
     setOneHour(oneHourVar / (filData.length - eleminate));
+    setSumCoin(filData.length);
   };
 
   return (
@@ -574,6 +576,9 @@ const Table = () => {
           />
           <label htmlFor="ATLd">ATLd</label>
         </li>
+        <li>
+          <p className="sum-number">{sumCoin}</p>
+        </li>
       </ul>
       {!isEmpty(coinsData) &&
         coinsData
@@ -778,15 +783,8 @@ const Table = () => {
                 null;
             }
           })
-          .map((coin, index, row) => {
-            return (
-              <TableLine
-                coin={coin}
-                key={coin.id}
-                index={index}
-                sumNumber={row.length}
-              />
-            );
+          .map((coin, index) => {
+            return <TableLine coin={coin} key={coin.id} index={index} />;
           })}
     </div>
   );
