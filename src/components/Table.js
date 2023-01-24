@@ -118,52 +118,58 @@ const Table = () => {
   ]);
 
   const calcGlobalPerf = (filData) => {
+    console.log(filData);
     let oneYearVar = 0;
     let sixMonthsVar = 0;
     let oneMonthVar = 0;
     let oneWeekVar = 0;
     let oneDayVar = 0;
     let oneHourVar = 0;
-    let eleminate = 0;
+    let eleminate1y = 0;
+    let eleminate6m = 0;
+    let eleminate1m = 0;
+    let eleminate1w = 0;
+    let eleminate1d = 0;
+    let eleminate1h = 0;
 
     for (let i = 0; i < filData.length; i++) {
       if (filData[i].price_change_percentage_1y_in_currency !== null) {
         oneYearVar += filData[i].price_change_percentage_1y_in_currency;
       } else {
-        eleminate++;
+        eleminate1y++;
       }
       if (filData[i].price_change_percentage_200d_in_currency !== null) {
         sixMonthsVar += filData[i].price_change_percentage_200d_in_currency;
       } else {
-        eleminate++;
+        eleminate6m++;
       }
       if (filData[i].price_change_percentage_30d_in_currency !== null) {
         oneMonthVar += filData[i].price_change_percentage_30d_in_currency;
       } else {
-        eleminate++;
+        eleminate1m++;
       }
       if (filData[i].price_change_percentage_7d_in_currency !== null) {
         oneWeekVar += filData[i].price_change_percentage_7d_in_currency;
       } else {
-        eleminate++;
+        eleminate1w++;
       }
       if (filData[i].price_change_percentage_24h_in_currency !== null) {
         oneDayVar += filData[i].price_change_percentage_24h_in_currency;
       } else {
-        eleminate++;
+        eleminate1d++;
       }
       if (filData[i].price_change_percentage_1h_in_currency !== null) {
         oneHourVar += filData[i].price_change_percentage_1h_in_currency;
       } else {
-        eleminate++;
+        eleminate1h++;
       }
     }
-    setOneYear(oneYearVar / (filData.length - eleminate));
-    setSixMonths(sixMonthsVar / (filData.length - eleminate));
-    setOneMonth(oneMonthVar / (filData.length - eleminate));
-    setOneWeek(oneWeekVar / (filData.length - eleminate));
-    setOneDay(oneDayVar / (filData.length - eleminate));
-    setOneHour(oneHourVar / (filData.length - eleminate));
+    setOneYear(oneYearVar / (filData.length - eleminate1y));
+    setSixMonths(sixMonthsVar / (filData.length - eleminate6m));
+    setOneMonth(oneMonthVar / (filData.length - eleminate1m));
+    setOneWeek(oneWeekVar / (filData.length - eleminate1w));
+    setOneDay(oneDayVar / (filData.length - eleminate1d));
+    setOneHour(oneHourVar / (filData.length - eleminate1h));
     setSumCoin(filData.length);
   };
 
