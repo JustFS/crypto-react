@@ -25,11 +25,11 @@ const Trending = () => {
                 <p className="rank">{coin.item.score + 1 + "."}</p>
                 <img src={coin.item.thumb} alt={coin.item.name + " logo"} />
                 <p className="name">
-                  {coin.item.name.replaceAll(" ", "-").length < 11
+                  {coin.item.name.replaceAll(" ", "-").length < 10
                     ? coin.item.name
-                    : coin.item.name.split(" ")[0].length < 12
+                    : coin.item.name.split(" ")[0].length < 10
                     ? coin.item.name.split(" ")[0]
-                    : coin.item.name.split("").slice(0, 12)}
+                    : coin.item.name.split("").slice(0, 10)}
                 </p>
                 <span>({coin.item.symbol})</span>
               </li>
@@ -43,11 +43,11 @@ const Trending = () => {
                 <p className="rank">{coin.item.score + 1 + "."}</p>
                 <img src={coin.item.thumb} alt={coin.item.name + " logo"} />
                 <p className="name">
-                  {coin.item.name.replaceAll(" ", "-").length < 11
+                  {coin.item.name.replaceAll(" ", "-").length < 10
                     ? coin.item.name
-                    : coin.item.name.split(" ")[0].length < 12
+                    : coin.item.name.split(" ")[0].length < 10
                     ? coin.item.name.split(" ")[0]
-                    : coin.item.name.split("").slice(0, 12)}
+                    : coin.item.name.split("").slice(0, 10)}
                 </p>
                 <span>({coin.item.symbol})</span>
               </li>
