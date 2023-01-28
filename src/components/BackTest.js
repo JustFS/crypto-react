@@ -26,7 +26,8 @@ const BackTest = () => {
       axios
         .get("https://api.coingecko.com/api/v3/search?query=" + coinSearch)
         .then((res) => {
-          setMenu(res.data);
+          console.log(res.data.coins);
+          setMenu(res.data.coins);
         });
     }
 
@@ -116,6 +117,7 @@ const BackTest = () => {
         setAmountInvested("");
         setCoinSearch("");
         setCoinChoice("");
+        console.log(coinsData);
       });
   };
 
@@ -208,8 +210,8 @@ const BackTest = () => {
               />
               {coinSearch.length > 2 && (
                 <ul>
-                  {menu.coins &&
-                    menu.coins
+                  {menu &&
+                    menu
                       .sort((a, b) => {
                         if (a.market_cap_rank === !null) {
                           return a.market_cap_rank - b.market_cap_rank;
@@ -241,7 +243,12 @@ const BackTest = () => {
             value={amountInvested}
             placeholder="amount"
           />
-          <button className="validate-form" onClick={() => validateCoin()}>
+          <button
+            className="validate-form"
+            onClick={() => {
+              if (amountInvested) validateCoin();
+            }}
+          >
             Add
           </button>
         </div>
