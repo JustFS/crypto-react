@@ -260,37 +260,44 @@ header {
     }
 
     .trend-list {
-      display: grid;
-      grid-template-columns: 50% 50%;
       margin-top: 7px;
 
-      ul {
-        display: grid;
-        height: 115px;
-        li {
-          display: flex;
-          align-items: center;
-          height: 22px;
+      display: grid;
+      grid-template-columns: 50% 50%;
+      grid-template-rows: repeat(4, 30px);
+      grid-template-areas:
+        "el1 el1"
+        "el2 el3"
+        "el4 el5"
+        "el6 el7";
 
-          .rank {
-            width: 10px;
-            font-size: 0.9rem;
-          }
+      li {
+        display: flex;
+        align-items: center;
+        height: 22px;
 
-          img {
-            border-radius: 4px;
-            height: 16px;
-            margin: 0 8px 0 6px;
-            filter: drop-shadow(0 0 4px rgba(250, 250, 250, 0.25));
-          }
-          p {
-            font-size: 0.95rem;
-          }
-          span {
-            font-size: 0.7rem;
-            color: $white2;
-            margin-left: 3px;
-          }
+        &:first-child {
+          grid-area: el1;
+        }
+
+        .rank {
+          width: 10px;
+          font-size: 0.9rem;
+        }
+
+        img {
+          border-radius: 4px;
+          height: 16px;
+          margin: 0 8px 0 6px;
+          filter: drop-shadow(0 0 4px rgba(250, 250, 250, 0.25));
+        }
+        p {
+          font-size: 0.95rem;
+        }
+        span {
+          font-size: 0.7rem;
+          color: $white2;
+          margin-left: 3px;
         }
       }
     }

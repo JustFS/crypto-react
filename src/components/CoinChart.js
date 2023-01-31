@@ -46,6 +46,7 @@ const CoinChart = ({ coinId, coinName, coinImg }) => {
             price: price < "50" ? price : parseInt(price),
           });
         }
+        console.log(dataArray);
         setCoinData(dataArray);
       });
   }, [coinId, timeFrame]);

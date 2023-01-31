@@ -18,41 +18,38 @@ const Trending = () => {
     <div className="trending-container">
       <h3>Trending</h3>
       <div className="trend-list">
-        <ul>
-          {trendData &&
-            trendData.slice(0, 4).map((coin) => (
-              <li key={coin.item.id}>
-                <p className="rank">{coin.item.score + 1 + "."}</p>
-                <img src={coin.item.thumb} alt={coin.item.name + " logo"} />
-                <p className="name">
-                  {coin.item.name.replaceAll(" ", "-").length < 10
+        {trendData &&
+          trendData.slice(0, 4).map((coin) => (
+            <li key={coin.item.id}>
+              <p className="rank">{coin.item.score + 1 + "."}</p>
+              <img src={coin.item.thumb} alt={coin.item.name + " logo"} />
+              <p className="name">
+                {coin.item.score !== 0
+                  ? coin.item.name.replaceAll(" ", "-").length < 10
                     ? coin.item.name
                     : coin.item.name.split(" ")[0].length < 10
                     ? coin.item.name.split(" ")[0]
-                    : coin.item.name.split("").slice(0, 10)}
-                </p>
-                <span>({coin.item.symbol})</span>
-              </li>
-            ))}
-        </ul>
-        <ul>
-          <li></li>
-          {trendData &&
-            trendData.slice(4, 7).map((coin) => (
-              <li key={coin.item.id}>
-                <p className="rank">{coin.item.score + 1 + "."}</p>
-                <img src={coin.item.thumb} alt={coin.item.name + " logo"} />
-                <p className="name">
-                  {coin.item.name.replaceAll(" ", "-").length < 10
-                    ? coin.item.name
-                    : coin.item.name.split(" ")[0].length < 10
-                    ? coin.item.name.split(" ")[0]
-                    : coin.item.name.split("").slice(0, 10)}
-                </p>
-                <span>({coin.item.symbol})</span>
-              </li>
-            ))}
-        </ul>
+                    : coin.item.name.split("").slice(0, 10)
+                  : coin.item.name}
+              </p>
+              <span>({coin.item.symbol})</span>
+            </li>
+          ))}
+        {trendData &&
+          trendData.slice(4, 7).map((coin) => (
+            <li key={coin.item.id}>
+              <p className="rank">{coin.item.score + 1 + "."}</p>
+              <img src={coin.item.thumb} alt={coin.item.name + " logo"} />
+              <p className="name">
+                {coin.item.name.replaceAll(" ", "-").length < 10
+                  ? coin.item.name
+                  : coin.item.name.split(" ")[0].length < 10
+                  ? coin.item.name.split(" ")[0]
+                  : coin.item.name.split("").slice(0, 10)}
+              </p>
+              <span>({coin.item.symbol})</span>
+            </li>
+          ))}
       </div>
     </div>
   );

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import BackTestCard from "./BackTestCard";
+import PnlChart from "./PnlChart";
 
 const BackTest = () => {
   const [menu, setMenu] = useState([]);
@@ -20,6 +21,8 @@ const BackTest = () => {
   const [btcData, setBtcData] = useState([]);
   const [btcBool, setBtcBool] = useState(true);
   const [btcEq, setBtcEq] = useState();
+  const [chartData, setChartData] = useState([]);
+  // const [playOnce, setPlayOnce] = useState(true);
 
   useEffect(() => {
     if (coinSearch.length > 2) {
@@ -46,6 +49,7 @@ const BackTest = () => {
         });
       });
       setPnl(pnlNum + availableTotal);
+      handleChartData();
     }
 
     btcCalc();
@@ -117,7 +121,6 @@ const BackTest = () => {
         setAmountInvested("");
         setCoinSearch("");
         setCoinChoice("");
-        console.log(coinsData);
       });
   };
 
@@ -135,7 +138,7 @@ const BackTest = () => {
     if (btcBool) {
       axios
         .get(
-          `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=1200`
+          `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=1600`
         )
         .then((res) => {
           let dataArray = [];
@@ -164,8 +167,31 @@ const BackTest = () => {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
   };
 
+  const handleChartData = () => {
+    let prevData = {
+      date: todayDate,
+      pnl,
+    };
+
+    for (let i = 0; i < chartData.length; i++) {
+      if (chartData[i].date === prevData.date) {
+        delete chartData[i];
+      }
+    }
+
+    let newData = [...chartData, prevData]
+      .filter((el) => el != null)
+      .sort((a, b) => new Date(a.date) - new Date(b.date));
+
+    setChartData(newData);
+    setTimeout(() => {
+      console.log(chartData);
+    }, 1000);
+  };
+
   return (
     <div className="backtest-container">
+      <PnlChart data={chartData} />
       <div className="header">
         <div className="start">
           <h2>Backtest</h2>
@@ -179,7 +205,10 @@ const BackTest = () => {
           Date
           <input
             type="date"
-            onChange={(e) => setTodayDate(e.target.value)}
+            onChange={(e) => {
+              setTodayDate(e.target.value);
+              handleChartData();
+            }}
             value={todayDate}
           />
         </div>
@@ -266,7 +295,6 @@ const BackTest = () => {
                 setCoinsData={setCoinsData}
                 todayDate={todayDate}
                 pnl={pnl}
-                setPnl={setPnl}
               />
             ))}
         </div>
