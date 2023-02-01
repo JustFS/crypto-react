@@ -10,6 +10,7 @@ import {
 import colors from "../styles/_settings.scss";
 
 const PnlChart = ({ data }) => {
+  console.log(data);
   return (
     <div className="coin-chart">
       <AreaChart

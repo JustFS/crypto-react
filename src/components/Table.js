@@ -118,7 +118,6 @@ const Table = () => {
   ]);
 
   const calcGlobalPerf = (filData) => {
-    console.log(filData);
     let oneYearVar = 0;
     let sixMonthsVar = 0;
     let oneMonthVar = 0;

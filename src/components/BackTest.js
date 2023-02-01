@@ -29,7 +29,6 @@ const BackTest = () => {
       axios
         .get("https://api.coingecko.com/api/v3/search?query=" + coinSearch)
         .then((res) => {
-          console.log(res.data.coins);
           setMenu(res.data.coins);
         });
     }
@@ -184,9 +183,7 @@ const BackTest = () => {
       .sort((a, b) => new Date(a.date) - new Date(b.date));
 
     setChartData(newData);
-    setTimeout(() => {
-      console.log(chartData);
-    }, 1000);
+    console.log(newData);
   };
 
   return (
