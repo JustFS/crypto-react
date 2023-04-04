@@ -768,6 +768,9 @@
         input[type="texte"] {
           padding-left: 10px;
         }
+        input::selection {
+          color: $white2;
+        }
         .btn-container {
           display: grid;
           grid-template-columns: 1fr 74%;
