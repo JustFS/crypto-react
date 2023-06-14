@@ -745,8 +745,12 @@
       .signal-container {
         position: absolute;
         z-index: 10;
-        top: -53px;
-        left: -108px;
+        top: -59px;
+        left: -126px;
+        background: rgba(0, 0, 0, 0.322);
+        backdrop-filter: blur(3px);
+        border-radius: 10px;
+        padding: 7px;
 
         button {
           width: 108px;
