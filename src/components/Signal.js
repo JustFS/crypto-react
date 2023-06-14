@@ -100,7 +100,7 @@ const Signal = ({ coin }) => {
       {param && (
         <div class="signal-container">
           <button onClick={() => setVerif(!verif)}>
-            {verif ? "Blue chip ?" : "Not blue chip ?"}
+            {verif ? "Not blue chip ?" : "blue chip ?"}
           </button>
           <form
             className="form"
