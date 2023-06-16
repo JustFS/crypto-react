@@ -59,43 +59,6 @@ const Home = () => {
             } else {
               dispatch(setCoinsData(data));
             }
-
-            axios
-              .get(
-                `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=3&sparkline=false&price_change_percentage=1h%2C24h%2C7d%2C14d%2C30d%2C200d%2C1y`
-              )
-              .then((res) => {
-                data = [...data, ...res.data];
-
-                axios
-                  .get(
-                    `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=4&sparkline=false&price_change_percentage=1h%2C24h%2C7d%2C14d%2C30d%2C200d%2C1y`
-                  )
-                  .then((res) => {
-                    data = [...data, ...res.data];
-
-                    if (window.localStorage.signalData) {
-                      let signalList = JSON.parse(
-                        window.localStorage.signalData
-                      );
-
-                      data.forEach((coin) => {
-                        coin.signal = [0, 0];
-                        for (let i = 0; i < signalList.length; i++) {
-                          if (signalList[i][0] === coin.id) {
-                            coin.signal[0] =
-                              coin.current_price / signalList[i][1];
-                            coin.signal[1] =
-                              coin.current_price / signalList[i][2];
-                          }
-                        }
-                      });
-                      dispatch(setCoinsData(data));
-                    } else {
-                      dispatch(setCoinsData(data));
-                    }
-                  });
-              });
           })
           .then(() => {
             window.addEventListener("scroll", scrollFunction);

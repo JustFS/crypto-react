@@ -21,7 +21,7 @@ const Signal = ({ coin }) => {
       if (coin.signal === [0, 0]) {
         setColor("rgb(42, 42, 42)");
       }
-      console.log(signalList);
+
       for (let i = 0; i < signalList.length; i++) {
         if (signalList[i][0] === coin.id) {
           setMini(Number(signalList[i][1]));

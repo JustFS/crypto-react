@@ -5,7 +5,6 @@ import ToTop from "./ToTop";
 import { isEmpty } from "./Utils";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { setTopThousand } from "../actions/tops.action";
 import { isStableCoin } from "./Utils";
 import { useEffect } from "react";
 import colors from "../styles/_settings.scss";
@@ -22,7 +21,6 @@ const Table = () => {
   const showList = useSelector((state) => state.listReducer);
   const banList = useSelector((state) => state.banListReducer);
   const coinsData = useSelector((state) => state.coinsDataReducer);
-  const topThousand = useSelector((state) => state.topThousandReducer);
   const dispatch = useDispatch();
   const [oneYear, setOneYear] = useState();
   const [sixMonths, setSixMonths] = useState();
@@ -114,7 +112,6 @@ const Table = () => {
     showList,
     banList,
     coinsData,
-    topThousand,
   ]);
 
   const calcGlobalPerf = (filData) => {
@@ -178,37 +175,14 @@ const Table = () => {
       <ul className="table-header">
         <div className="range-container">
           <span>
-            <span
-              onClick={() => {
-                if (topThousand === false) {
-                  setRangeNumber(1000);
-                  setStartNumber(0);
-                } else {
-                  setRangeNumber(500);
-                  setStartNumber(0);
-                }
-                dispatch(setTopThousand(!topThousand));
-              }}
-            >
-              Top
-            </span>{" "}
-            {topThousand ? (
-              <input
-                type="number"
-                value={rangeNumber}
-                onChange={(e) => setRangeNumber(e.target.value)}
-                max="1000"
-                maxLength={4}
-              />
-            ) : (
-              <input
-                type="number"
-                value={rangeNumber}
-                onChange={(e) => setRangeNumber(e.target.value)}
-                max="500"
-                maxLength={3}
-              />
-            )}
+            <span>Top</span>{" "}
+            <input
+              type="number"
+              value={rangeNumber}
+              onChange={(e) => setRangeNumber(e.target.value)}
+              max="500"
+              maxLength={3}
+            />
           </span>
           <div className="inputs-container">
             <div className="number-indic">
@@ -218,7 +192,6 @@ const Table = () => {
             <input
               type="range"
               min="0"
-              max={topThousand ? 1000 : 500}
               value={startNumber}
               onChange={(e) => {
                 if (startNumber > rangeNumber) {
@@ -232,7 +205,7 @@ const Table = () => {
             <input
               type="range"
               min="1"
-              max={topThousand ? 1000 : 500}
+              max="500"
               value={rangeNumber}
               onChange={(e) => {
                 if (rangeNumber < startNumber) {
