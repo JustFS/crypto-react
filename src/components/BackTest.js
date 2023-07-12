@@ -69,7 +69,7 @@ const BackTest = () => {
 
     axios
       .get(
-        `https://api.coingecko.com/api/v3/coins/${coinChoice}/market_chart?vs_currency=usd&days=1200`
+        `https://api.coingecko.com/api/v3/coins/${coinChoice}/market_chart?vs_currency=usd&days=1600`
       )
       .then((res) => {
         for (let i = 0; i < res.data.prices.length; i++) {
