@@ -56,7 +56,8 @@ export const isStableCoin = (coin) => {
     "usd+",
     "eusd",
     "usdr",
-    "usdr"
+    "usdr",
+    "fdusd"
   ];
   if (stables.includes(coin)) {
     return false;
