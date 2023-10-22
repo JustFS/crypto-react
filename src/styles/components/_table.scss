@@ -568,7 +568,7 @@
     border-top: 1px solid rgb(65, 65, 65);
     position: relative;
     color: $white1;
-    transition: 0.15s;
+    transition: 0.1s ease;
 
     p:nth-child(6),
     p:nth-child(7),
@@ -611,7 +611,7 @@
     }
 
     &:hover {
-      background: rgba(128, 128, 128, 0.25);
+      background: rgba(128, 128, 128, 0.1);
     }
     .infos-container {
       display: grid;
@@ -864,13 +864,21 @@
   .percent-change-container {
     position: relative;
     span {
-      height: 5px;
+      height: 30px;
       position: absolute;
-      bottom: -3px;
       left: 50%;
-      transform: translateX(-50%);
-      border-radius: 14px;
-      opacity: 0.3;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 10px;
+      width: 62px;
+      opacity: 0.1;
+      // COLOR
+      // color: green;
+      // color: rgb(85, 164, 85);
+      // color: rgb(166, 200, 166);
+      // color: rgb(255, 75, 75);
+      // color: rgb(249, 159, 159);
+      // color: rgb(248, 215, 215);
       // mix-blend-mode: difference;
     }
   }

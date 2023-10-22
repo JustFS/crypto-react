@@ -181,11 +181,8 @@ const TableLine = ({ coin, index }) => {
         percent={coin.price_change_percentage_1y_in_currency}
         time="1y"
       />
-      {coin.ath_change_percentage > -3 ? (
-        <p style={{ color: colors.green1 }}>ATH</p>
-      ) : (
-        <PercentChange percent={coin.ath_change_percentage} />
-      )}
+
+      <PercentChange percent={coin.ath_change_percentage} type={"ath"} />
       <p className="ath">
         {Math.round(
           (new Date() - new Date(coin.ath_date)) / (1000 * 3600 * 24)

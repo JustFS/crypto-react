@@ -46,13 +46,14 @@ const Trending = () => {
         {trendData &&
           trendData.slice(4, 7).map((coin) => (
             <a
+              key={coin.item.id}
               target="_blank"
               href={
                 "https://www.coingecko.com/en/coins/" +
                 coin.item.id.toLowerCase()
               }
             >
-              <li key={coin.item.id}>
+              <li>
                 <p className="rank">{coin.item.score + 1 + "."}</p>
                 <img src={coin.item.thumb} alt={coin.item.name + " logo"} />
                 <p className="name">
