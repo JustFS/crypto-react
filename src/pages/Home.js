@@ -13,13 +13,14 @@ import Footer from "../components/Footer";
 import { setTopThousand } from "../actions/tops.action";
 import { setTimeFrame } from "../actions/timeFrame.action";
 import Trending from "../components/Trending";
+import Categories from "../components/Categories";
 
 const Home = () => {
   const dispatch = useDispatch();
   const coinsData = useSelector((state) => state.coinsDataReducer);
 
   const scrollFunction = () => {
-    if (window.scrollY > 145 && document.querySelector(".table-header")) {
+    if (window.scrollY > 174 && document.querySelector(".table-header")) {
       document.querySelector(".table-header").classList.add("active");
     } else {
       document.querySelector(".table-header").classList.remove("active");
@@ -92,6 +93,7 @@ const Home = () => {
           <header>
             <Header />
             <Trending />
+            <Categories />
             <GlobalChart coinsData={coinsData} />
           </header>
           <Table />

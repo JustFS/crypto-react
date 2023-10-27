@@ -1,7 +1,7 @@
 header {
   margin: 20px 0 15px 0;
   display: grid;
-  grid-template-columns: 1fr 1fr 330px 500px;
+  grid-template-columns: 230px 230px 1fr 400px;
 
   @media screen and (max-width: 1235px) {
     grid-template-columns: 1fr 1fr 330px;
@@ -16,8 +16,14 @@ header {
   }
 
   .title,
-  .infos-mkt,
   .trending-container {
+    height: 172px;
+  }
+
+  .title,
+  .infos-mkt,
+  .trending-container,
+  .categories {
     background: rgba(20, 20, 20, 0.85);
     padding: 10px;
     border-radius: 14px;
@@ -25,7 +31,6 @@ header {
     box-shadow: $shadow;
     display: grid;
     align-items: center;
-    height: 112px;
     backdrop-filter: blur(3px);
     border-bottom: 2px solid $color1;
 
@@ -51,9 +56,9 @@ header {
     }
     h1 {
       font-family: $font2;
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       color: $color1;
-      z-index: 2;
+      z-index: 20;
       position: relative;
       text-align: center;
       display: flex;
@@ -62,8 +67,7 @@ header {
       background: -webkit-linear-gradient(360deg, $color1, #0debc6);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      height: 30px;
-      transform: translateY(-6px) !important;
+      transform: translateY(-8px) !important;
 
       a {
         letter-spacing: 1px;
@@ -91,22 +95,27 @@ header {
     }
     .infos {
       display: grid;
-      grid-template-columns: 50% 50%;
-      height: 100%;
+      grid-template-columns: 90% 10%;
+      height: 120%;
       font-size: 0.9rem;
+      background: none !important;
+      z-index: 0 !important;
 
       ul {
         display: flex;
         flex-direction: column;
         justify-content: space-around;
+        height: 95%;
       }
       .img-help {
         display: flex;
-        justify-content: flex-end;
+        justify-content: space-around;
         align-items: center;
+        flex-direction: column;
+        margin-top: 6px;
 
         img {
-          height: 30px;
+          height: 20px;
           cursor: pointer;
           transition: 0.2s;
 
@@ -123,13 +132,22 @@ header {
   }
   .infos-mkt {
     font-size: 0.95rem;
+    align-items: start;
+    border-bottom: none;
+    padding: 4px;
+    background: none !important;
 
     .global-mkt {
       display: flex;
+      background: none;
 
-      p {
-        margin-left: 5px;
-        font-size: 1rem;
+      strong {
+        margin-left: 6px;
+      }
+    }
+    .fearGreed {
+      strong {
+        font-size: 1.1rem;
       }
     }
   }
@@ -144,8 +162,8 @@ header {
     }
 
     .notes-container {
-      height: 159px;
-      width: 500px;
+      height: 100%;
+      width: 399px;
       background: $black1;
       border-bottom: 2px solid $color1;
       border-radius: 0 0 13px 13px;
@@ -159,7 +177,7 @@ header {
       }
 
       form {
-        height: 134px;
+        height: 90%;
         position: relative;
 
         textarea {
@@ -232,7 +250,6 @@ header {
     }
   }
   .trending-container {
-    height: 162px;
     display: block;
     overflow: hidden;
 
@@ -243,8 +260,8 @@ header {
     h3 {
       text-align: center;
       letter-spacing: 1px;
-      margin-top: -10px;
-      color: $color1;
+      margin-top: -8px;
+      color: #05cbc8;
 
       &::after {
         content: "";
@@ -260,7 +277,7 @@ header {
     }
 
     .trend-list {
-      margin-top: 7px;
+      margin-top: 14px;
 
       display: grid;
       grid-template-columns: 50% 50%;
@@ -282,7 +299,7 @@ header {
 
         .rank {
           width: 10px;
-          font-size: 0.9rem;
+          font-size: 0.85rem;
         }
 
         img {
@@ -292,7 +309,7 @@ header {
           filter: drop-shadow(0 0 4px rgba(250, 250, 250, 0.25));
         }
         p {
-          font-size: 0.95rem;
+          font-size: 0.85rem;
           color: $white1;
         }
         span {
@@ -300,6 +317,77 @@ header {
           color: $white2;
           margin-left: 3px;
         }
+      }
+    }
+  }
+  .categories {
+    display: block;
+    overflow: hidden;
+
+    h3 {
+      text-align: center;
+      letter-spacing: 1px;
+      margin-top: -8px;
+
+      a {
+        color: #05cbc8;
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        height: 35px;
+        width: 100%;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0, 0, 0, 0.5);
+        z-index: -1;
+      }
+    }
+    ul {
+      font-size: 0.94rem;
+      display: grid;
+      grid-template-columns: 50% 50%;
+      height: auto;
+      margin-top: 6px;
+
+      a {
+        display: flex;
+        height: 28px;
+        color: $white1;
+
+        .img {
+          margin-top: 2px;
+          position: relative;
+          width: 23px;
+
+          img {
+            height: 9px;
+            position: absolute;
+            opacity: 0.85;
+
+            &:nth-child(1) {
+              top: 2px;
+              left: 3px;
+            }
+            &:nth-child(2) {
+              left: -3px;
+              top: 12px;
+            }
+            &:nth-child(3) {
+              right: 6px;
+              top: 12px;
+            }
+          }
+        }
+        .text {
+          display: flex;
+          align-items: center;
+        }
+      }
+      .percent-change-container {
+        margin-left: 4px;
       }
     }
   }

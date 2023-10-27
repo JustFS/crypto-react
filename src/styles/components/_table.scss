@@ -63,8 +63,8 @@
 
   .table-filters {
     display: grid;
-    grid-template-columns: 1fr 290px 550px;
-    margin-bottom: 12px;
+    grid-template-columns: 451px 1fr 1fr;
+    margin-bottom: 4px;
 
     @media screen and (max-width: 1235px) {
       grid-template-columns: 1fr 340px;

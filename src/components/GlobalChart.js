@@ -64,8 +64,8 @@ const GlobalChart = ({ coinsData }) => {
         <Notes setShowNotes={setShowNotes} />
       ) : (
         <Treemap
-          width={500}
-          height={162}
+          width={400}
+          height={225}
           data={dataArray}
           dataKey="size"
           stroke="rgb(51, 51, 51)"
