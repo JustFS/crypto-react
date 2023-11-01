@@ -78,7 +78,7 @@ const Categories = () => {
                 <img src={cate.top_3_coins[2]} />
               </div>
               <div className="text">
-                {cate.name} :{" "}
+                {cate.name}{" "}
                 <PercentChange percent={cate.market_cap_change_24h} />
               </div>
             </a>
