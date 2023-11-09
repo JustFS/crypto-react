@@ -94,9 +94,26 @@ input {
 img {
   user-select: none;
 }
+.loading {
+  position: relative;
+  text-align: center;
+  height: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
+  img {
+    animation: loading 0.85s infinite linear;
+
+    @keyframes loading {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  }
+}
 .top {
-  margin: 10px auto 30px;
+  margin: 20px auto 30px;
   text-align: center;
   animation: animLogo 1.2s infinite linear;
   user-select: none;

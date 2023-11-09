@@ -48,7 +48,7 @@ const Header = () => {
                 />
               </strong>
             </li>
-            <li class="fearGreed">
+            <li className="fearGreed">
               Fear & Greed :{" "}
               <strong
                 style={{

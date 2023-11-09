@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import PercentChange from "./PercentChange";
+import { isEmpty } from "./Utils";
+import LoadItem from "./LoadItem";
 
 const Categories = () => {
   const [cateData, setCateData] = useState([]);
@@ -45,9 +47,11 @@ const Categories = () => {
   ];
 
   useEffect(() => {
-    axios
-      .get("https://api.coingecko.com/api/v3/coins/categories")
-      .then((res) => setCateData(res.data));
+    setTimeout(() => {
+      axios
+        .get("https://api.coingecko.com/api/v3/coins/categories")
+        .then((res) => setCateData(res.data));
+    }, 3000);
   }, []);
 
   return (
@@ -57,61 +61,67 @@ const Categories = () => {
           Trending by categories
         </a>
       </h3>
-      <ul>
-        {cateData
-          .sort((a, b) => b.market_cap_change_24h - a.market_cap_change_24h)
-          .filter((cate) => {
-            if (!filteredCat.includes(cate.id)) {
-              return cate;
-            }
-          })
-          .slice(0, 8)
-          .map((cate) => (
-            <a
-              key={cate.id}
-              href={"https://www.coingecko.com/fr/categories/" + cate.id}
-              target="_blank"
-            >
-              <div className="img">
-                <img src={cate.top_3_coins[0]} />
-                <img src={cate.top_3_coins[1]} />
-                <img src={cate.top_3_coins[2]} />
-              </div>
-              <div className="text">
-                {cate.name}{" "}
-                <PercentChange percent={cate.market_cap_change_24h} />
-              </div>
-            </a>
-          ))}
-      </ul>
-      <ul>
-        {cateData
-          .sort((a, b) => a.market_cap_change_24h - b.market_cap_change_24h)
-          .filter((cate) => {
-            if (!filteredCat.includes(cate.id)) {
-              return cate;
-            }
-          })
-          .slice(0, 4)
-          .sort((a, b) => b.market_cap_change_24h - a.market_cap_change_24h)
-          .map((cate) => (
-            <a
-              key={cate.id}
-              href={"https://www.coingecko.com/fr/categories/" + cate.id}
-              target="_blank"
-            >
-              <div className="img">
-                <img src={cate.top_3_coins[0]} />
-                <img src={cate.top_3_coins[1]} />
-                <img src={cate.top_3_coins[2]} />
-              </div>
-              <div className="text">
-                {cate.name} :{" "}
-                <PercentChange percent={cate.market_cap_change_24h} />
-              </div>
-            </a>
-          ))}
-      </ul>
+      {isEmpty(cateData) ? (
+        <LoadItem />
+      ) : (
+        <>
+          <ul>
+            {cateData
+              .sort((a, b) => b.market_cap_change_24h - a.market_cap_change_24h)
+              .filter((cate) => {
+                if (!filteredCat.includes(cate.id)) {
+                  return cate;
+                }
+              })
+              .slice(0, 8)
+              .map((cate) => (
+                <a
+                  key={cate.id}
+                  href={"https://www.coingecko.com/fr/categories/" + cate.id}
+                  target="_blank"
+                >
+                  <div className="img">
+                    <img src={cate.top_3_coins[0]} />
+                    <img src={cate.top_3_coins[1]} />
+                    <img src={cate.top_3_coins[2]} />
+                  </div>
+                  <div className="text">
+                    {cate.name}{" "}
+                    <PercentChange percent={cate.market_cap_change_24h} />
+                  </div>
+                </a>
+              ))}
+          </ul>
+          <ul>
+            {cateData
+              .sort((a, b) => a.market_cap_change_24h - b.market_cap_change_24h)
+              .filter((cate) => {
+                if (!filteredCat.includes(cate.id)) {
+                  return cate;
+                }
+              })
+              .slice(0, 4)
+              .sort((a, b) => b.market_cap_change_24h - a.market_cap_change_24h)
+              .map((cate) => (
+                <a
+                  key={cate.id}
+                  href={"https://www.coingecko.com/fr/categories/" + cate.id}
+                  target="_blank"
+                >
+                  <div className="img">
+                    <img src={cate.top_3_coins[0]} />
+                    <img src={cate.top_3_coins[1]} />
+                    <img src={cate.top_3_coins[2]} />
+                  </div>
+                  <div className="text">
+                    {cate.name} :{" "}
+                    <PercentChange percent={cate.market_cap_change_24h} />
+                  </div>
+                </a>
+              ))}
+          </ul>
+        </>
+      )}
     </div>
   );
 };

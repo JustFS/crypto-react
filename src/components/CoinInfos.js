@@ -7,11 +7,13 @@ const CoinInfos = ({ coinId, coinImage, coinName, volume, top }) => {
   const [coinData, setCoinData] = useState({});
 
   useEffect(() => {
-    axios
-      .get("https://api.coingecko.com/api/v3/coins/" + coinId)
-      .then((res) => {
-        setCoinData(res.data);
-      });
+    setTimeout(() => {
+      axios
+        .get("https://api.coingecko.com/api/v3/coins/" + coinId)
+        .then((res) => {
+          setCoinData(res.data);
+        });
+    }, 4000);
   }, []);
 
   const dateFormater = (date) => {
