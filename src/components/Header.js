@@ -11,15 +11,17 @@ const Header = () => {
   const [fearGreed, setFearGreed] = useState();
 
   useEffect(() => {
-    axios.get("https://api.coingecko.com/api/v3/global").then((res) => {
-      setHeaderData(res.data.data);
-      setBtcPercent(res.data.data.market_cap_percentage.btc.toFixed(1));
-      setEthPercent(res.data.data.market_cap_percentage.eth.toFixed(1));
-    });
+    setTimeout(() => {
+      axios.get("https://api.coingecko.com/api/v3/global").then((res) => {
+        setHeaderData(res.data.data);
+        setBtcPercent(res.data.data.market_cap_percentage.btc.toFixed(1));
+        setEthPercent(res.data.data.market_cap_percentage.eth.toFixed(1));
+      });
 
-    axios
-      .get("https://api.alternative.me/fng/?limit=1")
-      .then((res) => setFearGreed(res.data.data[0].value));
+      axios
+        .get("https://api.alternative.me/fng/?limit=1")
+        .then((res) => setFearGreed(res.data.data[0].value));
+    }, 4000);
   }, []);
 
   return (
