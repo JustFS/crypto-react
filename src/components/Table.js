@@ -11,7 +11,7 @@ import colors from "../styles/_settings.scss";
 
 const Table = () => {
   const [orderBy, setOrderBy] = useState("MarketCap");
-  const [rangeNumber, setRangeNumber] = useState(500);
+  const [rangeNumber, setRangeNumber] = useState(200);
   const [startNumber, setStartNumber] = useState(0);
   const [inputSearch, setInputSearch] = useState("");
   const [miniVol, setMiniVol] = useState(0);
