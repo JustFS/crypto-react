@@ -5,7 +5,6 @@ import PercentChange from "./PercentChange";
 import Signal from "./Signal";
 import StarIcon from "./StarIcon";
 import colors from "../styles/_settings.scss";
-import CoinInfos from "./CoinInfos";
 
 const TableLine = ({ coin, index }) => {
   const [showChart, setShowChart] = useState(false);
@@ -129,15 +128,6 @@ const TableLine = ({ coin, index }) => {
             >
               <img src="./assets/info-icon.svg" alt="info-icon" />
             </a>
-            {showInfos && (
-              <CoinInfos
-                coinId={coin.id}
-                coinImage={coin.image}
-                coinName={coin.name}
-                volume={coin.total_volume}
-                top={top}
-              />
-            )}
           </div>
         </div>
       </div>
